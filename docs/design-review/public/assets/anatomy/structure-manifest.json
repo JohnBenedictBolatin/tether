@@ -1,0 +1,4358 @@
+[
+  {
+    "id": "FMA49049",
+    "label": "Left levator palpebrae superioris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1306.obj",
+    "representationId": "BP4939",
+    "sourceConceptId": "FMA49049"
+  },
+  {
+    "id": "FMA54159",
+    "label": "Tendon of right levator palpebrae superioris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1343.obj",
+    "representationId": "BP6511",
+    "sourceConceptId": "FMA54159"
+  },
+  {
+    "id": "FMA49048",
+    "label": "Right levator palpebrae superioris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1357.obj",
+    "representationId": "BP4938",
+    "sourceConceptId": "FMA49048"
+  },
+  {
+    "id": "FMA37463",
+    "label": "Abductor digiti minimi of right foot",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1390.obj",
+    "representationId": "BP5056",
+    "sourceConceptId": "FMA37463"
+  },
+  {
+    "id": "FMA37464",
+    "label": "Abductor digiti minimi of left foot",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1390M.obj",
+    "representationId": "BP9182",
+    "sourceConceptId": "FMA37464"
+  },
+  {
+    "id": "FMA37471",
+    "label": "Flexor digiti minimi brevis of right foot",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1391.obj",
+    "representationId": "BP5050",
+    "sourceConceptId": "FMA37471"
+  },
+  {
+    "id": "FMA37472",
+    "label": "Flexor digiti minimi brevis of left foot",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1391M.obj",
+    "representationId": "BP8065",
+    "sourceConceptId": "FMA37472"
+  },
+  {
+    "id": "FMA45973",
+    "label": "Lateral head of right flexor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1393.obj",
+    "representationId": "BP5548",
+    "sourceConceptId": "FMA45973"
+  },
+  {
+    "id": "FMA45974",
+    "label": "Lateral head of left flexor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1393M.obj",
+    "representationId": "BP8361",
+    "sourceConceptId": "FMA45974"
+  },
+  {
+    "id": "FMA45960",
+    "label": "Lateral head of right gastrocnemius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1394.obj",
+    "representationId": "BP5541",
+    "sourceConceptId": "FMA45960"
+  },
+  {
+    "id": "FMA45961",
+    "label": "Lateral head of left gastrocnemius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1394M.obj",
+    "representationId": "BP7939",
+    "sourceConceptId": "FMA45961"
+  },
+  {
+    "id": "FMA45888",
+    "label": "Long head of right biceps femoris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1395.obj",
+    "representationId": "BP5575",
+    "sourceConceptId": "FMA45888"
+  },
+  {
+    "id": "FMA45889",
+    "label": "Long head of left biceps femoris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1395M.obj",
+    "representationId": "BP8331",
+    "sourceConceptId": "FMA45889"
+  },
+  {
+    "id": "FMA45971",
+    "label": "Medial head of right flexor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1396.obj",
+    "representationId": "BP5546",
+    "sourceConceptId": "FMA45971"
+  },
+  {
+    "id": "FMA45972",
+    "label": "Medial head of left flexor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1396M.obj",
+    "representationId": "BP8945",
+    "sourceConceptId": "FMA45972"
+  },
+  {
+    "id": "FMA45957",
+    "label": "Medial head of right gastrocnemius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1397.obj",
+    "representationId": "BP5539",
+    "sourceConceptId": "FMA45957"
+  },
+  {
+    "id": "FMA45958",
+    "label": "Medial head of left gastrocnemius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1397M.obj",
+    "representationId": "BP9217",
+    "sourceConceptId": "FMA45958"
+  },
+  {
+    "id": "FMA46018",
+    "label": "Oblique head of right adductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1398.obj",
+    "representationId": "BP5578",
+    "sourceConceptId": "FMA46018"
+  },
+  {
+    "id": "FMA46019",
+    "label": "Oblique head of left adductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1398M.obj",
+    "representationId": "BP8542",
+    "sourceConceptId": "FMA46019"
+  },
+  {
+    "id": "FMA37459",
+    "label": "Right abductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1400.obj",
+    "representationId": "BP5054",
+    "sourceConceptId": "FMA37459"
+  },
+  {
+    "id": "FMA37460",
+    "label": "Left abductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1400M.obj",
+    "representationId": "BP9193",
+    "sourceConceptId": "FMA37460"
+  },
+  {
+    "id": "FMA22452",
+    "label": "Right adductor brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1401.obj",
+    "representationId": "BP4986",
+    "sourceConceptId": "FMA22452"
+  },
+  {
+    "id": "FMA22454",
+    "label": "Left adductor brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1401M.obj",
+    "representationId": "BP9099",
+    "sourceConceptId": "FMA22454"
+  },
+  {
+    "id": "FMA22456",
+    "label": "Right adductor longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1402.obj",
+    "representationId": "BP4984",
+    "sourceConceptId": "FMA22456"
+  },
+  {
+    "id": "FMA22457",
+    "label": "Left adductor longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1402M.obj",
+    "representationId": "BP8604",
+    "sourceConceptId": "FMA22457"
+  },
+  {
+    "id": "FMA22459",
+    "label": "Right adductor magnus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1403.obj",
+    "representationId": "BP4982",
+    "sourceConceptId": "FMA22459"
+  },
+  {
+    "id": "FMA22460",
+    "label": "Left adductor magnus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1403M.obj",
+    "representationId": "BP8972",
+    "sourceConceptId": "FMA22460"
+  },
+  {
+    "id": "FMA43886",
+    "label": "Right adductor minimus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1404.obj",
+    "representationId": "BP4980",
+    "sourceConceptId": "FMA43886"
+  },
+  {
+    "id": "FMA43887",
+    "label": "Left adductor minimus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1404M.obj",
+    "representationId": "BP8832",
+    "sourceConceptId": "FMA43887"
+  },
+  {
+    "id": "FMA22548",
+    "label": "Right extensor digitorum longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1406.obj",
+    "representationId": "BP5024",
+    "sourceConceptId": "FMA22548"
+  },
+  {
+    "id": "FMA22549",
+    "label": "Left extensor digitorum longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1406M.obj",
+    "representationId": "BP8162",
+    "sourceConceptId": "FMA22549"
+  },
+  {
+    "id": "FMA51144",
+    "label": "Right extensor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1407.obj",
+    "representationId": "BP5059",
+    "sourceConceptId": "FMA51144"
+  },
+  {
+    "id": "FMA51145",
+    "label": "Left extensor hallucis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1407M.obj",
+    "representationId": "BP8118",
+    "sourceConceptId": "FMA51145"
+  },
+  {
+    "id": "FMA22546",
+    "label": "Right extensor hallucis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1408.obj",
+    "representationId": "BP5022",
+    "sourceConceptId": "FMA22546"
+  },
+  {
+    "id": "FMA22547",
+    "label": "Left extensor hallucis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1408M.obj",
+    "representationId": "BP7858",
+    "sourceConceptId": "FMA22547"
+  },
+  {
+    "id": "FMA22554",
+    "label": "Right fibularis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1409.obj",
+    "representationId": "BP5015",
+    "sourceConceptId": "FMA22554"
+  },
+  {
+    "id": "FMA22555",
+    "label": "Left fibularis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1409M.obj",
+    "representationId": "BP8977",
+    "sourceConceptId": "FMA22555"
+  },
+  {
+    "id": "FMA22552",
+    "label": "Right fibularis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1410.obj",
+    "representationId": "BP5013",
+    "sourceConceptId": "FMA22552"
+  },
+  {
+    "id": "FMA22553",
+    "label": "Left fibularis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1410M.obj",
+    "representationId": "BP8846",
+    "sourceConceptId": "FMA22553"
+  },
+  {
+    "id": "FMA22550",
+    "label": "Right fibularis tertius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1411.obj",
+    "representationId": "BP5020",
+    "sourceConceptId": "FMA22550"
+  },
+  {
+    "id": "FMA22551",
+    "label": "Left fibularis tertius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1411M.obj",
+    "representationId": "BP9228",
+    "sourceConceptId": "FMA22551"
+  },
+  {
+    "id": "FMA37465",
+    "label": "Right flexor accessorius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1412.obj",
+    "representationId": "BP5052",
+    "sourceConceptId": "FMA37465"
+  },
+  {
+    "id": "FMA37466",
+    "label": "Left flexor accessorius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1412M.obj",
+    "representationId": "BP8992",
+    "sourceConceptId": "FMA37466"
+  },
+  {
+    "id": "FMA37461",
+    "label": "Right flexor digitorum brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1413.obj",
+    "representationId": "BP5048",
+    "sourceConceptId": "FMA37461"
+  },
+  {
+    "id": "FMA37462",
+    "label": "Left flexor digitorum brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1413M.obj",
+    "representationId": "BP9215",
+    "sourceConceptId": "FMA37462"
+  },
+  {
+    "id": "FMA65016",
+    "label": "Right flexor digitorum longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1414.obj",
+    "representationId": "BP5010",
+    "sourceConceptId": "FMA65016"
+  },
+  {
+    "id": "FMA65017",
+    "label": "Left flexor digitorum longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1414M.obj",
+    "representationId": "BP8888",
+    "sourceConceptId": "FMA65017"
+  },
+  {
+    "id": "FMA65014",
+    "label": "Right flexor hallucis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1415.obj",
+    "representationId": "BP5008",
+    "sourceConceptId": "FMA65014"
+  },
+  {
+    "id": "FMA65015",
+    "label": "Left flexor hallucis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1415M.obj",
+    "representationId": "BP7949",
+    "sourceConceptId": "FMA65015"
+  },
+  {
+    "id": "FMA43883",
+    "label": "Right gracilis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1421.obj",
+    "representationId": "BP4976",
+    "sourceConceptId": "FMA43883"
+  },
+  {
+    "id": "FMA43884",
+    "label": "Left gracilis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1421M.obj",
+    "representationId": "BP8926",
+    "sourceConceptId": "FMA43884"
+  },
+  {
+    "id": "FMA58776",
+    "label": "Right iliotibial tract",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1423.obj",
+    "representationId": "BP5628",
+    "sourceConceptId": "FMA58776"
+  },
+  {
+    "id": "FMA58777",
+    "label": "Left iliotibial tract",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1423M.obj",
+    "representationId": "BP8856",
+    "sourceConceptId": "FMA58777"
+  },
+  {
+    "id": "FMA22326",
+    "label": "Right obturator externus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1425.obj",
+    "representationId": "BP5081",
+    "sourceConceptId": "FMA22326"
+  },
+  {
+    "id": "FMA22327",
+    "label": "Left obturator externus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1425M.obj",
+    "representationId": "BP8506",
+    "sourceConceptId": "FMA22327"
+  },
+  {
+    "id": "FMA22324",
+    "label": "Right obturator internus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1426.obj",
+    "representationId": "BP5079",
+    "sourceConceptId": "FMA22324"
+  },
+  {
+    "id": "FMA22325",
+    "label": "Left obturator internus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1426M.obj",
+    "representationId": "BP7986",
+    "sourceConceptId": "FMA22325"
+  },
+  {
+    "id": "FMA22342",
+    "label": "Right psoas major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1431.obj",
+    "representationId": "BP4701",
+    "sourceConceptId": "FMA22342"
+  },
+  {
+    "id": "FMA22343",
+    "label": "Left psoas major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1431M.obj",
+    "representationId": "BP8373",
+    "sourceConceptId": "FMA22343"
+  },
+  {
+    "id": "FMA22354",
+    "label": "Right sartorius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1434.obj",
+    "representationId": "BP4994",
+    "sourceConceptId": "FMA22354"
+  },
+  {
+    "id": "FMA22355",
+    "label": "Left sartorius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1434M.obj",
+    "representationId": "BP8876",
+    "sourceConceptId": "FMA22355"
+  },
+  {
+    "id": "FMA22558",
+    "label": "Right soleus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1437.obj",
+    "representationId": "BP4999",
+    "sourceConceptId": "FMA22558"
+  },
+  {
+    "id": "FMA22559",
+    "label": "Left soleus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1437M.obj",
+    "representationId": "BP8819",
+    "sourceConceptId": "FMA22559"
+  },
+  {
+    "id": "FMA22544",
+    "label": "Right tibialis anterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1439.obj",
+    "representationId": "BP5018",
+    "sourceConceptId": "FMA22544"
+  },
+  {
+    "id": "FMA22545",
+    "label": "Left tibialis anterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1439M.obj",
+    "representationId": "BP8720",
+    "sourceConceptId": "FMA22545"
+  },
+  {
+    "id": "FMA65018",
+    "label": "Right tibialis posterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1440.obj",
+    "representationId": "BP5004",
+    "sourceConceptId": "FMA65018"
+  },
+  {
+    "id": "FMA65019",
+    "label": "Left tibialis posterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1440M.obj",
+    "representationId": "BP9159",
+    "sourceConceptId": "FMA65019"
+  },
+  {
+    "id": "FMA38934",
+    "label": "Right vastus intermedius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1441.obj",
+    "representationId": "BP5604",
+    "sourceConceptId": "FMA38934"
+  },
+  {
+    "id": "FMA38935",
+    "label": "Left vastus intermedius",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1441M.obj",
+    "representationId": "BP9207",
+    "sourceConceptId": "FMA38935"
+  },
+  {
+    "id": "FMA38930",
+    "label": "Right vastus lateralis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1442.obj",
+    "representationId": "BP5602",
+    "sourceConceptId": "FMA38930"
+  },
+  {
+    "id": "FMA38931",
+    "label": "Left vastus lateralis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1442M.obj",
+    "representationId": "BP8754",
+    "sourceConceptId": "FMA38931"
+  },
+  {
+    "id": "FMA38932",
+    "label": "Right vastus medialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1443.obj",
+    "representationId": "BP5600",
+    "sourceConceptId": "FMA38932"
+  },
+  {
+    "id": "FMA38933",
+    "label": "Left vastus medialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1443M.obj",
+    "representationId": "BP9128",
+    "sourceConceptId": "FMA38933"
+  },
+  {
+    "id": "FMA45891",
+    "label": "Short head of right biceps femoris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1444.obj",
+    "representationId": "BP5573",
+    "sourceConceptId": "FMA45891"
+  },
+  {
+    "id": "FMA45892",
+    "label": "Short head of left biceps femoris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1444M.obj",
+    "representationId": "BP8616",
+    "sourceConceptId": "FMA45892"
+  },
+  {
+    "id": "FMA46020",
+    "label": "Transverse head of right adductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1445.obj",
+    "representationId": "BP5580",
+    "sourceConceptId": "FMA46020"
+  },
+  {
+    "id": "FMA46021",
+    "label": "Transverse head of left adductor hallucis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1445M.obj",
+    "representationId": "BP8394",
+    "sourceConceptId": "FMA46021"
+  },
+  {
+    "id": "FMA45874",
+    "label": "Abdominal part of right pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1446.obj",
+    "representationId": "BP5615",
+    "sourceConceptId": "FMA45874"
+  },
+  {
+    "id": "FMA45875",
+    "label": "Abdominal part of left pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1446M.obj",
+    "representationId": "BP7862",
+    "sourceConceptId": "FMA45875"
+  },
+  {
+    "id": "FMA34690",
+    "label": "Clavicular part of right pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1447.obj",
+    "representationId": "BP5582",
+    "sourceConceptId": "FMA34690"
+  },
+  {
+    "id": "FMA34691",
+    "label": "Clavicular part of left pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1447M.obj",
+    "representationId": "BP9095",
+    "sourceConceptId": "FMA34691"
+  },
+  {
+    "id": "FMA9756",
+    "label": "External intercostal muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1451M.obj",
+    "representationId": "BP8306",
+    "sourceConceptId": "FMA9756"
+  },
+  {
+    "id": "FMA9758",
+    "label": "Innermost intercostal muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1454M.obj",
+    "representationId": "BP9146",
+    "sourceConceptId": "FMA9758"
+  },
+  {
+    "id": "FMA9757",
+    "label": "Internal intercostal muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1455M.obj",
+    "representationId": "BP8018",
+    "sourceConceptId": "FMA9757"
+  },
+  {
+    "id": "FMA13375",
+    "label": "Right pectoralis minor",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1456.obj",
+    "representationId": "BP4775",
+    "sourceConceptId": "FMA13375"
+  },
+  {
+    "id": "FMA13376",
+    "label": "Left pectoralis minor",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1456M.obj",
+    "representationId": "BP9038",
+    "sourceConceptId": "FMA13376"
+  },
+  {
+    "id": "FMA13398",
+    "label": "Right serratus anterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1459.obj",
+    "representationId": "BP4782",
+    "sourceConceptId": "FMA13398"
+  },
+  {
+    "id": "FMA13399",
+    "label": "Left serratus anterior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1459M.obj",
+    "representationId": "BP8760",
+    "sourceConceptId": "FMA13399"
+  },
+  {
+    "id": "FMA74077",
+    "label": "Set of right levatores costarum breves",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1462.obj",
+    "representationId": "BP6639",
+    "sourceConceptId": "FMA74077"
+  },
+  {
+    "id": "FMA74078",
+    "label": "Set of left levatores costarum breves",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1462M.obj",
+    "representationId": "BP8675",
+    "sourceConceptId": "FMA74078"
+  },
+  {
+    "id": "FMA74075",
+    "label": "Set of right levatores costarum longi",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1463.obj",
+    "representationId": "BP6637",
+    "sourceConceptId": "FMA74075"
+  },
+  {
+    "id": "FMA74076",
+    "label": "Set of left levatores costarum longi",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1463M.obj",
+    "representationId": "BP8466",
+    "sourceConceptId": "FMA74076"
+  },
+  {
+    "id": "FMA79979",
+    "label": "Sternocostal part of right pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1464.obj",
+    "representationId": "BP5613",
+    "sourceConceptId": "FMA79979"
+  },
+  {
+    "id": "FMA79980",
+    "label": "Sternocostal part of left pectoralis major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1464M.obj",
+    "representationId": "BP8323",
+    "sourceConceptId": "FMA79980"
+  },
+  {
+    "id": "FMA46442",
+    "label": "Tendinous arch of levator ani",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1465M.obj",
+    "representationId": "BP9016",
+    "sourceConceptId": "FMA46442"
+  },
+  {
+    "id": "FMA37396",
+    "label": "Abductor digiti minimi of right hand",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1466.obj",
+    "representationId": "BP7569",
+    "sourceConceptId": "FMA37396"
+  },
+  {
+    "id": "FMA37397",
+    "label": "Abductor digiti minimi of left hand",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1466M.obj",
+    "representationId": "BP8737",
+    "sourceConceptId": "FMA37397"
+  },
+  {
+    "id": "FMA34682",
+    "label": "Acromial part of right deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1467.obj",
+    "representationId": "BP7571",
+    "sourceConceptId": "FMA34682"
+  },
+  {
+    "id": "FMA34683",
+    "label": "Acromial part of left deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1467M.obj",
+    "representationId": "BP9075",
+    "sourceConceptId": "FMA34683"
+  },
+  {
+    "id": "FMA34680",
+    "label": "Clavicular part of right deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1468.obj",
+    "representationId": "BP7573",
+    "sourceConceptId": "FMA34680"
+  },
+  {
+    "id": "FMA34681",
+    "label": "Clavicular part of left deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1468M.obj",
+    "representationId": "BP8259",
+    "sourceConceptId": "FMA34681"
+  },
+  {
+    "id": "FMA37389",
+    "label": "Left flexor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1469.obj",
+    "representationId": "BP7575",
+    "sourceConceptId": "FMA37389"
+  },
+  {
+    "id": "FMA37388",
+    "label": "Right flexor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1469M.obj",
+    "representationId": "BP8958",
+    "sourceConceptId": "FMA37388"
+  },
+  {
+    "id": "FMA37398",
+    "label": "Flexor digiti minimi brevis of right hand",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1470.obj",
+    "representationId": "BP4858",
+    "sourceConceptId": "FMA37398"
+  },
+  {
+    "id": "FMA37399",
+    "label": "Flexor digiti minimi brevis of left hand",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1470M.obj",
+    "representationId": "BP8516",
+    "sourceConceptId": "FMA37399"
+  },
+  {
+    "id": "FMA40120",
+    "label": "Flexor retinaculum of right wrist",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1471.obj",
+    "representationId": "BP6527",
+    "sourceConceptId": "FMA40120"
+  },
+  {
+    "id": "FMA40121",
+    "label": "Flexor retinaculum of left wrist",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1471M.obj",
+    "representationId": "BP8058",
+    "sourceConceptId": "FMA40121"
+  },
+  {
+    "id": "FMA38507",
+    "label": "Right extensor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1472.obj",
+    "representationId": "BP4829",
+    "sourceConceptId": "FMA38507"
+  },
+  {
+    "id": "FMA38508",
+    "label": "Left extensor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1472M.obj",
+    "representationId": "BP7970",
+    "sourceConceptId": "FMA38508"
+  },
+  {
+    "id": "FMA38617",
+    "label": "Humeral head of right flexor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1473.obj",
+    "representationId": "BP5570",
+    "sourceConceptId": "FMA38617"
+  },
+  {
+    "id": "FMA38618",
+    "label": "Humeral head of left flexor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1473M.obj",
+    "representationId": "BP8144",
+    "sourceConceptId": "FMA38618"
+  },
+  {
+    "id": "FMA38560",
+    "label": "Humeral head of right pronator teres",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1474.obj",
+    "representationId": "BP5568",
+    "sourceConceptId": "FMA38560"
+  },
+  {
+    "id": "FMA38561",
+    "label": "Humeral head of left pronator teres",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1474M.obj",
+    "representationId": "BP8015",
+    "sourceConceptId": "FMA38561"
+  },
+  {
+    "id": "FMA38470",
+    "label": "Right flexor digitorum superficialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1475.obj",
+    "representationId": "BP4837",
+    "sourceConceptId": "FMA38470"
+  },
+  {
+    "id": "FMA38471",
+    "label": "Left flexor digitorum superficialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1475M.obj",
+    "representationId": "BP8284",
+    "sourceConceptId": "FMA38471"
+  },
+  {
+    "id": "FMA37697",
+    "label": "Lateral head of right triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1477.obj",
+    "representationId": "BP5550",
+    "sourceConceptId": "FMA37697"
+  },
+  {
+    "id": "FMA37698",
+    "label": "Lateral head of left triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1477M.obj",
+    "representationId": "BP8525",
+    "sourceConceptId": "FMA37698"
+  },
+  {
+    "id": "FMA37686",
+    "label": "Long head of right biceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1478.obj",
+    "representationId": "BP5566",
+    "sourceConceptId": "FMA37686"
+  },
+  {
+    "id": "FMA37687",
+    "label": "Long head of left biceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1478M.obj",
+    "representationId": "BP8816",
+    "sourceConceptId": "FMA37687"
+  },
+  {
+    "id": "FMA37699",
+    "label": "Long head of right triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1479.obj",
+    "representationId": "BP5564",
+    "sourceConceptId": "FMA37699"
+  },
+  {
+    "id": "FMA37700",
+    "label": "Long head of left triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1479M.obj",
+    "representationId": "BP8344",
+    "sourceConceptId": "FMA37700"
+  },
+  {
+    "id": "FMA37695",
+    "label": "Medial head of right triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1480.obj",
+    "representationId": "BP5562",
+    "sourceConceptId": "FMA37695"
+  },
+  {
+    "id": "FMA37696",
+    "label": "Medial head of left triceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1480M.obj",
+    "representationId": "BP8257",
+    "sourceConceptId": "FMA37696"
+  },
+  {
+    "id": "FMA46121",
+    "label": "Oblique head of right adductor pollicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1481.obj",
+    "representationId": "BP5560",
+    "sourceConceptId": "FMA46121"
+  },
+  {
+    "id": "FMA46122",
+    "label": "Oblique head of left adductor pollicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1481M.obj",
+    "representationId": "BP8248",
+    "sourceConceptId": "FMA46122"
+  },
+  {
+    "id": "FMA37386",
+    "label": "Right abductor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1483.obj",
+    "representationId": "BP4855",
+    "sourceConceptId": "FMA37386"
+  },
+  {
+    "id": "FMA37387",
+    "label": "Left abductor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1483M.obj",
+    "representationId": "BP8706",
+    "sourceConceptId": "FMA37387"
+  },
+  {
+    "id": "FMA38516",
+    "label": "Right abductor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1484.obj",
+    "representationId": "BP4820",
+    "sourceConceptId": "FMA38516"
+  },
+  {
+    "id": "FMA38517",
+    "label": "Left abductor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1484M.obj",
+    "representationId": "BP9144",
+    "sourceConceptId": "FMA38517"
+  },
+  {
+    "id": "FMA38498",
+    "label": "Right extensor carpi radialis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1489.obj",
+    "representationId": "BP4823",
+    "sourceConceptId": "FMA38498"
+  },
+  {
+    "id": "FMA38499",
+    "label": "Left extensor carpi radialis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1489M.obj",
+    "representationId": "BP9287",
+    "sourceConceptId": "FMA38499"
+  },
+  {
+    "id": "FMA38495",
+    "label": "Right extensor carpi radialis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1490.obj",
+    "representationId": "BP4831",
+    "sourceConceptId": "FMA38495"
+  },
+  {
+    "id": "FMA38496",
+    "label": "Left extensor carpi radialis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1490M.obj",
+    "representationId": "BP9280",
+    "sourceConceptId": "FMA38496"
+  },
+  {
+    "id": "FMA38504",
+    "label": "Right extensor digiti minimi",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1491.obj",
+    "representationId": "BP4825",
+    "sourceConceptId": "FMA38504"
+  },
+  {
+    "id": "FMA38505",
+    "label": "Left extensor digiti minimi",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1491M.obj",
+    "representationId": "BP8489",
+    "sourceConceptId": "FMA38505"
+  },
+  {
+    "id": "FMA38501",
+    "label": "Right extensor digitorum",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1492.obj",
+    "representationId": "BP4827",
+    "sourceConceptId": "FMA38501"
+  },
+  {
+    "id": "FMA38502",
+    "label": "Left extensor digitorum",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1492M.obj",
+    "representationId": "BP8560",
+    "sourceConceptId": "FMA38502"
+  },
+  {
+    "id": "FMA38525",
+    "label": "Right extensor indicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1493.obj",
+    "representationId": "BP4812",
+    "sourceConceptId": "FMA38525"
+  },
+  {
+    "id": "FMA38526",
+    "label": "Left extensor indicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1493M.obj",
+    "representationId": "BP8779",
+    "sourceConceptId": "FMA38526"
+  },
+  {
+    "id": "FMA38519",
+    "label": "Right extensor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1494.obj",
+    "representationId": "BP4818",
+    "sourceConceptId": "FMA38519"
+  },
+  {
+    "id": "FMA38520",
+    "label": "Left extensor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1494M.obj",
+    "representationId": "BP9253",
+    "sourceConceptId": "FMA38520"
+  },
+  {
+    "id": "FMA38522",
+    "label": "Right extensor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1495.obj",
+    "representationId": "BP4816",
+    "sourceConceptId": "FMA38522"
+  },
+  {
+    "id": "FMA38523",
+    "label": "Left extensor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1495M.obj",
+    "representationId": "BP8191",
+    "sourceConceptId": "FMA38523"
+  },
+  {
+    "id": "FMA38460",
+    "label": "Right flexor carpi radialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1496.obj",
+    "representationId": "BP4841",
+    "sourceConceptId": "FMA38460"
+  },
+  {
+    "id": "FMA38461",
+    "label": "Left flexor carpi radialis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1496M.obj",
+    "representationId": "BP8940",
+    "sourceConceptId": "FMA38461"
+  },
+  {
+    "id": "FMA38479",
+    "label": "Right flexor digitorum profundus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1497.obj",
+    "representationId": "BP4848",
+    "sourceConceptId": "FMA38479"
+  },
+  {
+    "id": "FMA38480",
+    "label": "Left flexor digitorum profundus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1497M.obj",
+    "representationId": "BP7826",
+    "sourceConceptId": "FMA38480"
+  },
+  {
+    "id": "FMA38482",
+    "label": "Right flexor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1498.obj",
+    "representationId": "BP4844",
+    "sourceConceptId": "FMA38482"
+  },
+  {
+    "id": "FMA38484",
+    "label": "Left flexor pollicis longus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1498M.obj",
+    "representationId": "BP9106",
+    "sourceConceptId": "FMA38484"
+  },
+  {
+    "id": "FMA32547",
+    "label": "Right infraspinatus muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1500.obj",
+    "representationId": "BP4797",
+    "sourceConceptId": "FMA32547"
+  },
+  {
+    "id": "FMA32548",
+    "label": "Left infraspinatus muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1500M.obj",
+    "representationId": "BP8965",
+    "sourceConceptId": "FMA32548"
+  },
+  {
+    "id": "FMA38454",
+    "label": "Right pronator quadratus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1503.obj",
+    "representationId": "BP4846",
+    "sourceConceptId": "FMA38454"
+  },
+  {
+    "id": "FMA38455",
+    "label": "Left pronator quadratus",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1503M.obj",
+    "representationId": "BP7957",
+    "sourceConceptId": "FMA38455"
+  },
+  {
+    "id": "FMA38513",
+    "label": "Right supinator",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1505.obj",
+    "representationId": "BP4814",
+    "sourceConceptId": "FMA38513"
+  },
+  {
+    "id": "FMA38514",
+    "label": "Left supinator",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1505M.obj",
+    "representationId": "BP8499",
+    "sourceConceptId": "FMA38514"
+  },
+  {
+    "id": "FMA37684",
+    "label": "Short head of right biceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1512.obj",
+    "representationId": "BP5558",
+    "sourceConceptId": "FMA37684"
+  },
+  {
+    "id": "FMA37685",
+    "label": "Short head of left biceps brachii",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1512M.obj",
+    "representationId": "BP9153",
+    "sourceConceptId": "FMA37685"
+  },
+  {
+    "id": "FMA34684",
+    "label": "Spinal part of right deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1513.obj",
+    "representationId": "BP5607",
+    "sourceConceptId": "FMA34684"
+  },
+  {
+    "id": "FMA34685",
+    "label": "Spinal part of left deltoid",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1513M.obj",
+    "representationId": "BP8151",
+    "sourceConceptId": "FMA34685"
+  },
+  {
+    "id": "FMA65198",
+    "label": "Superficial head of right flexor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1514.obj",
+    "representationId": "BP5556",
+    "sourceConceptId": "FMA65198"
+  },
+  {
+    "id": "FMA65199",
+    "label": "Superficial head of left flexor pollicis brevis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1514M.obj",
+    "representationId": "BP8722",
+    "sourceConceptId": "FMA65199"
+  },
+  {
+    "id": "FMA46123",
+    "label": "Transverse head of right adductor pollicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1515.obj",
+    "representationId": "BP5543",
+    "sourceConceptId": "FMA46123"
+  },
+  {
+    "id": "FMA46124",
+    "label": "Transverse head of left adductor pollicis",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1515M.obj",
+    "representationId": "BP8885",
+    "sourceConceptId": "FMA46124"
+  },
+  {
+    "id": "FMA38562",
+    "label": "Ulnar head of right pronator teres",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1516.obj",
+    "representationId": "BP5552",
+    "sourceConceptId": "FMA38562"
+  },
+  {
+    "id": "FMA38563",
+    "label": "Ulnar head of left pronator teres",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1516M.obj",
+    "representationId": "BP9043",
+    "sourceConceptId": "FMA38563"
+  },
+  {
+    "id": "FMA38619",
+    "label": "Ulnar head of right flexor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1518.obj",
+    "representationId": "BP5554",
+    "sourceConceptId": "FMA38619"
+  },
+  {
+    "id": "FMA38620",
+    "label": "Ulnar head of left flexor carpi ulnaris",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1518M.obj",
+    "representationId": "BP8540",
+    "sourceConceptId": "FMA38620"
+  },
+  {
+    "id": "FMA32540",
+    "label": "Right levator scapulae",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1532.obj",
+    "representationId": "BP4786",
+    "sourceConceptId": "FMA32540"
+  },
+  {
+    "id": "FMA32541",
+    "label": "Left levator scapulae",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1532M.obj",
+    "representationId": "BP8746",
+    "sourceConceptId": "FMA32541"
+  },
+  {
+    "id": "FMA13381",
+    "label": "Right rhomboid major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1536.obj",
+    "representationId": "BP4780",
+    "sourceConceptId": "FMA13381"
+  },
+  {
+    "id": "FMA13382",
+    "label": "Left rhomboid major",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1536M.obj",
+    "representationId": "BP9245",
+    "sourceConceptId": "FMA13382"
+  },
+  {
+    "id": "FMA13383",
+    "label": "Right rhomboid minor",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1537.obj",
+    "representationId": "BP4784",
+    "sourceConceptId": "FMA13383"
+  },
+  {
+    "id": "FMA13384",
+    "label": "Left rhomboid minor",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1537M.obj",
+    "representationId": "BP8585",
+    "sourceConceptId": "FMA13384"
+  },
+  {
+    "id": "FMA13405",
+    "label": "Right serratus posterior inferior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1541.obj",
+    "representationId": "BP4768",
+    "sourceConceptId": "FMA13405"
+  },
+  {
+    "id": "FMA13406",
+    "label": "Left serratus posterior inferior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1541M.obj",
+    "representationId": "BP9048",
+    "sourceConceptId": "FMA13406"
+  },
+  {
+    "id": "FMA13403",
+    "label": "Right serratus posterior superior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1542.obj",
+    "representationId": "BP4766",
+    "sourceConceptId": "FMA13403"
+  },
+  {
+    "id": "FMA13404",
+    "label": "Left serratus posterior superior",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1542M.obj",
+    "representationId": "BP8298",
+    "sourceConceptId": "FMA13404"
+  },
+  {
+    "id": "FMA3958",
+    "label": "Right vertebral artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ1725.obj",
+    "representationId": "BP7644",
+    "sourceConceptId": "FMA3958"
+  },
+  {
+    "id": "FMA4066",
+    "label": "Left vertebral artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ1725M.obj",
+    "representationId": "BP8812",
+    "sourceConceptId": "FMA4066"
+  },
+  {
+    "id": "FMA78454",
+    "label": "Third ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1730.obj",
+    "representationId": "BP5515",
+    "sourceConceptId": "FMA78454"
+  },
+  {
+    "id": "FMA78469",
+    "label": "Fourth ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1731.obj",
+    "representationId": "BP5514",
+    "sourceConceptId": "FMA78469"
+  },
+  {
+    "id": "FMA78450",
+    "label": "Left lateral ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1767.obj",
+    "representationId": "BP10468",
+    "sourceConceptId": "FMA78450"
+  },
+  {
+    "id": "FMA78449",
+    "label": "Right lateral ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1814.obj",
+    "representationId": "BP10436",
+    "sourceConceptId": "FMA78449"
+  },
+  {
+    "id": "FMA7198",
+    "label": "Pancreas",
+    "meshName": "digestive|Pancreas",
+    "system": "digestive",
+    "sourceFile": "FJ1895.obj",
+    "representationId": "BP4631",
+    "sourceConceptId": "FMA7198"
+  },
+  {
+    "id": "FMA87217",
+    "label": "Descending thoracic aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1931.obj",
+    "representationId": "BP6004",
+    "sourceConceptId": "FMA87217"
+  },
+  {
+    "id": "FMA3789",
+    "label": "Abdominal aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ1932.obj",
+    "representationId": "BP6008",
+    "sourceConceptId": "FMA3789"
+  },
+  {
+    "id": "FMA68109",
+    "label": "Bronchial artery",
+    "meshName": "respiratory|Bronchial artery",
+    "system": "respiratory",
+    "sourceFile": "FJ1933.obj",
+    "representationId": "BP6095",
+    "sourceConceptId": "FMA68109"
+  },
+  {
+    "id": "FMA5042",
+    "label": "Right superior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1935.obj",
+    "representationId": "BP6329",
+    "sourceConceptId": "FMA5042"
+  },
+  {
+    "id": "FMA66242",
+    "label": "Right first posterior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1939.obj",
+    "representationId": "BP6139",
+    "sourceConceptId": "FMA66242"
+  },
+  {
+    "id": "FMA5041",
+    "label": "Right second posterior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1950.obj",
+    "representationId": "BP6135",
+    "sourceConceptId": "FMA5041"
+  },
+  {
+    "id": "FMA63822",
+    "label": "Posterior intercostal arteries",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1961.obj",
+    "representationId": "BP6654",
+    "sourceConceptId": "FMA63822"
+  },
+  {
+    "id": "FMA4088",
+    "label": "Left superior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1970.obj",
+    "representationId": "BP6330",
+    "sourceConceptId": "FMA4088"
+  },
+  {
+    "id": "FMA66243",
+    "label": "Left first posterior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1973.obj",
+    "representationId": "BP6138",
+    "sourceConceptId": "FMA66243"
+  },
+  {
+    "id": "FMA4112",
+    "label": "Left second posterior intercostal artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1974.obj",
+    "representationId": "BP6136",
+    "sourceConceptId": "FMA4112"
+  },
+  {
+    "id": "FMA70839",
+    "label": "Set of anterior intercostal veins",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1985.obj",
+    "representationId": "BP6659",
+    "sourceConceptId": "FMA70839"
+  },
+  {
+    "id": "FMA4797",
+    "label": "Left superior intercostal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1986.obj",
+    "representationId": "BP5965",
+    "sourceConceptId": "FMA4797"
+  },
+  {
+    "id": "FMA4877",
+    "label": "Right superior intercostal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ1991.obj",
+    "representationId": "BP5901",
+    "sourceConceptId": "FMA4877"
+  },
+  {
+    "id": "FMA14752",
+    "label": "Right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2038.obj",
+    "representationId": "BP7655",
+    "sourceConceptId": "FMA14752"
+  },
+  {
+    "id": "FMA86340",
+    "label": "Superior segmental branch of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2042.obj",
+    "representationId": "BP7665",
+    "sourceConceptId": "FMA86340"
+  },
+  {
+    "id": "FMA86346",
+    "label": "Inferior segmental branch of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2043.obj",
+    "representationId": "BP7668",
+    "sourceConceptId": "FMA86346"
+  },
+  {
+    "id": "FMA86348",
+    "label": "Posterior segmental branch of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2045.obj",
+    "representationId": "BP7670",
+    "sourceConceptId": "FMA86348"
+  },
+  {
+    "id": "FMA14753",
+    "label": "Left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2046.obj",
+    "representationId": "BP7672",
+    "sourceConceptId": "FMA14753"
+  },
+  {
+    "id": "FMA86347",
+    "label": "Inferior segmental branch of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2049.obj",
+    "representationId": "BP7675",
+    "sourceConceptId": "FMA86347"
+  },
+  {
+    "id": "FMA86341",
+    "label": "Superior segmental branch of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2052.obj",
+    "representationId": "BP7677",
+    "sourceConceptId": "FMA86341"
+  },
+  {
+    "id": "FMA86349",
+    "label": "Posterior segmental branch of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2053.obj",
+    "representationId": "BP7678",
+    "sourceConceptId": "FMA86349"
+  },
+  {
+    "id": "FMA21422",
+    "label": "Descending branch of right lateral circumflex femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2057.obj",
+    "representationId": "BP6042",
+    "sourceConceptId": "FMA21422"
+  },
+  {
+    "id": "FMA21423",
+    "label": "Descending branch of left lateral circumflex femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2063.obj",
+    "representationId": "BP6043",
+    "sourceConceptId": "FMA21423"
+  },
+  {
+    "id": "FMA70250",
+    "label": "Left femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2074.obj",
+    "representationId": "BP6082",
+    "sourceConceptId": "FMA70250"
+  },
+  {
+    "id": "FMA20802",
+    "label": "Left lateral circumflex femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2078.obj",
+    "representationId": "BP6036",
+    "sourceConceptId": "FMA20802"
+  },
+  {
+    "id": "FMA43956",
+    "label": "Plantar metatarsal artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2096.obj",
+    "representationId": "BP6060",
+    "sourceConceptId": "FMA43956"
+  },
+  {
+    "id": "FMA70249",
+    "label": "Right femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2143.obj",
+    "representationId": "BP6081",
+    "sourceConceptId": "FMA70249"
+  },
+  {
+    "id": "FMA20801",
+    "label": "Right lateral circumflex femoral artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2158.obj",
+    "representationId": "BP6035",
+    "sourceConceptId": "FMA20801"
+  },
+  {
+    "id": "FMA22954",
+    "label": "Dorsal metacarpal vein",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2186.obj",
+    "representationId": "BP5981",
+    "sourceConceptId": "FMA22954"
+  },
+  {
+    "id": "FMA44504",
+    "label": "Plantar metatarsal vein",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2191.obj",
+    "representationId": "BP5822",
+    "sourceConceptId": "FMA44504"
+  },
+  {
+    "id": "FMA22692",
+    "label": "Left brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2219.obj",
+    "representationId": "BP6021",
+    "sourceConceptId": "FMA22692"
+  },
+  {
+    "id": "FMA22697",
+    "label": "Left deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2225.obj",
+    "representationId": "BP6285",
+    "sourceConceptId": "FMA22697"
+  },
+  {
+    "id": "FMA23073",
+    "label": "Deltoid branch of left thoraco-acromial artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2230.obj",
+    "representationId": "BP6322",
+    "sourceConceptId": "FMA23073"
+  },
+  {
+    "id": "FMA22773",
+    "label": "Dorsal carpal branch of left radial artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2231.obj",
+    "representationId": "BP6229",
+    "sourceConceptId": "FMA22773"
+  },
+  {
+    "id": "FMA22822",
+    "label": "Left dorsal carpal branch of ulnar artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2236.obj",
+    "representationId": "BP6309",
+    "sourceConceptId": "FMA22822"
+  },
+  {
+    "id": "FMA22865",
+    "label": "Left palmar metacarpal artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2237.obj",
+    "representationId": "BP6132",
+    "sourceConceptId": "FMA22865"
+  },
+  {
+    "id": "FMA22921",
+    "label": "Left palmar metacarpal vein",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2238.obj",
+    "representationId": "BP5925",
+    "sourceConceptId": "FMA22921"
+  },
+  {
+    "id": "FMA23127",
+    "label": "Radial collateral branch of left deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2261.obj",
+    "representationId": "BP6273",
+    "sourceConceptId": "FMA23127"
+  },
+  {
+    "id": "FMA23126",
+    "label": "Radial collateral branch of right deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2262.obj",
+    "representationId": "BP6272",
+    "sourceConceptId": "FMA23126"
+  },
+  {
+    "id": "FMA22691",
+    "label": "Right brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2271.obj",
+    "representationId": "BP6020",
+    "sourceConceptId": "FMA22691"
+  },
+  {
+    "id": "FMA22696",
+    "label": "Right deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2277.obj",
+    "representationId": "BP6284",
+    "sourceConceptId": "FMA22696"
+  },
+  {
+    "id": "FMA23072",
+    "label": "Deltoid branch of right thoraco-acromial artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2282.obj",
+    "representationId": "BP6323",
+    "sourceConceptId": "FMA23072"
+  },
+  {
+    "id": "FMA22772",
+    "label": "Dorsal carpal branch of right radial artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2283.obj",
+    "representationId": "BP6228",
+    "sourceConceptId": "FMA22772"
+  },
+  {
+    "id": "FMA22821",
+    "label": "Right dorsal carpal branch of ulnar artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2288.obj",
+    "representationId": "BP6308",
+    "sourceConceptId": "FMA22821"
+  },
+  {
+    "id": "FMA22864",
+    "label": "Right palmar metacarpal artery",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2289.obj",
+    "representationId": "BP6131",
+    "sourceConceptId": "FMA22864"
+  },
+  {
+    "id": "FMA22920",
+    "label": "Right palmar metacarpal vein",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2290.obj",
+    "representationId": "BP5924",
+    "sourceConceptId": "FMA22920"
+  },
+  {
+    "id": "FMA23064",
+    "label": "Pectoral branch of left thoraco-acromial artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2330.obj",
+    "representationId": "BP6320",
+    "sourceConceptId": "FMA23064"
+  },
+  {
+    "id": "FMA23125",
+    "label": "Middle collateral branch of left deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2331.obj",
+    "representationId": "BP6275",
+    "sourceConceptId": "FMA23125"
+  },
+  {
+    "id": "FMA70800",
+    "label": "Set of dorsal metacarpal arteries",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2347.obj",
+    "representationId": "BP6651",
+    "sourceConceptId": "FMA70800"
+  },
+  {
+    "id": "FMA23063",
+    "label": "Pectoral branch of right thoraco-acromial artery",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2361.obj",
+    "representationId": "BP6319",
+    "sourceConceptId": "FMA23063"
+  },
+  {
+    "id": "FMA23124",
+    "label": "Middle collateral branch of right deep brachial artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2362.obj",
+    "representationId": "BP6276",
+    "sourceConceptId": "FMA23124"
+  },
+  {
+    "id": "FMA7265",
+    "label": "Anterolateral head of lateral papillary muscle of left ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2418.obj",
+    "representationId": "BP8573",
+    "sourceConceptId": "FMA7265"
+  },
+  {
+    "id": "FMA7260",
+    "label": "Anterior papillary muscle of right ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2419.obj",
+    "representationId": "BP9283",
+    "sourceConceptId": "FMA7260"
+  },
+  {
+    "id": "FMA9466",
+    "label": "Cavity of left ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2422.obj",
+    "representationId": "BP8928",
+    "sourceConceptId": "FMA9466"
+  },
+  {
+    "id": "FMA9291",
+    "label": "Cavity of right ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2423.obj",
+    "representationId": "BP9227",
+    "sourceConceptId": "FMA9291"
+  },
+  {
+    "id": "FMA11359",
+    "label": "Cavity of right atrium",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2424.obj",
+    "representationId": "BP8677",
+    "sourceConceptId": "FMA11359"
+  },
+  {
+    "id": "FMA9465",
+    "label": "Cavity of left atrium",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2425.obj",
+    "representationId": "BP8719",
+    "sourceConceptId": "FMA9465"
+  },
+  {
+    "id": "FMA13884",
+    "label": "Wall of ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2428.obj",
+    "representationId": "BP7815",
+    "sourceConceptId": "FMA13884"
+  },
+  {
+    "id": "FMA7264",
+    "label": "Lateral papillary muscle of left ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2429.obj",
+    "representationId": "BP8949",
+    "sourceConceptId": "FMA7264"
+  },
+  {
+    "id": "FMA7261",
+    "label": "Posterior papillary muscle of right ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2430.obj",
+    "representationId": "BP8146",
+    "sourceConceptId": "FMA7261"
+  },
+  {
+    "id": "FMA7262",
+    "label": "Septal papillary muscle of right ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2437.obj",
+    "representationId": "BP8088",
+    "sourceConceptId": "FMA7262"
+  },
+  {
+    "id": "FMA9531",
+    "label": "Wall of left atrium",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2438.obj",
+    "representationId": "BP9267",
+    "sourceConceptId": "FMA9531"
+  },
+  {
+    "id": "FMA9457",
+    "label": "Wall of right atrium",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2439.obj",
+    "representationId": "BP8712",
+    "sourceConceptId": "FMA9457"
+  },
+  {
+    "id": "FMA68227",
+    "label": "Inferior lingular bronchial tree",
+    "meshName": "respiratory|Inferior lingular bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2441.obj",
+    "representationId": "BP9109",
+    "sourceConceptId": "FMA68227"
+  },
+  {
+    "id": "FMA68230",
+    "label": "Left medial basal segmental bronchial tree",
+    "meshName": "respiratory|Left medial basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2442.obj",
+    "representationId": "BP8759",
+    "sourceConceptId": "FMA68230"
+  },
+  {
+    "id": "FMA68222",
+    "label": "Left anterior segmental bronchial tree",
+    "meshName": "respiratory|Left anterior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2443.obj",
+    "representationId": "BP7924",
+    "sourceConceptId": "FMA68222"
+  },
+  {
+    "id": "FMA68223",
+    "label": "Left apical segmental bronchial tree",
+    "meshName": "respiratory|Left apical segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2444.obj",
+    "representationId": "BP8229",
+    "sourceConceptId": "FMA68223"
+  },
+  {
+    "id": "FMA68232",
+    "label": "Left lateral basal segmental bronchial tree",
+    "meshName": "respiratory|Left lateral basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2445.obj",
+    "representationId": "BP9045",
+    "sourceConceptId": "FMA68232"
+  },
+  {
+    "id": "FMA68233",
+    "label": "Left posterior basal segmental bronchial tree",
+    "meshName": "respiratory|Left posterior basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2446.obj",
+    "representationId": "BP8584",
+    "sourceConceptId": "FMA68233"
+  },
+  {
+    "id": "FMA68225",
+    "label": "Left posterior segmental bronchial tree",
+    "meshName": "respiratory|Left posterior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2447.obj",
+    "representationId": "BP8694",
+    "sourceConceptId": "FMA68225"
+  },
+  {
+    "id": "FMA68228",
+    "label": "Left superior segmental bronchial tree",
+    "meshName": "respiratory|Left superior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2448.obj",
+    "representationId": "BP8416",
+    "sourceConceptId": "FMA68228"
+  },
+  {
+    "id": "FMA68215",
+    "label": "Lateral segmental bronchial tree",
+    "meshName": "respiratory|Lateral segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2449.obj",
+    "representationId": "BP7978",
+    "sourceConceptId": "FMA68215"
+  },
+  {
+    "id": "FMA7396",
+    "label": "Left main bronchus",
+    "meshName": "respiratory|Left main bronchus",
+    "system": "respiratory",
+    "sourceFile": "FJ2450.obj",
+    "representationId": "BP8386",
+    "sourceConceptId": "FMA7396"
+  },
+  {
+    "id": "FMA68214",
+    "label": "Medial segmental bronchial tree",
+    "meshName": "respiratory|Medial segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2451.obj",
+    "representationId": "BP8364",
+    "sourceConceptId": "FMA68214"
+  },
+  {
+    "id": "FMA68321",
+    "label": "Right anterior basal segmental bronchial tree",
+    "meshName": "respiratory|Right anterior basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2452.obj",
+    "representationId": "BP8250",
+    "sourceConceptId": "FMA68321"
+  },
+  {
+    "id": "FMA68212",
+    "label": "Right anterior segmental bronchial tree",
+    "meshName": "respiratory|Right anterior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2453.obj",
+    "representationId": "BP7982",
+    "sourceConceptId": "FMA68212"
+  },
+  {
+    "id": "FMA68211",
+    "label": "Right apical segmental bronchial tree",
+    "meshName": "respiratory|Right apical segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2454.obj",
+    "representationId": "BP8086",
+    "sourceConceptId": "FMA68211"
+  },
+  {
+    "id": "FMA68220",
+    "label": "Right lateral basal segmental bronchial tree",
+    "meshName": "respiratory|Right lateral basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2455.obj",
+    "representationId": "BP8090",
+    "sourceConceptId": "FMA68220"
+  },
+  {
+    "id": "FMA68218",
+    "label": "Right medial basal segmental bronchial tree",
+    "meshName": "respiratory|Right medial basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2456.obj",
+    "representationId": "BP7932",
+    "sourceConceptId": "FMA68218"
+  },
+  {
+    "id": "FMA68221",
+    "label": "Right posterior basal segmental bronchial tree",
+    "meshName": "respiratory|Right posterior basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2457.obj",
+    "representationId": "BP7919",
+    "sourceConceptId": "FMA68221"
+  },
+  {
+    "id": "FMA68213",
+    "label": "Right posterior segmental bronchial tree",
+    "meshName": "respiratory|Right posterior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2458.obj",
+    "representationId": "BP8644",
+    "sourceConceptId": "FMA68213"
+  },
+  {
+    "id": "FMA68216",
+    "label": "Right superior segmental bronchial tree",
+    "meshName": "respiratory|Right superior segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2459.obj",
+    "representationId": "BP7994",
+    "sourceConceptId": "FMA68216"
+  },
+  {
+    "id": "FMA68226",
+    "label": "Superior lingular bronchial tree",
+    "meshName": "respiratory|Superior lingular bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2476.obj",
+    "representationId": "BP8806",
+    "sourceConceptId": "FMA68226"
+  },
+  {
+    "id": "FMA68231",
+    "label": "Left anterior basal segmental bronchial tree",
+    "meshName": "respiratory|Left anterior basal segmental bronchial tree",
+    "system": "respiratory",
+    "sourceFile": "FJ2535.obj",
+    "representationId": "BP8011",
+    "sourceConceptId": "FMA68231"
+  },
+  {
+    "id": "FMA68418",
+    "label": "Right main bronchus proper",
+    "meshName": "respiratory|Right main bronchus proper",
+    "system": "respiratory",
+    "sourceFile": "FJ2539.obj",
+    "representationId": "BP8732",
+    "sourceConceptId": "FMA68418"
+  },
+  {
+    "id": "FMA7394",
+    "label": "Trachea",
+    "meshName": "respiratory|Trachea",
+    "system": "respiratory",
+    "sourceFile": "FJ2541.obj",
+    "representationId": "BP7849",
+    "sourceConceptId": "FMA7394"
+  },
+  {
+    "id": "FMA7131",
+    "label": "Esophagus",
+    "meshName": "digestive|Esophagus",
+    "system": "digestive",
+    "sourceFile": "FJ2563.obj",
+    "representationId": "BP9222",
+    "sourceConceptId": "FMA7131"
+  },
+  {
+    "id": "FMA7148",
+    "label": "Stomach",
+    "meshName": "digestive|Stomach",
+    "system": "digestive",
+    "sourceFile": "FJ2564.obj",
+    "representationId": "BP7926",
+    "sourceConceptId": "FMA7148"
+  },
+  {
+    "id": "FMA14545",
+    "label": "Ascending colon",
+    "meshName": "digestive|Ascending colon",
+    "system": "digestive",
+    "sourceFile": "FJ2566.obj",
+    "representationId": "BP9195",
+    "sourceConceptId": "FMA14545"
+  },
+  {
+    "id": "FMA14547",
+    "label": "Descending colon",
+    "meshName": "digestive|Descending colon",
+    "system": "digestive",
+    "sourceFile": "FJ2567.obj",
+    "representationId": "BP8743",
+    "sourceConceptId": "FMA14547"
+  },
+  {
+    "id": "FMA14544",
+    "label": "Rectum",
+    "meshName": "digestive|Rectum",
+    "system": "digestive",
+    "sourceFile": "FJ2571.obj",
+    "representationId": "BP9212",
+    "sourceConceptId": "FMA14544"
+  },
+  {
+    "id": "FMA14546",
+    "label": "Transverse colon",
+    "meshName": "digestive|Transverse colon",
+    "system": "digestive",
+    "sourceFile": "FJ2572.obj",
+    "representationId": "BP8403",
+    "sourceConceptId": "FMA14546"
+  },
+  {
+    "id": "FMA63120",
+    "label": "Parenchyma of pancreas",
+    "meshName": "digestive|Parenchyma of pancreas",
+    "system": "digestive",
+    "sourceFile": "FJ2629.obj",
+    "representationId": "BP9199",
+    "sourceConceptId": "FMA63120"
+  },
+  {
+    "id": "FMA74912",
+    "label": "Trunk of anterior interventricular branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2631.obj",
+    "representationId": "BP8970",
+    "sourceConceptId": "FMA74912"
+  },
+  {
+    "id": "FMA3872",
+    "label": "First right anterior branch of anterior interventricular branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2632.obj",
+    "representationId": "BP8913",
+    "sourceConceptId": "FMA3872"
+  },
+  {
+    "id": "FMA3860",
+    "label": "Diagonal branch of anterior descending branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2633.obj",
+    "representationId": "BP8004",
+    "sourceConceptId": "FMA3860"
+  },
+  {
+    "id": "FMA3876",
+    "label": "Third right anterior branch of anterior interventricular branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2641.obj",
+    "representationId": "BP8649",
+    "sourceConceptId": "FMA3876"
+  },
+  {
+    "id": "FMA3868",
+    "label": "Conus branch of anterior interventricular branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2643.obj",
+    "representationId": "BP8013",
+    "sourceConceptId": "FMA3868"
+  },
+  {
+    "id": "FMA3874",
+    "label": "Second right anterior branch of anterior interventricular branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2646.obj",
+    "representationId": "BP8897",
+    "sourceConceptId": "FMA3874"
+  },
+  {
+    "id": "FMA3895",
+    "label": "Circumflex branch of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2649.obj",
+    "representationId": "BP8397",
+    "sourceConceptId": "FMA3895"
+  },
+  {
+    "id": "FMA4706",
+    "label": "Coronary sinus",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2655.obj",
+    "representationId": "BP9086",
+    "sourceConceptId": "FMA4706"
+  },
+  {
+    "id": "FMA3818",
+    "label": "Marginal branch of right coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2667.obj",
+    "representationId": "BP8446",
+    "sourceConceptId": "FMA3818"
+  },
+  {
+    "id": "FMA3815",
+    "label": "First anterior ventricular branch of right coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2671.obj",
+    "representationId": "BP7824",
+    "sourceConceptId": "FMA3815"
+  },
+  {
+    "id": "FMA3840",
+    "label": "Posterior interventricular branch of right coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2692.obj",
+    "representationId": "BP7876",
+    "sourceConceptId": "FMA3840"
+  },
+  {
+    "id": "FMA4712",
+    "label": "Posterior vein of left ventricle",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2701.obj",
+    "representationId": "BP8014",
+    "sourceConceptId": "FMA4712"
+  },
+  {
+    "id": "FMA3837",
+    "label": "First posterior ventricular branch of right coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2714.obj",
+    "representationId": "BP7761",
+    "sourceConceptId": "FMA3837"
+  },
+  {
+    "id": "FMA3802",
+    "label": "Trunk of right coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2723.obj",
+    "representationId": "BP8221",
+    "sourceConceptId": "FMA3802"
+  },
+  {
+    "id": "FMA3855",
+    "label": "Trunk of left coronary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2737.obj",
+    "representationId": "BP8961",
+    "sourceConceptId": "FMA3855"
+  },
+  {
+    "id": "FMA46729",
+    "label": "Left levator veli palatini",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2741.obj",
+    "representationId": "BP8365",
+    "sourceConceptId": "FMA46729"
+  },
+  {
+    "id": "FMA46728",
+    "label": "Right levator veli palatini",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2753.obj",
+    "representationId": "BP9032",
+    "sourceConceptId": "FMA46728"
+  },
+  {
+    "id": "FMA46733",
+    "label": "Uvular muscle",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ2762.obj",
+    "representationId": "BP9142",
+    "sourceConceptId": "FMA46733"
+  },
+  {
+    "id": "FMA52749",
+    "label": "Hyoid bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ2772.obj",
+    "representationId": "BP8836",
+    "sourceConceptId": "FMA52749"
+  },
+  {
+    "id": "FMA7163",
+    "label": "Skin",
+    "meshName": "skin|Skin",
+    "system": "surface",
+    "sourceFile": "FJ2810.obj",
+    "representationId": "BP9115",
+    "sourceConceptId": "FMA7163"
+  },
+  {
+    "id": "FMA13365",
+    "label": "Caudate lobe of liver",
+    "meshName": "digestive|Caudate lobe of liver",
+    "system": "digestive",
+    "sourceFile": "FJ2816.obj",
+    "representationId": "BP8727",
+    "sourceConceptId": "FMA13365"
+  },
+  {
+    "id": "FMA7202",
+    "label": "Gallbladder",
+    "meshName": "digestive|Gallbladder",
+    "system": "digestive",
+    "sourceFile": "FJ2817.obj",
+    "representationId": "BP9029",
+    "sourceConceptId": "FMA7202"
+  },
+  {
+    "id": "FMA50873",
+    "label": "Left pulmonary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2924.obj",
+    "representationId": "BP8463",
+    "sourceConceptId": "FMA50873"
+  },
+  {
+    "id": "FMA8612",
+    "label": "Pulmonary trunk",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ2966.obj",
+    "representationId": "BP8690",
+    "sourceConceptId": "FMA8612"
+  },
+  {
+    "id": "FMA50872",
+    "label": "Right pulmonary artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3019.obj",
+    "representationId": "BP8968",
+    "sourceConceptId": "FMA50872"
+  },
+  {
+    "id": "FMA76903",
+    "label": "Left duct of caudate lobe of liver",
+    "meshName": "digestive|Left duct of caudate lobe of liver",
+    "system": "digestive",
+    "sourceFile": "FJ3094.obj",
+    "representationId": "BP8609",
+    "sourceConceptId": "FMA76903"
+  },
+  {
+    "id": "FMA16586",
+    "label": "Right hip bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3152.obj",
+    "representationId": "BP8768",
+    "sourceConceptId": "FMA16586"
+  },
+  {
+    "id": "FMA10037",
+    "label": "Tenth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3154.obj",
+    "representationId": "BP8412",
+    "sourceConceptId": "FMA10037"
+  },
+  {
+    "id": "FMA10059",
+    "label": "Eleventh thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3155.obj",
+    "representationId": "BP8043",
+    "sourceConceptId": "FMA10059"
+  },
+  {
+    "id": "FMA10081",
+    "label": "Twelfth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3156.obj",
+    "representationId": "BP9250",
+    "sourceConceptId": "FMA10081"
+  },
+  {
+    "id": "FMA13072",
+    "label": "First lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3157.obj",
+    "representationId": "BP8948",
+    "sourceConceptId": "FMA13072"
+  },
+  {
+    "id": "FMA9165",
+    "label": "First thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3158.obj",
+    "representationId": "BP8981",
+    "sourceConceptId": "FMA9165"
+  },
+  {
+    "id": "FMA13073",
+    "label": "Second lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3159.obj",
+    "representationId": "BP8995",
+    "sourceConceptId": "FMA13073"
+  },
+  {
+    "id": "FMA9187",
+    "label": "Second thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3160.obj",
+    "representationId": "BP8475",
+    "sourceConceptId": "FMA9187"
+  },
+  {
+    "id": "FMA12521",
+    "label": "Third cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3161.obj",
+    "representationId": "BP9108",
+    "sourceConceptId": "FMA12521"
+  },
+  {
+    "id": "FMA13074",
+    "label": "Third lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3162.obj",
+    "representationId": "BP8227",
+    "sourceConceptId": "FMA13074"
+  },
+  {
+    "id": "FMA9209",
+    "label": "Third thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3163.obj",
+    "representationId": "BP8726",
+    "sourceConceptId": "FMA9209"
+  },
+  {
+    "id": "FMA12522",
+    "label": "Fourth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3164.obj",
+    "representationId": "BP8003",
+    "sourceConceptId": "FMA12522"
+  },
+  {
+    "id": "FMA13075",
+    "label": "Fourth lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3165.obj",
+    "representationId": "BP8133",
+    "sourceConceptId": "FMA13075"
+  },
+  {
+    "id": "FMA9248",
+    "label": "Fourth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3166.obj",
+    "representationId": "BP9156",
+    "sourceConceptId": "FMA9248"
+  },
+  {
+    "id": "FMA12523",
+    "label": "Fifth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3167.obj",
+    "representationId": "BP8835",
+    "sourceConceptId": "FMA12523"
+  },
+  {
+    "id": "FMA13076",
+    "label": "Fifth lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3168.obj",
+    "representationId": "BP8280",
+    "sourceConceptId": "FMA13076"
+  },
+  {
+    "id": "FMA9922",
+    "label": "Fifth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3169.obj",
+    "representationId": "BP8643",
+    "sourceConceptId": "FMA9922"
+  },
+  {
+    "id": "FMA12524",
+    "label": "Sixth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3170.obj",
+    "representationId": "BP7845",
+    "sourceConceptId": "FMA12524"
+  },
+  {
+    "id": "FMA9945",
+    "label": "Sixth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3171.obj",
+    "representationId": "BP8303",
+    "sourceConceptId": "FMA9945"
+  },
+  {
+    "id": "FMA12525",
+    "label": "Seventh cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3172.obj",
+    "representationId": "BP7979",
+    "sourceConceptId": "FMA12525"
+  },
+  {
+    "id": "FMA9968",
+    "label": "Seventh thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3173.obj",
+    "representationId": "BP8840",
+    "sourceConceptId": "FMA9968"
+  },
+  {
+    "id": "FMA9991",
+    "label": "Eighth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3174.obj",
+    "representationId": "BP9221",
+    "sourceConceptId": "FMA9991"
+  },
+  {
+    "id": "FMA10014",
+    "label": "Ninth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3175.obj",
+    "representationId": "BP8178",
+    "sourceConceptId": "FMA10014"
+  },
+  {
+    "id": "FMA7487",
+    "label": "Body of sternum",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3178.obj",
+    "representationId": "BP8989",
+    "sourceConceptId": "FMA7487"
+  },
+  {
+    "id": "FMA52734",
+    "label": "Frontal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3200.obj",
+    "representationId": "BP8209",
+    "sourceConceptId": "FMA52734"
+  },
+  {
+    "id": "FMA25058",
+    "label": "Intervertebral disk of axis",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3202.obj",
+    "representationId": "BP9151",
+    "sourceConceptId": "FMA25058"
+  },
+  {
+    "id": "FMA13501",
+    "label": "Intervertebral disk of fourth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3203.obj",
+    "representationId": "BP9269",
+    "sourceConceptId": "FMA13501"
+  },
+  {
+    "id": "FMA13502",
+    "label": "Intervertebral disk of fifth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3204.obj",
+    "representationId": "BP8610",
+    "sourceConceptId": "FMA13502"
+  },
+  {
+    "id": "FMA13503",
+    "label": "Intervertebral disk of sixth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3205.obj",
+    "representationId": "BP8652",
+    "sourceConceptId": "FMA13503"
+  },
+  {
+    "id": "FMA13504",
+    "label": "Intervertebral disk of seventh thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3206.obj",
+    "representationId": "BP8433",
+    "sourceConceptId": "FMA13504"
+  },
+  {
+    "id": "FMA13505",
+    "label": "Intervertebral disk of eighth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3207.obj",
+    "representationId": "BP8829",
+    "sourceConceptId": "FMA13505"
+  },
+  {
+    "id": "FMA13506",
+    "label": "Intervertebral disk of ninth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3208.obj",
+    "representationId": "BP8704",
+    "sourceConceptId": "FMA13506"
+  },
+  {
+    "id": "FMA13507",
+    "label": "Intervertebral disk of tenth thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3209.obj",
+    "representationId": "BP9069",
+    "sourceConceptId": "FMA13507"
+  },
+  {
+    "id": "FMA13508",
+    "label": "Intervertebral disk of eleventh thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3210.obj",
+    "representationId": "BP7810",
+    "sourceConceptId": "FMA13508"
+  },
+  {
+    "id": "FMA10446",
+    "label": "Intervertebral disk",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3211.obj",
+    "representationId": "BP7812",
+    "sourceConceptId": "FMA10446"
+  },
+  {
+    "id": "FMA16033",
+    "label": "Intervertebral disk of first lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3212.obj",
+    "representationId": "BP8891",
+    "sourceConceptId": "FMA16033"
+  },
+  {
+    "id": "FMA13896",
+    "label": "Intervertebral disk of third cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3213.obj",
+    "representationId": "BP9201",
+    "sourceConceptId": "FMA13896"
+  },
+  {
+    "id": "FMA16034",
+    "label": "Intervertebral disk of second lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3214.obj",
+    "representationId": "BP8683",
+    "sourceConceptId": "FMA16034"
+  },
+  {
+    "id": "FMA16035",
+    "label": "Intervertebral disk of third lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3215.obj",
+    "representationId": "BP8046",
+    "sourceConceptId": "FMA16035"
+  },
+  {
+    "id": "FMA16036",
+    "label": "Intervertebral disk of fourth lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3216.obj",
+    "representationId": "BP8261",
+    "sourceConceptId": "FMA16036"
+  },
+  {
+    "id": "FMA16037",
+    "label": "Intervertebral disk of fifth lumbar vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3217.obj",
+    "representationId": "BP8781",
+    "sourceConceptId": "FMA16037"
+  },
+  {
+    "id": "FMA13897",
+    "label": "Intervertebral disk of fourth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3218.obj",
+    "representationId": "BP8718",
+    "sourceConceptId": "FMA13897"
+  },
+  {
+    "id": "FMA13898",
+    "label": "Intervertebral disk of fifth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3219.obj",
+    "representationId": "BP7934",
+    "sourceConceptId": "FMA13898"
+  },
+  {
+    "id": "FMA13899",
+    "label": "Intervertebral disk of sixth cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3220.obj",
+    "representationId": "BP9190",
+    "sourceConceptId": "FMA13899"
+  },
+  {
+    "id": "FMA13900",
+    "label": "Intervertebral disk of seventh cervical vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3221.obj",
+    "representationId": "BP8243",
+    "sourceConceptId": "FMA13900"
+  },
+  {
+    "id": "FMA10458",
+    "label": "Intervertebral disk of first thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3222.obj",
+    "representationId": "BP9158",
+    "sourceConceptId": "FMA10458"
+  },
+  {
+    "id": "FMA13495",
+    "label": "Intervertebral disk of second thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3223.obj",
+    "representationId": "BP8514",
+    "sourceConceptId": "FMA13495"
+  },
+  {
+    "id": "FMA13500",
+    "label": "Intervertebral disk of third thoracic vertebra",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3224.obj",
+    "representationId": "BP9007",
+    "sourceConceptId": "FMA13500"
+  },
+  {
+    "id": "FMA8472",
+    "label": "Left tenth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3225.obj",
+    "representationId": "BP9155",
+    "sourceConceptId": "FMA8472"
+  },
+  {
+    "id": "FMA8532",
+    "label": "Left eleventh rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3226.obj",
+    "representationId": "BP9097",
+    "sourceConceptId": "FMA8532"
+  },
+  {
+    "id": "FMA8534",
+    "label": "Left twelfth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3227.obj",
+    "representationId": "BP9061",
+    "sourceConceptId": "FMA8534"
+  },
+  {
+    "id": "FMA7987",
+    "label": "Left first rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3228.obj",
+    "representationId": "BP8800",
+    "sourceConceptId": "FMA7987"
+  },
+  {
+    "id": "FMA8012",
+    "label": "Left second rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3229.obj",
+    "representationId": "BP8996",
+    "sourceConceptId": "FMA8012"
+  },
+  {
+    "id": "FMA8039",
+    "label": "Left third rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3230.obj",
+    "representationId": "BP8357",
+    "sourceConceptId": "FMA8039"
+  },
+  {
+    "id": "FMA8148",
+    "label": "Left fourth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3231.obj",
+    "representationId": "BP8081",
+    "sourceConceptId": "FMA8148"
+  },
+  {
+    "id": "FMA8093",
+    "label": "Left fifth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3232.obj",
+    "representationId": "BP8479",
+    "sourceConceptId": "FMA8093"
+  },
+  {
+    "id": "FMA8202",
+    "label": "Left sixth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3233.obj",
+    "representationId": "BP9041",
+    "sourceConceptId": "FMA8202"
+  },
+  {
+    "id": "FMA8256",
+    "label": "Left seventh rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3234.obj",
+    "representationId": "BP9230",
+    "sourceConceptId": "FMA8256"
+  },
+  {
+    "id": "FMA8310",
+    "label": "Left eighth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3235.obj",
+    "representationId": "BP8708",
+    "sourceConceptId": "FMA8310"
+  },
+  {
+    "id": "FMA8391",
+    "label": "Left ninth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3236.obj",
+    "representationId": "BP8438",
+    "sourceConceptId": "FMA8391"
+  },
+  {
+    "id": "FMA13323",
+    "label": "Left clavicle",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3237.obj",
+    "representationId": "BP8841",
+    "sourceConceptId": "FMA13323"
+  },
+  {
+    "id": "FMA24465",
+    "label": "Left first metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3240.obj",
+    "representationId": "BP8887",
+    "sourceConceptId": "FMA24465"
+  },
+  {
+    "id": "FMA24508",
+    "label": "Left first metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3241.obj",
+    "representationId": "BP8160",
+    "sourceConceptId": "FMA24508"
+  },
+  {
+    "id": "FMA24467",
+    "label": "Left second metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3243.obj",
+    "representationId": "BP8909",
+    "sourceConceptId": "FMA24467"
+  },
+  {
+    "id": "FMA24510",
+    "label": "Left second metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3244.obj",
+    "representationId": "BP8915",
+    "sourceConceptId": "FMA24510"
+  },
+  {
+    "id": "FMA24469",
+    "label": "Left third metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3246.obj",
+    "representationId": "BP8863",
+    "sourceConceptId": "FMA24469"
+  },
+  {
+    "id": "FMA24512",
+    "label": "Left third metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3247.obj",
+    "representationId": "BP8967",
+    "sourceConceptId": "FMA24512"
+  },
+  {
+    "id": "FMA24471",
+    "label": "Left fourth metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3249.obj",
+    "representationId": "BP9203",
+    "sourceConceptId": "FMA24471"
+  },
+  {
+    "id": "FMA24514",
+    "label": "Left fourth metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3250.obj",
+    "representationId": "BP8511",
+    "sourceConceptId": "FMA24514"
+  },
+  {
+    "id": "FMA24473",
+    "label": "Left fifth metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3252.obj",
+    "representationId": "BP8000",
+    "sourceConceptId": "FMA24473"
+  },
+  {
+    "id": "FMA24516",
+    "label": "Left fifth metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3253.obj",
+    "representationId": "BP9237",
+    "sourceConceptId": "FMA24516"
+  },
+  {
+    "id": "FMA24529",
+    "label": "Left cuboid bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3258.obj",
+    "representationId": "BP8538",
+    "sourceConceptId": "FMA24529"
+  },
+  {
+    "id": "FMA24475",
+    "label": "Left femur",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3259.obj",
+    "representationId": "BP9042",
+    "sourceConceptId": "FMA24475"
+  },
+  {
+    "id": "FMA24481",
+    "label": "Left fibula",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3260.obj",
+    "representationId": "BP8251",
+    "sourceConceptId": "FMA24481"
+  },
+  {
+    "id": "FMA23131",
+    "label": "Left humerus",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3262.obj",
+    "representationId": "BP9191",
+    "sourceConceptId": "FMA23131"
+  },
+  {
+    "id": "FMA24524",
+    "label": "Left intermediate cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3264.obj",
+    "representationId": "BP8520",
+    "sourceConceptId": "FMA24524"
+  },
+  {
+    "id": "FMA53646",
+    "label": "Left lacrimal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3265.obj",
+    "representationId": "BP8103",
+    "sourceConceptId": "FMA53646"
+  },
+  {
+    "id": "FMA45098",
+    "label": "Sesamoid bone of left foot",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3266.obj",
+    "representationId": "BP8272",
+    "sourceConceptId": "FMA45098"
+  },
+  {
+    "id": "FMA24526",
+    "label": "Left lateral cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3267.obj",
+    "representationId": "BP8347",
+    "sourceConceptId": "FMA24526"
+  },
+  {
+    "id": "FMA53650",
+    "label": "Left maxilla",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3269.obj",
+    "representationId": "BP9046",
+    "sourceConceptId": "FMA53650"
+  },
+  {
+    "id": "FMA24522",
+    "label": "Left medial cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3271.obj",
+    "representationId": "BP8774",
+    "sourceConceptId": "FMA24522"
+  },
+  {
+    "id": "FMA53648",
+    "label": "Left nasal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3272.obj",
+    "representationId": "BP8558",
+    "sourceConceptId": "FMA53648"
+  },
+  {
+    "id": "FMA53656",
+    "label": "Left palatine bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3273.obj",
+    "representationId": "BP7930",
+    "sourceConceptId": "FMA53656"
+  },
+  {
+    "id": "FMA52789",
+    "label": "Left parietal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3274.obj",
+    "representationId": "BP9209",
+    "sourceConceptId": "FMA52789"
+  },
+  {
+    "id": "FMA24487",
+    "label": "Left patella",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3275.obj",
+    "representationId": "BP8378",
+    "sourceConceptId": "FMA24487"
+  },
+  {
+    "id": "FMA23465",
+    "label": "Left radius",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3277.obj",
+    "representationId": "BP9059",
+    "sourceConceptId": "FMA23465"
+  },
+  {
+    "id": "FMA13396",
+    "label": "Left scapula",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3279.obj",
+    "representationId": "BP9121",
+    "sourceConceptId": "FMA13396"
+  },
+  {
+    "id": "FMA52739",
+    "label": "Left temporal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3281.obj",
+    "representationId": "BP7991",
+    "sourceConceptId": "FMA52739"
+  },
+  {
+    "id": "FMA24478",
+    "label": "Left tibia",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3282.obj",
+    "representationId": "BP9202",
+    "sourceConceptId": "FMA24478"
+  },
+  {
+    "id": "FMA23468",
+    "label": "Left ulna",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3286.obj",
+    "representationId": "BP9070",
+    "sourceConceptId": "FMA23468"
+  },
+  {
+    "id": "FMA52893",
+    "label": "Left zygomatic bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3287.obj",
+    "representationId": "BP8495",
+    "sourceConceptId": "FMA52893"
+  },
+  {
+    "id": "FMA16587",
+    "label": "Left hip bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3288.obj",
+    "representationId": "BP8950",
+    "sourceConceptId": "FMA16587"
+  },
+  {
+    "id": "FMA52748",
+    "label": "Mandible",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3289.obj",
+    "representationId": "BP8107",
+    "sourceConceptId": "FMA52748"
+  },
+  {
+    "id": "FMA24501",
+    "label": "Navicular bone of left foot",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3307.obj",
+    "representationId": "BP8599",
+    "sourceConceptId": "FMA24501"
+  },
+  {
+    "id": "FMA24500",
+    "label": "Navicular bone of right foot",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3308.obj",
+    "representationId": "BP9133",
+    "sourceConceptId": "FMA24500"
+  },
+  {
+    "id": "FMA52735",
+    "label": "Occipital bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3309.obj",
+    "representationId": "BP9177",
+    "sourceConceptId": "FMA52735"
+  },
+  {
+    "id": "FMA8445",
+    "label": "Right tenth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3330.obj",
+    "representationId": "BP8407",
+    "sourceConceptId": "FMA8445"
+  },
+  {
+    "id": "FMA8531",
+    "label": "Right eleventh rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3331.obj",
+    "representationId": "BP8951",
+    "sourceConceptId": "FMA8531"
+  },
+  {
+    "id": "FMA8533",
+    "label": "Right twelfth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3332.obj",
+    "representationId": "BP9236",
+    "sourceConceptId": "FMA8533"
+  },
+  {
+    "id": "FMA7857",
+    "label": "Right first rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3334.obj",
+    "representationId": "BP8341",
+    "sourceConceptId": "FMA7857"
+  },
+  {
+    "id": "FMA7882",
+    "label": "Right second rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3336.obj",
+    "representationId": "BP9279",
+    "sourceConceptId": "FMA7882"
+  },
+  {
+    "id": "FMA7909",
+    "label": "Right third rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3338.obj",
+    "representationId": "BP8969",
+    "sourceConceptId": "FMA7909"
+  },
+  {
+    "id": "FMA7957",
+    "label": "Right fourth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3340.obj",
+    "representationId": "BP9092",
+    "sourceConceptId": "FMA7957"
+  },
+  {
+    "id": "FMA8066",
+    "label": "Right fifth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3342.obj",
+    "representationId": "BP8792",
+    "sourceConceptId": "FMA8066"
+  },
+  {
+    "id": "FMA8175",
+    "label": "Right sixth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3344.obj",
+    "representationId": "BP8881",
+    "sourceConceptId": "FMA8175"
+  },
+  {
+    "id": "FMA8229",
+    "label": "Right seventh rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3346.obj",
+    "representationId": "BP8211",
+    "sourceConceptId": "FMA8229"
+  },
+  {
+    "id": "FMA8283",
+    "label": "Right eighth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3347.obj",
+    "representationId": "BP9073",
+    "sourceConceptId": "FMA8283"
+  },
+  {
+    "id": "FMA8364",
+    "label": "Right ninth rib",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3348.obj",
+    "representationId": "BP9181",
+    "sourceConceptId": "FMA8364"
+  },
+  {
+    "id": "FMA23464",
+    "label": "Right radius",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3349.obj",
+    "representationId": "BP8464",
+    "sourceConceptId": "FMA23464"
+  },
+  {
+    "id": "FMA24464",
+    "label": "Right first metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3350.obj",
+    "representationId": "BP8547",
+    "sourceConceptId": "FMA24464"
+  },
+  {
+    "id": "FMA24507",
+    "label": "Right first metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3351.obj",
+    "representationId": "BP8230",
+    "sourceConceptId": "FMA24507"
+  },
+  {
+    "id": "FMA24466",
+    "label": "Right second metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3352.obj",
+    "representationId": "BP8219",
+    "sourceConceptId": "FMA24466"
+  },
+  {
+    "id": "FMA24509",
+    "label": "Right second metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3353.obj",
+    "representationId": "BP8627",
+    "sourceConceptId": "FMA24509"
+  },
+  {
+    "id": "FMA24468",
+    "label": "Right third metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3354.obj",
+    "representationId": "BP8629",
+    "sourceConceptId": "FMA24468"
+  },
+  {
+    "id": "FMA24511",
+    "label": "Right third metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3355.obj",
+    "representationId": "BP8802",
+    "sourceConceptId": "FMA24511"
+  },
+  {
+    "id": "FMA24470",
+    "label": "Right fourth metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3356.obj",
+    "representationId": "BP8444",
+    "sourceConceptId": "FMA24470"
+  },
+  {
+    "id": "FMA24513",
+    "label": "Right fourth metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3357.obj",
+    "representationId": "BP9130",
+    "sourceConceptId": "FMA24513"
+  },
+  {
+    "id": "FMA24472",
+    "label": "Right fifth metacarpal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3358.obj",
+    "representationId": "BP8925",
+    "sourceConceptId": "FMA24472"
+  },
+  {
+    "id": "FMA24515",
+    "label": "Right fifth metatarsal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3359.obj",
+    "representationId": "BP7912",
+    "sourceConceptId": "FMA24515"
+  },
+  {
+    "id": "FMA13322",
+    "label": "Right clavicle",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3362.obj",
+    "representationId": "BP9271",
+    "sourceConceptId": "FMA13322"
+  },
+  {
+    "id": "FMA24528",
+    "label": "Right cuboid bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3364.obj",
+    "representationId": "BP8873",
+    "sourceConceptId": "FMA24528"
+  },
+  {
+    "id": "FMA24474",
+    "label": "Right femur",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3365.obj",
+    "representationId": "BP8920",
+    "sourceConceptId": "FMA24474"
+  },
+  {
+    "id": "FMA24480",
+    "label": "Right fibula",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3366.obj",
+    "representationId": "BP8009",
+    "sourceConceptId": "FMA24480"
+  },
+  {
+    "id": "FMA23130",
+    "label": "Right humerus",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3368.obj",
+    "representationId": "BP9206",
+    "sourceConceptId": "FMA23130"
+  },
+  {
+    "id": "FMA24523",
+    "label": "Right intermediate cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3370.obj",
+    "representationId": "BP9110",
+    "sourceConceptId": "FMA24523"
+  },
+  {
+    "id": "FMA53645",
+    "label": "Right lacrimal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3371.obj",
+    "representationId": "BP8741",
+    "sourceConceptId": "FMA53645"
+  },
+  {
+    "id": "FMA45097",
+    "label": "Sesamoid bone of right foot",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3372.obj",
+    "representationId": "BP8756",
+    "sourceConceptId": "FMA45097"
+  },
+  {
+    "id": "FMA24525",
+    "label": "Right lateral cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3373.obj",
+    "representationId": "BP8730",
+    "sourceConceptId": "FMA24525"
+  },
+  {
+    "id": "FMA53649",
+    "label": "Right maxilla",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3375.obj",
+    "representationId": "BP8309",
+    "sourceConceptId": "FMA53649"
+  },
+  {
+    "id": "FMA24521",
+    "label": "Right medial cuneiform bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3377.obj",
+    "representationId": "BP8830",
+    "sourceConceptId": "FMA24521"
+  },
+  {
+    "id": "FMA53647",
+    "label": "Right nasal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3378.obj",
+    "representationId": "BP9060",
+    "sourceConceptId": "FMA53647"
+  },
+  {
+    "id": "FMA53655",
+    "label": "Right palatine bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3379.obj",
+    "representationId": "BP8406",
+    "sourceConceptId": "FMA53655"
+  },
+  {
+    "id": "FMA52788",
+    "label": "Right parietal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3380.obj",
+    "representationId": "BP9057",
+    "sourceConceptId": "FMA52788"
+  },
+  {
+    "id": "FMA24486",
+    "label": "Right patella",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3381.obj",
+    "representationId": "BP8390",
+    "sourceConceptId": "FMA24486"
+  },
+  {
+    "id": "FMA13395",
+    "label": "Right scapula",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3384.obj",
+    "representationId": "BP9101",
+    "sourceConceptId": "FMA13395"
+  },
+  {
+    "id": "FMA52738",
+    "label": "Right temporal bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3386.obj",
+    "representationId": "BP8875",
+    "sourceConceptId": "FMA52738"
+  },
+  {
+    "id": "FMA24477",
+    "label": "Right tibia",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3387.obj",
+    "representationId": "BP8031",
+    "sourceConceptId": "FMA24477"
+  },
+  {
+    "id": "FMA23467",
+    "label": "Right ulna",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3391.obj",
+    "representationId": "BP8233",
+    "sourceConceptId": "FMA23467"
+  },
+  {
+    "id": "FMA52892",
+    "label": "Right zygomatic bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3392.obj",
+    "representationId": "BP8777",
+    "sourceConceptId": "FMA52892"
+  },
+  {
+    "id": "FMA16202",
+    "label": "Sacrum",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3393.obj",
+    "representationId": "BP9174",
+    "sourceConceptId": "FMA16202"
+  },
+  {
+    "id": "FMA52736",
+    "label": "Sphenoid bone",
+    "meshName": "skeleton|Skeleton",
+    "system": "skeleton",
+    "sourceFile": "FJ3394.obj",
+    "representationId": "BP8498",
+    "sourceConceptId": "FMA52736"
+  },
+  {
+    "id": "FMA14643",
+    "label": "Mesentery of small intestine",
+    "meshName": "digestive|Mesentery of small intestine",
+    "system": "digestive",
+    "sourceFile": "FJ3396.obj",
+    "representationId": "BP9149",
+    "sourceConceptId": "FMA14643"
+  },
+  {
+    "id": "FMA14647",
+    "label": "Transverse mesocolon",
+    "meshName": "digestive|Transverse mesocolon",
+    "system": "digestive",
+    "sourceFile": "FJ3398.obj",
+    "representationId": "BP9186",
+    "sourceConceptId": "FMA14647"
+  },
+  {
+    "id": "FMA3768",
+    "label": "Arch of aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3411.obj",
+    "representationId": "BP10322",
+    "sourceConceptId": "FMA3768"
+  },
+  {
+    "id": "FMA3736",
+    "label": "Ascending aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3413.obj",
+    "representationId": "BP10329",
+    "sourceConceptId": "FMA3736"
+  },
+  {
+    "id": "FMA14177",
+    "label": "Bronchial branch of arch of aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3418.obj",
+    "representationId": "BP10558",
+    "sourceConceptId": "FMA14177"
+  },
+  {
+    "id": "FMA3784",
+    "label": "Descending aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3427.obj",
+    "representationId": "BP10248",
+    "sourceConceptId": "FMA3784"
+  },
+  {
+    "id": "FMA71537",
+    "label": "Set of oesophageal branches of thoracic aorta",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3431.obj",
+    "representationId": "BP10612",
+    "sourceConceptId": "FMA71537"
+  },
+  {
+    "id": "FMA10951",
+    "label": "Inferior vena cava",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3441.obj",
+    "representationId": "BP10311",
+    "sourceConceptId": "FMA10951"
+  },
+  {
+    "id": "FMA70487",
+    "label": "Anterior division of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3458.obj",
+    "representationId": "BP10274",
+    "sourceConceptId": "FMA70487"
+  },
+  {
+    "id": "FMA14766",
+    "label": "Left common iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3464.obj",
+    "representationId": "BP10347",
+    "sourceConceptId": "FMA14766"
+  },
+  {
+    "id": "FMA18807",
+    "label": "Left external iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3466.obj",
+    "representationId": "BP10599",
+    "sourceConceptId": "FMA18807"
+  },
+  {
+    "id": "FMA69266",
+    "label": "Left inferior suprarenal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3467.obj",
+    "representationId": "BP10319",
+    "sourceConceptId": "FMA69266"
+  },
+  {
+    "id": "FMA18810",
+    "label": "Left internal iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3468.obj",
+    "representationId": "BP10328",
+    "sourceConceptId": "FMA18810"
+  },
+  {
+    "id": "FMA14756",
+    "label": "Left middle suprarenal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3472.obj",
+    "representationId": "BP10608",
+    "sourceConceptId": "FMA14756"
+  },
+  {
+    "id": "FMA70490",
+    "label": "Posterior division of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3473.obj",
+    "representationId": "BP10270",
+    "sourceConceptId": "FMA70490"
+  },
+  {
+    "id": "FMA66364",
+    "label": "Trunk of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3476.obj",
+    "representationId": "BP10627",
+    "sourceConceptId": "FMA66364"
+  },
+  {
+    "id": "FMA4694",
+    "label": "Left subclavian artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3479.obj",
+    "representationId": "BP10308",
+    "sourceConceptId": "FMA4694"
+  },
+  {
+    "id": "FMA70493",
+    "label": "Ureteric segment of left renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3481.obj",
+    "representationId": "BP10616",
+    "sourceConceptId": "FMA70493"
+  },
+  {
+    "id": "FMA4058",
+    "label": "Left common carotid artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3483.obj",
+    "representationId": "BP10326",
+    "sourceConceptId": "FMA4058"
+  },
+  {
+    "id": "FMA4762",
+    "label": "Left internal jugular vein",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3485.obj",
+    "representationId": "BP10367",
+    "sourceConceptId": "FMA4762"
+  },
+  {
+    "id": "FMA18913",
+    "label": "Left inferior gluteal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3513.obj",
+    "representationId": "BP10359",
+    "sourceConceptId": "FMA18913"
+  },
+  {
+    "id": "FMA18916",
+    "label": "Left obturator vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3527.obj",
+    "representationId": "BP10362",
+    "sourceConceptId": "FMA18916"
+  },
+  {
+    "id": "FMA18910",
+    "label": "Left superior gluteal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3531.obj",
+    "representationId": "BP10357",
+    "sourceConceptId": "FMA18910"
+  },
+  {
+    "id": "FMA14831",
+    "label": "Marginal artery of colon",
+    "meshName": "digestive|Marginal artery of colon",
+    "system": "digestive",
+    "sourceFile": "FJ3534.obj",
+    "representationId": "BP10606",
+    "sourceConceptId": "FMA14831"
+  },
+  {
+    "id": "FMA70486",
+    "label": "Anterior division of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3558.obj",
+    "representationId": "BP10290",
+    "sourceConceptId": "FMA70486"
+  },
+  {
+    "id": "FMA3941",
+    "label": "Right common carotid artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3564.obj",
+    "representationId": "BP10288",
+    "sourceConceptId": "FMA3941"
+  },
+  {
+    "id": "FMA14765",
+    "label": "Right common iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3565.obj",
+    "representationId": "BP10297",
+    "sourceConceptId": "FMA14765"
+  },
+  {
+    "id": "FMA18806",
+    "label": "Right external iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3567.obj",
+    "representationId": "BP10614",
+    "sourceConceptId": "FMA18806"
+  },
+  {
+    "id": "FMA18809",
+    "label": "Right internal iliac artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3569.obj",
+    "representationId": "BP10316",
+    "sourceConceptId": "FMA18809"
+  },
+  {
+    "id": "FMA70489",
+    "label": "Posterior division of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3573.obj",
+    "representationId": "BP10258",
+    "sourceConceptId": "FMA70489"
+  },
+  {
+    "id": "FMA66363",
+    "label": "Trunk of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3576.obj",
+    "representationId": "BP10632",
+    "sourceConceptId": "FMA66363"
+  },
+  {
+    "id": "FMA3953",
+    "label": "Right subclavian artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3579.obj",
+    "representationId": "BP10281",
+    "sourceConceptId": "FMA3953"
+  },
+  {
+    "id": "FMA70492",
+    "label": "Ureteric segment of right renal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3581.obj",
+    "representationId": "BP10556",
+    "sourceConceptId": "FMA70492"
+  },
+  {
+    "id": "FMA69265",
+    "label": "Right inferior suprarenal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3584.obj",
+    "representationId": "BP10358",
+    "sourceConceptId": "FMA69265"
+  },
+  {
+    "id": "FMA4754",
+    "label": "Right internal jugular vein",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3585.obj",
+    "representationId": "BP10334",
+    "sourceConceptId": "FMA4754"
+  },
+  {
+    "id": "FMA14755",
+    "label": "Right middle suprarenal artery",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3586.obj",
+    "representationId": "BP10613",
+    "sourceConceptId": "FMA14755"
+  },
+  {
+    "id": "FMA18912",
+    "label": "Right inferior gluteal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3606.obj",
+    "representationId": "BP10276",
+    "sourceConceptId": "FMA18912"
+  },
+  {
+    "id": "FMA18915",
+    "label": "Right obturator vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3612.obj",
+    "representationId": "BP10254",
+    "sourceConceptId": "FMA18915"
+  },
+  {
+    "id": "FMA18909",
+    "label": "Right superior gluteal vein",
+    "meshName": "muscles|Muscles",
+    "system": "muscular",
+    "sourceFile": "FJ3616.obj",
+    "representationId": "BP10304",
+    "sourceConceptId": "FMA18909"
+  },
+  {
+    "id": "FMA4720",
+    "label": "Superior vena cava",
+    "meshName": "vessels|Great vessels",
+    "system": "cardiovascular",
+    "sourceFile": "FJ3645.obj",
+    "representationId": "BP10292",
+    "sourceConceptId": "FMA4720"
+  }
+]
