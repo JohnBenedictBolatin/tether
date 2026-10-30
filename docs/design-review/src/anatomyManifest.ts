@@ -12,7 +12,7 @@ export type AnatomyStructure = {
 export const anatomyManifest: AnatomyStructure[] = [
   { id: 'heart', label: 'Heart', system: 'cardiovascular', metricKeys: ['heart', 'bp'], aliases: ['heart', 'cardiac', 'atrium', 'ventricle', 'aorta', 'coronary'], sourceConceptIds: ['FMA7088'] },
   { id: 'lungs', label: 'Lungs', system: 'respiratory', metricKeys: [], aliases: ['lung', 'bronch', 'pulmonary', 'fma73'], sourceConceptIds: ['FMA7309', 'FMA7310'] },
-  { id: 'vessels', label: 'Great vessels', system: 'cardiovascular', metricKeys: ['bp'], aliases: ['vessel', 'vena cava', 'artery', 'vein'], sourceConceptIds: ['FMA3734', 'FMA4720', 'FMA8612'] },
+  { id: 'vessels', label: 'Blood vessels', system: 'cardiovascular', metricKeys: ['bp'], aliases: ['vessel', 'vena cava', 'artery', 'vein'], sourceConceptIds: ['FMA3734', 'FMA4720', 'FMA8612'] },
   { id: 'skeleton', label: 'Skeleton', system: 'skeleton', metricKeys: [], aliases: ['bone', 'skeleton', 'vertebra', 'skull', 'rib', 'femur'], sourceConceptIds: ['FMA7481', 'FMA7483'] },
   { id: 'muscles', label: 'Muscles', system: 'muscular', metricKeys: [], aliases: ['muscle', 'muscles'], sourceConceptIds: [] },
   { id: 'skin', label: 'Body surface', system: 'surface', metricKeys: ['temperature', 'glucose'], aliases: ['skin', 'integument', 'surface'], sourceConceptIds: ['FMA7163'] },

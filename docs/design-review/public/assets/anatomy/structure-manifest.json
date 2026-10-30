@@ -1611,42 +1611,6 @@
     "sourceConceptId": "FMA4066"
   },
   {
-    "id": "FMA78454",
-    "label": "Third ventricle",
-    "meshName": "vessels|Great vessels",
-    "system": "cardiovascular",
-    "sourceFile": "FJ1730.obj",
-    "representationId": "BP5515",
-    "sourceConceptId": "FMA78454"
-  },
-  {
-    "id": "FMA78469",
-    "label": "Fourth ventricle",
-    "meshName": "vessels|Great vessels",
-    "system": "cardiovascular",
-    "sourceFile": "FJ1731.obj",
-    "representationId": "BP5514",
-    "sourceConceptId": "FMA78469"
-  },
-  {
-    "id": "FMA78450",
-    "label": "Left lateral ventricle",
-    "meshName": "vessels|Great vessels",
-    "system": "cardiovascular",
-    "sourceFile": "FJ1767.obj",
-    "representationId": "BP10468",
-    "sourceConceptId": "FMA78450"
-  },
-  {
-    "id": "FMA78449",
-    "label": "Right lateral ventricle",
-    "meshName": "vessels|Great vessels",
-    "system": "cardiovascular",
-    "sourceFile": "FJ1814.obj",
-    "representationId": "BP10436",
-    "sourceConceptId": "FMA78449"
-  },
-  {
     "id": "FMA7198",
     "label": "Pancreas",
     "meshName": "digestive|Pancreas",
@@ -1658,7 +1622,7 @@
   {
     "id": "FMA87217",
     "label": "Descending thoracic aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ1931.obj",
     "representationId": "BP6004",
@@ -1667,7 +1631,7 @@
   {
     "id": "FMA3789",
     "label": "Abdominal aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ1932.obj",
     "representationId": "BP6008",
@@ -1775,7 +1739,7 @@
   {
     "id": "FMA14752",
     "label": "Right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2038.obj",
     "representationId": "BP7655",
@@ -1784,7 +1748,7 @@
   {
     "id": "FMA86340",
     "label": "Superior segmental branch of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2042.obj",
     "representationId": "BP7665",
@@ -1793,7 +1757,7 @@
   {
     "id": "FMA86346",
     "label": "Inferior segmental branch of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2043.obj",
     "representationId": "BP7668",
@@ -1802,7 +1766,7 @@
   {
     "id": "FMA86348",
     "label": "Posterior segmental branch of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2045.obj",
     "representationId": "BP7670",
@@ -1811,7 +1775,7 @@
   {
     "id": "FMA14753",
     "label": "Left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2046.obj",
     "representationId": "BP7672",
@@ -1820,7 +1784,7 @@
   {
     "id": "FMA86347",
     "label": "Inferior segmental branch of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2049.obj",
     "representationId": "BP7675",
@@ -1829,7 +1793,7 @@
   {
     "id": "FMA86341",
     "label": "Superior segmental branch of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2052.obj",
     "representationId": "BP7677",
@@ -1838,7 +1802,7 @@
   {
     "id": "FMA86349",
     "label": "Posterior segmental branch of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2053.obj",
     "representationId": "BP7678",
@@ -1847,7 +1811,7 @@
   {
     "id": "FMA21422",
     "label": "Descending branch of right lateral circumflex femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2057.obj",
     "representationId": "BP6042",
@@ -1856,7 +1820,7 @@
   {
     "id": "FMA21423",
     "label": "Descending branch of left lateral circumflex femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2063.obj",
     "representationId": "BP6043",
@@ -1865,7 +1829,7 @@
   {
     "id": "FMA70250",
     "label": "Left femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2074.obj",
     "representationId": "BP6082",
@@ -1874,7 +1838,7 @@
   {
     "id": "FMA20802",
     "label": "Left lateral circumflex femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2078.obj",
     "representationId": "BP6036",
@@ -1892,7 +1856,7 @@
   {
     "id": "FMA70249",
     "label": "Right femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2143.obj",
     "representationId": "BP6081",
@@ -1901,7 +1865,7 @@
   {
     "id": "FMA20801",
     "label": "Right lateral circumflex femoral artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2158.obj",
     "representationId": "BP6035",
@@ -1928,7 +1892,7 @@
   {
     "id": "FMA22692",
     "label": "Left brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2219.obj",
     "representationId": "BP6021",
@@ -1937,7 +1901,7 @@
   {
     "id": "FMA22697",
     "label": "Left deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2225.obj",
     "representationId": "BP6285",
@@ -1991,7 +1955,7 @@
   {
     "id": "FMA23127",
     "label": "Radial collateral branch of left deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2261.obj",
     "representationId": "BP6273",
@@ -2000,7 +1964,7 @@
   {
     "id": "FMA23126",
     "label": "Radial collateral branch of right deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2262.obj",
     "representationId": "BP6272",
@@ -2009,7 +1973,7 @@
   {
     "id": "FMA22691",
     "label": "Right brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2271.obj",
     "representationId": "BP6020",
@@ -2018,7 +1982,7 @@
   {
     "id": "FMA22696",
     "label": "Right deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2277.obj",
     "representationId": "BP6284",
@@ -2081,7 +2045,7 @@
   {
     "id": "FMA23125",
     "label": "Middle collateral branch of left deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2331.obj",
     "representationId": "BP6275",
@@ -2108,7 +2072,7 @@
   {
     "id": "FMA23124",
     "label": "Middle collateral branch of right deep brachial artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2362.obj",
     "representationId": "BP6276",
@@ -2117,7 +2081,7 @@
   {
     "id": "FMA7265",
     "label": "Anterolateral head of lateral papillary muscle of left ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2418.obj",
     "representationId": "BP8573",
@@ -2126,7 +2090,7 @@
   {
     "id": "FMA7260",
     "label": "Anterior papillary muscle of right ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2419.obj",
     "representationId": "BP9283",
@@ -2135,7 +2099,7 @@
   {
     "id": "FMA9466",
     "label": "Cavity of left ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2422.obj",
     "representationId": "BP8928",
@@ -2144,7 +2108,7 @@
   {
     "id": "FMA9291",
     "label": "Cavity of right ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2423.obj",
     "representationId": "BP9227",
@@ -2153,7 +2117,7 @@
   {
     "id": "FMA11359",
     "label": "Cavity of right atrium",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2424.obj",
     "representationId": "BP8677",
@@ -2162,7 +2126,7 @@
   {
     "id": "FMA9465",
     "label": "Cavity of left atrium",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2425.obj",
     "representationId": "BP8719",
@@ -2171,7 +2135,7 @@
   {
     "id": "FMA13884",
     "label": "Wall of ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2428.obj",
     "representationId": "BP7815",
@@ -2180,7 +2144,7 @@
   {
     "id": "FMA7264",
     "label": "Lateral papillary muscle of left ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2429.obj",
     "representationId": "BP8949",
@@ -2189,7 +2153,7 @@
   {
     "id": "FMA7261",
     "label": "Posterior papillary muscle of right ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2430.obj",
     "representationId": "BP8146",
@@ -2198,7 +2162,7 @@
   {
     "id": "FMA7262",
     "label": "Septal papillary muscle of right ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2437.obj",
     "representationId": "BP8088",
@@ -2207,7 +2171,7 @@
   {
     "id": "FMA9531",
     "label": "Wall of left atrium",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2438.obj",
     "representationId": "BP9267",
@@ -2216,7 +2180,7 @@
   {
     "id": "FMA9457",
     "label": "Wall of right atrium",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2439.obj",
     "representationId": "BP8712",
@@ -2495,7 +2459,7 @@
   {
     "id": "FMA74912",
     "label": "Trunk of anterior interventricular branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2631.obj",
     "representationId": "BP8970",
@@ -2504,7 +2468,7 @@
   {
     "id": "FMA3872",
     "label": "First right anterior branch of anterior interventricular branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2632.obj",
     "representationId": "BP8913",
@@ -2513,7 +2477,7 @@
   {
     "id": "FMA3860",
     "label": "Diagonal branch of anterior descending branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2633.obj",
     "representationId": "BP8004",
@@ -2522,7 +2486,7 @@
   {
     "id": "FMA3876",
     "label": "Third right anterior branch of anterior interventricular branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2641.obj",
     "representationId": "BP8649",
@@ -2531,7 +2495,7 @@
   {
     "id": "FMA3868",
     "label": "Conus branch of anterior interventricular branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2643.obj",
     "representationId": "BP8013",
@@ -2540,7 +2504,7 @@
   {
     "id": "FMA3874",
     "label": "Second right anterior branch of anterior interventricular branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2646.obj",
     "representationId": "BP8897",
@@ -2549,7 +2513,7 @@
   {
     "id": "FMA3895",
     "label": "Circumflex branch of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2649.obj",
     "representationId": "BP8397",
@@ -2558,7 +2522,7 @@
   {
     "id": "FMA4706",
     "label": "Coronary sinus",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2655.obj",
     "representationId": "BP9086",
@@ -2567,7 +2531,7 @@
   {
     "id": "FMA3818",
     "label": "Marginal branch of right coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2667.obj",
     "representationId": "BP8446",
@@ -2576,7 +2540,7 @@
   {
     "id": "FMA3815",
     "label": "First anterior ventricular branch of right coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2671.obj",
     "representationId": "BP7824",
@@ -2585,7 +2549,7 @@
   {
     "id": "FMA3840",
     "label": "Posterior interventricular branch of right coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2692.obj",
     "representationId": "BP7876",
@@ -2594,7 +2558,7 @@
   {
     "id": "FMA4712",
     "label": "Posterior vein of left ventricle",
-    "meshName": "vessels|Great vessels",
+    "meshName": "heart|Heart",
     "system": "cardiovascular",
     "sourceFile": "FJ2701.obj",
     "representationId": "BP8014",
@@ -2603,7 +2567,7 @@
   {
     "id": "FMA3837",
     "label": "First posterior ventricular branch of right coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2714.obj",
     "representationId": "BP7761",
@@ -2612,7 +2576,7 @@
   {
     "id": "FMA3802",
     "label": "Trunk of right coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2723.obj",
     "representationId": "BP8221",
@@ -2621,7 +2585,7 @@
   {
     "id": "FMA3855",
     "label": "Trunk of left coronary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2737.obj",
     "representationId": "BP8961",
@@ -2693,7 +2657,7 @@
   {
     "id": "FMA50873",
     "label": "Left pulmonary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2924.obj",
     "representationId": "BP8463",
@@ -2702,7 +2666,7 @@
   {
     "id": "FMA8612",
     "label": "Pulmonary trunk",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ2966.obj",
     "representationId": "BP8690",
@@ -2711,7 +2675,7 @@
   {
     "id": "FMA50872",
     "label": "Right pulmonary artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3019.obj",
     "representationId": "BP8968",
@@ -4016,7 +3980,7 @@
   {
     "id": "FMA3768",
     "label": "Arch of aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3411.obj",
     "representationId": "BP10322",
@@ -4025,7 +3989,7 @@
   {
     "id": "FMA3736",
     "label": "Ascending aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3413.obj",
     "representationId": "BP10329",
@@ -4034,7 +3998,7 @@
   {
     "id": "FMA14177",
     "label": "Bronchial branch of arch of aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3418.obj",
     "representationId": "BP10558",
@@ -4043,7 +4007,7 @@
   {
     "id": "FMA3784",
     "label": "Descending aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3427.obj",
     "representationId": "BP10248",
@@ -4052,7 +4016,7 @@
   {
     "id": "FMA71537",
     "label": "Set of oesophageal branches of thoracic aorta",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3431.obj",
     "representationId": "BP10612",
@@ -4061,7 +4025,7 @@
   {
     "id": "FMA10951",
     "label": "Inferior vena cava",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3441.obj",
     "representationId": "BP10311",
@@ -4070,7 +4034,7 @@
   {
     "id": "FMA70487",
     "label": "Anterior division of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3458.obj",
     "representationId": "BP10274",
@@ -4079,7 +4043,7 @@
   {
     "id": "FMA14766",
     "label": "Left common iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3464.obj",
     "representationId": "BP10347",
@@ -4088,7 +4052,7 @@
   {
     "id": "FMA18807",
     "label": "Left external iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3466.obj",
     "representationId": "BP10599",
@@ -4097,7 +4061,7 @@
   {
     "id": "FMA69266",
     "label": "Left inferior suprarenal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3467.obj",
     "representationId": "BP10319",
@@ -4106,7 +4070,7 @@
   {
     "id": "FMA18810",
     "label": "Left internal iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3468.obj",
     "representationId": "BP10328",
@@ -4115,7 +4079,7 @@
   {
     "id": "FMA14756",
     "label": "Left middle suprarenal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3472.obj",
     "representationId": "BP10608",
@@ -4124,7 +4088,7 @@
   {
     "id": "FMA70490",
     "label": "Posterior division of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3473.obj",
     "representationId": "BP10270",
@@ -4133,7 +4097,7 @@
   {
     "id": "FMA66364",
     "label": "Trunk of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3476.obj",
     "representationId": "BP10627",
@@ -4142,7 +4106,7 @@
   {
     "id": "FMA4694",
     "label": "Left subclavian artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3479.obj",
     "representationId": "BP10308",
@@ -4151,7 +4115,7 @@
   {
     "id": "FMA70493",
     "label": "Ureteric segment of left renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3481.obj",
     "representationId": "BP10616",
@@ -4160,7 +4124,7 @@
   {
     "id": "FMA4058",
     "label": "Left common carotid artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3483.obj",
     "representationId": "BP10326",
@@ -4169,7 +4133,7 @@
   {
     "id": "FMA4762",
     "label": "Left internal jugular vein",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3485.obj",
     "representationId": "BP10367",
@@ -4214,7 +4178,7 @@
   {
     "id": "FMA70486",
     "label": "Anterior division of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3558.obj",
     "representationId": "BP10290",
@@ -4223,7 +4187,7 @@
   {
     "id": "FMA3941",
     "label": "Right common carotid artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3564.obj",
     "representationId": "BP10288",
@@ -4232,7 +4196,7 @@
   {
     "id": "FMA14765",
     "label": "Right common iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3565.obj",
     "representationId": "BP10297",
@@ -4241,7 +4205,7 @@
   {
     "id": "FMA18806",
     "label": "Right external iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3567.obj",
     "representationId": "BP10614",
@@ -4250,7 +4214,7 @@
   {
     "id": "FMA18809",
     "label": "Right internal iliac artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3569.obj",
     "representationId": "BP10316",
@@ -4259,7 +4223,7 @@
   {
     "id": "FMA70489",
     "label": "Posterior division of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3573.obj",
     "representationId": "BP10258",
@@ -4268,7 +4232,7 @@
   {
     "id": "FMA66363",
     "label": "Trunk of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3576.obj",
     "representationId": "BP10632",
@@ -4277,7 +4241,7 @@
   {
     "id": "FMA3953",
     "label": "Right subclavian artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3579.obj",
     "representationId": "BP10281",
@@ -4286,7 +4250,7 @@
   {
     "id": "FMA70492",
     "label": "Ureteric segment of right renal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3581.obj",
     "representationId": "BP10556",
@@ -4295,7 +4259,7 @@
   {
     "id": "FMA69265",
     "label": "Right inferior suprarenal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3584.obj",
     "representationId": "BP10358",
@@ -4304,7 +4268,7 @@
   {
     "id": "FMA4754",
     "label": "Right internal jugular vein",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3585.obj",
     "representationId": "BP10334",
@@ -4313,7 +4277,7 @@
   {
     "id": "FMA14755",
     "label": "Right middle suprarenal artery",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3586.obj",
     "representationId": "BP10613",
@@ -4349,7 +4313,7 @@
   {
     "id": "FMA4720",
     "label": "Superior vena cava",
-    "meshName": "vessels|Great vessels",
+    "meshName": "vessels|Blood vessels",
     "system": "cardiovascular",
     "sourceFile": "FJ3645.obj",
     "representationId": "BP10292",

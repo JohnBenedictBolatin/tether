@@ -1,10 +1,11 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, CalendarClock, Pause, Play, Plus } from 'lucide-react';
-import { anatomyManifest } from './anatomyManifest';
 import { MetricGlyph } from './TetherIcons';
+import type { HeartRateMonitorState } from './useHeartRateMonitor';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
+import { LiveHeartRateChart } from './LiveHeartRateChart';
 import { assessmentPriority, type AssessmentState, type ReadingAssessment } from './assessment';
 import { compareObservation, formatValue, fullDate, latestForMetric, localStamp, type ContextEntry, type Followup, type Metric, type MetricInfo, type Observation } from './domain';
 import { ObservationChart } from './ObservationChart';
@@ -16,6 +17,7 @@ type Props = {
   contexts: ContextEntry[];
   tasks: Followup[];
   assessments: Record<Metric, ReadingAssessment>;
+  liveHeartRate: HeartRateMonitorState;
   selectedMetric: Metric;
   selectedStructure: string;
   environment: string;
@@ -34,13 +36,38 @@ type Props = {
 
 type SupportTab = 'pressure' | 'sleep' | 'activity';
 
-const AnatomyViewer = lazy(async () => {
-  const module = await import('./AnatomyViewer');
-  return { default: module.AnatomyViewer };
-});
 
 function conciseState(state: AssessmentState) {
-  return ({ urgent: 'Urgent review', attention: 'Review reading', verify: 'Check conditions', within: 'Within configured limits', unconfigured: 'No limits set', missing: 'No measurement', stale: 'Out of date' } as const)[state];
+  return ({ urgent: 'Urgent', attention: 'Needs attention', verify: 'Conditions missing', within: 'Good', unconfigured: 'Not assessed', missing: 'No reading', stale: 'Update reading' } as const)[state];
+}
+
+function astronautAssessmentText(assessment: ReadingAssessment) {
+  if (assessment.state === 'attention') return `${assessment.reason} ${assessment.nextAction}`;
+  if (assessment.state === 'within' || assessment.state === 'unconfigured') return assessment.reason;
+  return ({
+    urgent: 'This check is above its urgent limit. Follow your mission medical instructions now.',
+    verify: 'The method or conditions are missing. Repeat the measurement and record them.',
+    within: assessment.reason,
+    unconfigured: assessment.reason,
+    missing: 'There is no reading yet. Record this check when scheduled.',
+    stale: 'This reading is too old for the configured check. Record a fresh measurement.',
+  } as const)[assessment.state];
+}
+
+function astronautComparison(item: Observation, previous?: Observation) {
+  if (!previous) return 'No similar reading in the past 7 days.';
+  if (item.metric === 'mood') return `Your mood check-in changed from ${previous.value} to ${item.value}.`;
+  const delta = Number(item.value) - Number(previous.value);
+  if (item.metric === 'bp') {
+    const bottom = Number(item.secondary) - Number(previous.secondary);
+    const word = (value: number) => value === 0 ? 'unchanged' : `${value > 0 ? 'up' : 'down'} ${Math.abs(value)} mmHg`;
+    return `Top number ${word(delta)}; bottom number ${word(bottom)} since your last similar check.`;
+  }
+  const precision = item.metric === 'sleep' || item.metric === 'temperature' ? 1 : 0;
+  const difference = Number(delta.toFixed(precision));
+  return difference === 0
+    ? `Unchanged since your last similar check.`
+    : `${Math.abs(difference)} ${item.unit} ${difference > 0 ? 'higher' : 'lower'} than your last similar check.`;
 }
 
 function dueLabel(task: Followup, now: number, timeZone: string) {
@@ -60,7 +87,8 @@ function ActionButton({ task, assessment, onTask, onAdd, onReview }: {
 }) {
   if (task?.resultId) return <Button onClick={() => onTask(task)}>Review repeat<ArrowRight data-icon="inline-end" /></Button>;
   if (task) return <Button onClick={() => onTask(task)}>{task.kind === 'measurement' ? 'Start repeat' : 'Open task'}<ArrowRight data-icon="inline-end" /></Button>;
-  if (!assessment || assessment.state === 'missing') return <Button onClick={() => onAdd(assessment?.metric ?? 'heart')}><Plus data-icon="inline-start" /> Record measurement</Button>;
+  if (!assessment || assessment.state === 'missing') return <Button onClick={() => onAdd(assessment?.metric ?? 'heart')}><Plus data-icon="inline-start" />{assessment?.metric === 'heart' ? 'Log resting reading' : 'Record measurement'}</Button>;
+  if (assessment.metric === 'sleep' && assessment.observation && assessment.state === 'attention') return <Button onClick={() => onReview(assessment.observation!)}>Review sleep history<ArrowRight data-icon="inline-end" /></Button>;
   if (assessment.state === 'attention' || assessment.state === 'urgent' || assessment.state === 'verify' || assessment.state === 'stale') {
     return <Button onClick={() => onAdd(assessment.metric)}>Record another reading<ArrowRight data-icon="inline-end" /></Button>;
   }
@@ -71,13 +99,23 @@ export function TodayView(props: Props) {
   const now = Date.now();
   const activeTimeZone = props.timeZone === 'UTC' ? 'UTC' : undefined;
   const [supportTab, setSupportTab] = useState<SupportTab>('pressure');
+  const [chartMode, setChartMode] = useState<'history' | 'live'>('history');
   const [playing, setPlaying] = useState(false);
   const [playbackFraction, setPlaybackFraction] = useState(1);
-  const [focusRequestKey, setFocusRequestKey] = useState(0);
   const [updatedObservationId, setUpdatedObservationId] = useState('');
   const priorLatestRef = useRef('');
   const latestByMetric = useMemo(() => Object.fromEntries(props.metricOrder.map((metric) => [metric, latestForMetric(props.observations, metric)])) as Record<Metric, Observation | undefined>, [props.metricOrder, props.observations]);
   const latestSignature = props.metricOrder.map((metric) => latestByMetric[metric]?.id ?? '').join('|');
+
+  useEffect(() => {
+    const wearableAvailable = props.liveHeartRate.status === 'connected' || props.liveHeartRate.status === 'stale';
+    if (props.selectedMetric !== 'heart' || !wearableAvailable) {
+      setChartMode('history');
+    } else {
+      setPlaying(false);
+      setChartMode('live');
+    }
+  }, [props.liveHeartRate.status, props.selectedMetric]);
 
   useEffect(() => {
     const previous = priorLatestRef.current;
@@ -95,6 +133,8 @@ export function TodayView(props: Props) {
   }, [latestByMetric, latestSignature, props.metricOrder]);
 
   const openTasks = props.tasks.filter((task) => task.status === 'open').sort((a, b) => a.due.localeCompare(b.due));
+  const currentHeartRate = props.liveHeartRate.latest;
+  const liveHeartRateFresh = props.liveHeartRate.status === 'connected' && !!currentHeartRate && now - currentHeartRate.receivedAt <= 10000 && currentHeartRate.sensorContact !== 'not-detected';
   const topAssessment = props.metricOrder.map((metric) => props.assessments[metric])
     .filter((assessment) => ['urgent', 'attention', 'verify', 'stale'].includes(assessment.state))
     .sort((a, b) => assessmentPriority(a.state) - assessmentPriority(b.state) || (b.observation?.at ?? '').localeCompare(a.observation?.at ?? ''))[0];
@@ -103,10 +143,13 @@ export function TodayView(props: Props) {
   const taskForPriority = topAssessment?.observation && openTasks.find((task) => task.observationId === topAssessment.observation?.id || task.resultId === topAssessment.observation?.id);
   const actionTask = topAssessment ? taskForPriority : topTask;
   const actionAssessment = topAssessment ?? (!actionTask ? missingAssessment : undefined);
-  const selectedStructureInfo = anatomyManifest.find((item) => item.id === props.selectedStructure);
-  const structureNotAssessed = !!selectedStructureInfo && selectedStructureInfo.metricKeys.length === 0;
   const selectedAssessment = props.assessments[props.selectedMetric];
   const selectedItem = latestByMetric[props.selectedMetric];
+  const selectedComparison = selectedItem ? compareObservation(selectedItem, props.observations, 7) : undefined;
+  const canShowLiveHeartRate = props.selectedMetric === 'heart' && (props.liveHeartRate.status === 'connected' || props.liveHeartRate.status === 'stale');
+  const liveHeartRateStatus = props.liveHeartRate.status === 'stale' ? 'Signal paused'
+    : currentHeartRate?.sensorContact === 'not-detected' ? 'Check sensor fit'
+      : currentHeartRate ? 'Live signal' : 'Waiting for signal';
   const rangeStart = now - props.rangeDays * 86400000;
   const rangeRows = props.observations.filter((item) => new Date(item.at).getTime() >= rangeStart && new Date(item.at).getTime() <= now);
   const latestForSelected = selectedItem && new Date(selectedItem.at).getTime() >= rangeStart ? selectedItem : undefined;
@@ -148,7 +191,6 @@ export function TodayView(props: Props) {
   const selectMetric = (metric: Metric) => {
     setPlaying(false);
     setPlaybackFraction(1);
-    setFocusRequestKey((key) => key + 1);
     props.onSelectMetric(metric);
     props.onStructure(props.assessments[metric].bodyTarget ?? '');
   };
@@ -166,77 +208,98 @@ export function TodayView(props: Props) {
     if (event && 'metric' in event.item) props.onReview(event.item);
   };
 
-  const metricStrip = <div className="mission-metric-strip" aria-label="Latest crew readings">
+  const metricStrip = <div className="mission-metric-strip" role="group" aria-label="Latest health readings">
     {props.metricOrder.map((metric) => {
       const item = latestByMetric[metric];
       const assessment = props.assessments[metric];
       const selected = props.selectedMetric === metric;
-      const stamp = item ? localStamp(item.at, true, activeTimeZone) : 'Awaiting entry';
+      const sample = metric === 'heart' ? props.liveHeartRate.latest : undefined;
+      const live = metric === 'heart' && liveHeartRateFresh;
+      const pausedSample = !!sample && props.liveHeartRate.status === 'stale';
+      const sensorFitIssue = metric === 'heart' && props.liveHeartRate.status === 'connected' && sample?.sensorContact === 'not-detected';
+      const stamp = live ? 'Live now' : pausedSample ? `Last signal · ${new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', timeZone: activeTimeZone }).format(sample.receivedAt)}`
+        : sensorFitIssue ? item ? `Recorded · ${localStamp(item.at, true, activeTimeZone)}` : 'Waiting for sensor contact'
+          : item ? localStamp(item.at, true, activeTimeZone) : 'Awaiting entry';
+      const value = live || pausedSample ? `${sample!.bpm} bpm` : item ? formatValue(item) : '—';
+      const stateLabel = live ? 'Live signal' : pausedSample ? 'Signal paused' : sensorFitIssue ? 'Check sensor fit' : item ? assessment.label : 'No measurement';
+      const stateClass = live ? 'state-live' : pausedSample ? 'state-sensor-stale' : sensorFitIssue ? 'state-verify' : `state-${assessment.state}`;
+      const metricLabel = live ? 'Live pulse' : pausedSample ? 'Last pulse' : props.metrics[metric].short;
+      const signalNote = 'Wearable sample, not a logged resting heart-rate observation.';
       return <button key={metric} type="button" className={`mission-metric ${selected ? 'selected' : ''} ${updatedObservationId === item?.id ? 'reading-updated' : ''}`}
-        aria-label={`${props.metrics[metric].label}: ${item ? formatValue(item) : 'No measurement'} · ${item ? conciseState(assessment.state) : 'Record measurement'}. Recorded ${stamp}. View graph.`}
+        aria-label={`${live ? 'Live pulse' : pausedSample ? 'Last wearable pulse' : props.metrics[metric].label}: ${live || pausedSample ? value : item ? formatValue(item) : 'No measurement'} · ${stateLabel}. ${live || pausedSample ? `${signalNote} ${pausedSample ? stamp : ''}` : stamp}. View graph.`}
         aria-pressed={selected} onClick={() => selectMetric(metric)}>
-        <span className={`mission-metric-glyph metric-${metric}`}><MetricGlyph name={metric} size={21} /></span>
-        <span className="mission-metric-label">{props.metrics[metric].short}</span>
-        <strong>{item ? formatValue(item) : '—'}</strong>
-        <span className="mission-metric-stamp">{stamp}</span>
-        <span className={`mission-metric-state state-${assessment.state}`}><i aria-hidden="true" />{item ? conciseState(assessment.state) : 'No measurement'}</span>
+        <span className="mission-metric-primary">
+          <span className={`mission-metric-glyph metric-${metric}`}><MetricGlyph name={metric} size={21} /></span>
+          <span className="mission-metric-label">{metricLabel}</span>
+        </span>
+        <strong>{value}</strong>
+        <span className="mission-metric-details">
+          <span className="mission-metric-stamp">{stamp}</span>
+          <span className={`mission-metric-state ${stateClass}`}><i aria-hidden="true" />{stateLabel}</span>
+        </span>
       </button>;
     })}
   </div>;
 
-  return <section className="today-page mission-console page-view" aria-labelledby="today-title">
-    <header className="mission-console-heading">
-      <div><h1 id="today-title">Crew monitor</h1><p>Mission day {props.missionDay} <span aria-hidden="true">·</span> {props.environment} <span aria-hidden="true">·</span> {new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', timeZone: activeTimeZone }).format(new Date(now))}</p></div>
-      <Button onClick={() => props.onAdd(props.selectedMetric)}><Plus data-icon="inline-start" /> Add measurement</Button>
-    </header>
-
+  return <section className="today-page mission-console page-view" aria-label="Today health monitor">
     {metricStrip}
 
     <div className="mission-main-grid">
       <Card className="mission-chart-panel">
         <CardHeader className="mission-chart-heading">
-          <div className="mission-chart-title"><div><CardTitle>{props.metrics[props.selectedMetric].label}</CardTitle><span>Recorded observations · {props.rangeDays} days</span></div>
-            <div className="mission-chart-current"><strong>{selectedItem ? formatValue(selectedItem) : 'No measurement'}</strong>
-              {selectedItem && <span className={`mission-status status-${selectedAssessment.state}`}><i aria-hidden="true" />{conciseState(selectedAssessment.state)}</span>}
+          <div className="mission-chart-title"><div><CardTitle>{chartMode === 'live' ? 'Live pulse' : props.metrics[props.selectedMetric].label}</CardTitle><span>{chartMode === 'live' ? 'Wearable · not a resting reading' : `Recorded observations · ${props.rangeDays} days`}</span></div>
+            <div className="mission-chart-current"><strong>{chartMode === 'live'
+              ? currentHeartRate ? `${currentHeartRate.bpm} bpm` : 'Waiting for signal'
+              : selectedItem ? formatValue(selectedItem) : 'No measurement'}</strong>
+              {chartMode === 'live'
+                ? <span className={`mission-status live-status ${liveHeartRateStatus === 'Live signal' ? 'status-live' : liveHeartRateStatus === 'Check sensor fit' ? 'status-verify' : 'status-paused'}`}><i aria-hidden="true" />{liveHeartRateStatus}</span>
+                : selectedItem && <span className={`mission-status status-${selectedAssessment.state}`}><i aria-hidden="true" />{selectedAssessment.label}</span>}
             </div>
           </div>
           <div className="mission-chart-controls">
-            <span>{selectedItem ? `${rangeObservations(props.selectedMetric).length} observations` : 'No observation in this period'}</span>
-            <div className="mission-range" role="group" aria-label="Chart date range">
-              {([7, 30] as const).map((days) => <Button key={days} type="button" size="sm" variant={props.rangeDays === days ? 'secondary' : 'ghost'} aria-pressed={props.rangeDays === days} onClick={() => { setPlaying(false); setPlaybackFraction(1); props.onRangeChange(days); }}>{days}d</Button>)}
+            <span>{chartMode === 'live' ? `${props.liveHeartRate.samples.length} updates · 90 sec` : selectedItem ? `${rangeObservations(props.selectedMetric).length} observations` : 'No observation in this period'}</span>
+            <div className="mission-chart-control-group">
+              {canShowLiveHeartRate && <div className="mission-range mission-chart-mode" role="group" aria-label="Heart-rate chart mode">
+                <Button type="button" size="sm" variant={chartMode === 'live' ? 'secondary' : 'ghost'} aria-pressed={chartMode === 'live'} onClick={() => { setPlaying(false); setChartMode('live'); }}>Live</Button>
+                <Button type="button" size="sm" variant={chartMode === 'history' ? 'secondary' : 'ghost'} aria-pressed={chartMode === 'history'} onClick={() => { setPlaying(false); setChartMode('history'); }}>History</Button>
+              </div>}
+              {chartMode === 'history' && <div className="mission-range" role="group" aria-label="Chart date range">
+                {([7, 30] as const).map((days) => <Button key={days} type="button" size="sm" variant={props.rangeDays === days ? 'secondary' : 'ghost'} aria-pressed={props.rangeDays === days} onClick={() => { setPlaying(false); setPlaybackFraction(1); props.onRangeChange(days); }}>{days}d</Button>)}
+              </div>}
             </div>
           </div>
         </CardHeader>
         <CardContent className="mission-main-chart-content">
-          <ObservationChart observations={rangeObservations(props.selectedMetric)} metric={props.selectedMetric} timeZone={activeTimeZone}
-            presentation="console-main" rangeDays={props.rangeDays} rangeEnd={now} replayAt={playbackAt}
-            reducedMotion={props.reducedMotion} onSelect={props.onReview} />
-          {comparison && <div className="mission-comparison" aria-live="polite">
+          {chartMode === 'live'
+            ? <LiveHeartRateChart samples={props.liveHeartRate.samples} status={props.liveHeartRate.status} timeZone={activeTimeZone} />
+            : <ObservationChart observations={rangeObservations(props.selectedMetric)} metric={props.selectedMetric} timeZone={activeTimeZone}
+              presentation="console-main" rangeDays={props.rangeDays} rangeEnd={now} replayAt={playbackAt}
+              reducedMotion={props.reducedMotion} onSelect={props.onReview} />}
+          {chartMode === 'history' && comparison && <div className="mission-comparison" aria-live="polite">
             <span>{comparison.count} similar reading{comparison.count === 1 ? '' : 's'} · past {comparison.days} days</span>
             <strong>{comparison.comparison}</strong>
           </div>}
         </CardContent>
       </Card>
 
-      <aside className="mission-right-rail" aria-label="Anatomy and next action">
-        <Card className="mission-anatomy-panel">
-          <CardHeader><CardTitle>Body map</CardTitle></CardHeader>
+      <aside className="mission-right-rail" aria-label="Reading assessment and next action">
+        <Card className="mission-assessment-panel">
+          <CardHeader><div><CardTitle>Reading assessment</CardTitle><Badge className="mission-action-badge" variant={selectedAssessment.state === 'urgent' ? 'destructive' : ['within', 'missing', 'unconfigured'].includes(selectedAssessment.state) ? 'outline' : 'attention'}>{selectedAssessment.label}</Badge></div></CardHeader>
           <CardContent>
-            <Suspense fallback={<div className="mission-anatomy-placeholder" role="status">Preparing anatomy</div>}>
-              <AnatomyViewer selectedMetric={props.selectedMetric} selectedStructure={props.selectedStructure} focusRequestKey={focusRequestKey} reducedMotion={props.reducedMotion}
-                onMetric={(metric) => { if (metric) selectMetric(metric); }} onStructure={props.onStructure}
-                priorityStructure={topAssessment?.bodyTarget} priorityState={topAssessment?.state} compact />
-            </Suspense>
-            {structureNotAssessed && <div className="mission-structure-note"><strong>{selectedStructureInfo?.label}</strong><span>Not assessed</span></div>}
+            {selectedItem && <strong className="mission-assessment-value">{formatValue(selectedItem)}</strong>}
+            <div className="mission-assessment-reason"><strong>{selectedAssessment.state === 'within' ? 'Status' : selectedAssessment.state === 'missing' ? 'Status' : 'What to do'}</strong><span>{astronautAssessmentText(selectedAssessment)}</span></div>
+            {selectedItem && <div className="mission-assessment-reason mission-assessment-comparison"><strong>Compared with your last similar check</strong><span>{astronautComparison(selectedItem, selectedComparison?.previous)}</span></div>}
+            <details className="mission-assessment-limits"><summary>Context and limits</summary><span>{props.metrics[props.selectedMetric].why} {props.metrics[props.selectedMetric].cannot}</span>{selectedAssessment.rule && <span>{selectedAssessment.rule.referenceLabel} Source: {selectedAssessment.rule.source} · v{selectedAssessment.rule.version}.</span>}</details>
+            {!selectedItem && <Button size="sm" onClick={() => props.onAdd(props.selectedMetric)}>Record {props.metrics[props.selectedMetric].short.toLocaleLowerCase()}</Button>}
           </CardContent>
         </Card>
 
         <Card className={`mission-action-panel ${actionAssessment ? `priority-${actionAssessment.state}` : ''}`}>
-          <CardHeader><div><CardTitle>Next action</CardTitle>{actionAssessment && <Badge className="mission-action-badge" variant={actionAssessment.state === 'urgent' ? 'destructive' : actionAssessment.state === 'missing' ? 'outline' : 'attention'}>{conciseState(actionAssessment.state)}</Badge>}</div></CardHeader>
+          <CardHeader><div><CardTitle>Next action</CardTitle>{actionAssessment && (actionAssessment.metric !== props.selectedMetric || actionAssessment.state !== selectedAssessment.state) && <Badge className="mission-action-badge" variant={actionAssessment.state === 'urgent' ? 'destructive' : actionAssessment.state === 'missing' ? 'outline' : 'attention'}>{conciseState(actionAssessment.state)}</Badge>}</div></CardHeader>
           <CardContent>
             <strong className="mission-action-value">{topAssessment?.observation
               ? `${props.metrics[topAssessment.metric].short} · ${formatValue(topAssessment.observation)}`
-              : actionTask?.title ?? (missingAssessment ? `Record ${props.metrics[missingAssessment.metric].short.toLocaleLowerCase()}` : 'No action scheduled')}</strong>
+              : actionTask?.title ?? (missingAssessment ? missingAssessment.metric === 'heart' ? 'Log resting heart rate' : `Record ${props.metrics[missingAssessment.metric].short.toLocaleLowerCase()}` : 'No action scheduled')}</strong>
             <p>{topAssessment?.nextAction ?? (actionTask ? actionTask.kind === 'measurement' ? 'A repeat measurement is scheduled.' : 'A routine check-in is scheduled.' : missingAssessment ? 'Record a reading to begin.' : 'There are no scheduled actions.')}</p>
             {actionTask && <small className="mission-action-due"><CalendarClock aria-hidden="true" />{dueLabel(actionTask, now, activeTimeZone ?? '')}</small>}
             <ActionButton task={actionTask} assessment={actionAssessment} onTask={props.onTask}
@@ -275,7 +338,7 @@ export function TodayView(props: Props) {
       </div>
     </section>
 
-    <div className="mission-replay" aria-label="Saved observation playback">
+    {chartMode === 'history' && <div className="mission-replay" aria-label="Saved observation playback">
       <Button type="button" variant="outline" size="icon-sm" aria-label={playing ? 'Pause timeline replay' : 'Play timeline replay'} aria-pressed={playing}
         onClick={() => { if (playbackFraction >= 1) setPlaybackFraction(0); setPlaying((value) => !value); }}>
         {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
@@ -288,7 +351,7 @@ export function TodayView(props: Props) {
       <Button type="button" variant="ghost" size="sm" disabled={!activeReplayEvent || !('metric' in activeReplayEvent.item)} onClick={() => inspectReplayEvent(activeReplayEvent)}>
         Open reading<ArrowRight data-icon="inline-end" />
       </Button>
-    </div>
-    <span className="mission-sr-only">Moving the timeline reviews saved observations only. Current readings and the next action remain unchanged.</span>
+    </div>}
+    {chartMode === 'history' && <span className="mission-sr-only">Moving the timeline reviews saved observations only. Current readings and the next action remain unchanged.</span>}
   </section>;
 }

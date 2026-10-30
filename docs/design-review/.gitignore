@@ -4,3 +4,5 @@ bodyparts3d-99.zip
 bodyparts3d-partof.zip
 .playwright-cli/
 dev-server*.log
+__pycache__/
+*.py[cod]

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Activity, ArrowDownToLine, ArrowLeft, ArrowRight, CalendarClock, Check, CircleHelp, FileHeart, FileText, Info, LifeBuoy, Plus, RotateCcw, Search, SunMedium, Upload, X } from 'lucide-react';
+import { Activity, ArrowDownToLine, ArrowLeft, ArrowRight, CalendarClock, Check, CircleHelp, FileHeart, FileText, Info, LifeBuoy, Plus, RotateCcw, Search, SunMedium, X } from 'lucide-react';
 import { EntryDialog } from './EntryDialog';
 import { TodayView } from './TodayView';
 import { ObservationChart } from './ObservationChart';
@@ -16,7 +16,9 @@ import { Input } from './components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './components/ui/select';
 import { Switch } from './components/ui/switch';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './components/ui/table';
-import { compareObservation, CONTEXT_KINDS, formatValue, fullDate, GUIDANCE_REVIEW_STATUS, GUIDANCE_VERSION, HAZARDS, isComparable, latestForMetric, localStamp, METRICS, METRIC_ORDER, makeDemoData, makeId, MOOD, SLEEP_QUALITY, type ContextEntry, type Dataset, type Followup, type ImportRow, type Metric, type Observation, type Page, type ReviewEpisode, type TaskKind } from './domain';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
+import { useHeartRateMonitor } from './useHeartRateMonitor';
+import { compareObservation, CONTEXT_KINDS, formatValue, fullDate, GUIDANCE_REVIEW_STATUS, GUIDANCE_VERSION, HAZARDS, isComparable, latestForMetric, localStamp, METRICS, METRIC_ORDER, makeDemoData, makeId, MOOD, SLEEP_QUALITY, type ContextEntry, type Dataset, type Followup, type Metric, type Observation, type Page, type ReviewEpisode, type TaskKind } from './domain';
 import './app.css';
 import './soft.css';
 import './console.css';
@@ -89,94 +91,6 @@ function normalizeMetric(value: string): Metric | null {
   return aliases[key] ?? null;
 }
 
-function csvRecords(text: string) {
-  const records: string[][] = [];
-  let row: string[] = [];
-  let cell = '';
-  let quoted = false;
-  const input = text.replace(/^\uFEFF/, '');
-  for (let index = 0; index < input.length; index += 1) {
-    const character = input[index];
-    if (character === '"' && quoted && input[index + 1] === '"') { cell += '"'; index += 1; }
-    else if (character === '"') {
-      if (!quoted && cell.length) throw new Error('A quote appeared inside an unquoted CSV value. Correct the file and try again.');
-      quoted = !quoted;
-    } else if (character === ',' && !quoted) { row.push(cell.trim()); cell = ''; }
-    else if ((character === '\n' || character === '\r') && !quoted) {
-      if (character === '\r' && input[index + 1] === '\n') index += 1;
-      row.push(cell.trim());
-      if (row.some((value) => value.length)) records.push(row);
-      row = []; cell = '';
-    } else cell += character;
-  }
-  if (quoted) throw new Error('The CSV has an unclosed quote. Correct the file and try again.');
-  if (cell.length || row.length) { row.push(cell.trim()); records.push(row); }
-  return records;
-}
-
-function duplicateKey(metric: Metric, value: string, unit: string, at: string) {
-  const timestamp = new Date(at).getTime();
-  if (!Number.isFinite(timestamp)) return '';
-  const canonical = metric === 'bp'
-    ? value.split('/').map((part) => String(Number(part.trim()))).join('/')
-    : metric === 'mood' ? value.trim() : String(Number(value));
-  return JSON.stringify([metric, canonical, unit.trim().toLocaleLowerCase(), timestamp]);
-}
-
-function observationKey(item: Observation) {
-  return duplicateKey(item.metric, item.metric === 'bp' ? `${item.value}/${item.secondary}` : String(item.value), item.unit, item.at);
-}
-
-function validateImportRows(rows: ImportRow[], observations: Observation[]) {
-  const seen = new Set(observations.map(observationKey));
-  return rows.map((row) => {
-    let error = row.error?.startsWith('Row has') ? row.error : '';
-    if (!error && !row.metric) error = 'Choose a recognized indicator';
-    if (!error && !row.value.trim()) error = 'Enter a value';
-    const date = new Date(row.at);
-    if (!error && (!row.at || Number.isNaN(date.valueOf()))) error = 'Enter a valid timestamp';
-    if (!error && date.getTime() > Date.now() + 60000) error = 'Timestamp is in the future';
-    if (row.metric && !error) {
-      const info = METRICS[row.metric];
-      if (row.unit.trim().toLocaleLowerCase() !== info.unit.toLocaleLowerCase()) error = `Expected unit ${info.unit || '(blank for mood)'}`;
-      if (!error && row.metric === 'bp') {
-        if (!/^\s*\d+(?:\.\d+)?\s*\/\s*\d+(?:\.\d+)?\s*$/.test(row.value)) error = 'Enter top/bottom values separated by /';
-        else { const [systolic, diastolic] = row.value.split('/').map(Number); if (systolic <= diastolic || diastolic <= 0 || systolic > 350 || diastolic > 250) error = 'Check both blood pressure values'; }
-      } else if (!error && row.metric === 'mood' && !MOOD.includes(row.value.trim())) error = 'Choose one of the five mood labels';
-      else if (!error && row.metric !== 'mood') {
-        const value = Number(row.value);
-        const maximum = row.metric === 'heart' ? 300 : row.metric === 'temperature' ? 45 : row.metric === 'sleep' ? 24 : 2000;
-        const minimum = row.metric === 'sleep' ? 0 : 0.01;
-        if (!Number.isFinite(value) || value < minimum || value > maximum) error = `Enter a numeric value from ${minimum} to ${maximum}`;
-      }
-    }
-    const key = row.metric && !error ? duplicateKey(row.metric, row.value, row.unit, row.at) : '';
-    const duplicate = !!key && seen.has(key);
-    if (key) seen.add(key);
-    return { ...row, error, duplicate };
-  });
-}
-
-function parseCsv(text: string, observations: Observation[]): ImportRow[] {
-  const records = csvRecords(text);
-  if (records.length < 2) throw new Error('CSV needs a header and at least one measurement row.');
-  const headers = records[0].map((header) => header.trim().toLocaleLowerCase());
-  const required = ['metric', 'value', 'unit', 'timestamp', 'context'];
-  const missing = required.filter((header) => !headers.includes(header));
-  if (missing.length) throw new Error(`Missing CSV columns: ${missing.join(', ')}.`);
-  const indexes = Object.fromEntries(headers.map((header, index) => [header, index]));
-  const rows = records.slice(1).map((cells, index): ImportRow => {
-    const read = (key: string) => cells[indexes[key]] ?? '';
-    const metric = normalizeMetric(read('metric'));
-    return {
-      id: makeId(`CSV${index + 1}`), metric, rawMetric: read('metric'), value: read('value'), unit: read('unit'), at: read('timestamp'),
-      context: read('context'), method: read('method') || 'CSV import',
-      error: cells.length !== headers.length ? `Row has ${cells.length} fields; expected ${headers.length}.` : undefined,
-    };
-  });
-  return validateImportRows(rows, observations);
-}
-
 function escapeHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character] ?? character));
 }
@@ -198,17 +112,39 @@ function MissionClock({ missionDay, timeZone }: { missionDay: number; timeZone?:
   }, []);
   const formatter = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23', timeZone });
   const zone = new Intl.DateTimeFormat(undefined, { timeZoneName: 'short', timeZone }).formatToParts(now).find((part) => part.type === 'timeZoneName')?.value;
-  return <div className="mission-clock" aria-label={`Mission day ${missionDay}, ${zone ?? 'local time'}`}>
+  return <div className="mission-clock" role="group" aria-label={`Mission day ${missionDay}, ${zone ?? 'local time'}`}>
     <span>MISSION DAY</span><strong>{String(missionDay).padStart(3, '0')}</strong><i aria-hidden="true" />
     <span className="mission-clock-zone">{zone}</span><time dateTime={now.toISOString()}>{formatter.format(now)}</time>
   </div>;
 }
 
+function WearableStatus({ monitor }: { monitor: ReturnType<typeof useHeartRateMonitor> }) {
+  const connected = monitor.status === 'connected' || monitor.status === 'stale';
+  if (monitor.status === 'unsupported') {
+    const detail = monitor.error ?? 'BLE is unavailable in this preview window. Native Tauri BLE support is not configured in this prototype.';
+    return <span className="wearable-unavailable" role="status" aria-label={detail} title={detail}><MetricGlyph name="heart" size={17} />BLE unavailable</span>;
+  }
+
+  return <div className="wearable-status" aria-live="polite">
+    {connected ? <>
+      <span className={`wearable-connected ${monitor.status === 'stale' ? 'signal-stale' : ''}`} title={monitor.deviceName || 'Heart-rate wearable'}>
+        <i aria-hidden="true" />
+        <span>{monitor.status === 'stale' ? 'Signal paused' : monitor.latest?.sensorContact === 'not-detected' ? 'Check sensor fit' : monitor.latest ? 'Wearable live' : 'Waiting for signal'}</span>
+      </span>
+      {monitor.status === 'stale' ? <Button type="button" variant="outline" size="sm" className="wearable-connect" aria-label="Reconnect heart-rate wearable" onClick={() => void monitor.connect()}><MetricGlyph name="heart" size={17} />Reconnect</Button>
+        : <Button type="button" variant="ghost" size="icon-xs" className="wearable-disconnect" aria-label="Disconnect wearable" title="Disconnect wearable" onClick={() => void monitor.disconnect()}><X aria-hidden="true" /></Button>}
+    </> : <Button type="button" variant="outline" size="sm" className="wearable-connect" aria-label={monitor.status === 'connecting' ? 'Connecting to heart-rate wearable' : 'Connect heart-rate wearable'} disabled={monitor.status === 'connecting'} onClick={() => void monitor.connect()}>
+      <MetricGlyph name="heart" size={17} />{monitor.status === 'connecting' ? 'Connecting…' : 'Connect wearable'}
+    </Button>}
+    {monitor.error && <span className="wearable-error" role="alert">{monitor.error}</span>}
+  </div>;
+}
+
 export default function App() {
+  const heartRateMonitor = useHeartRateMonitor();
   const [page, setPage] = useState<Page>(() => routeFromHash(window.location.hash));
   const [historyView, setHistoryView] = useState<'chart' | 'timeline'>(() => historyViewFromHash(window.location.hash) ?? 'chart');
   const [returnPage, setReturnPage] = useState<Page>('console');
-  const [showMilo, setShowMilo] = useState(true);
   const [environment, setEnvironment] = useState('Spacecraft');
   const [missionStartDate, setMissionStartDate] = useState(() => new Date(Date.now() - 41 * 86400000).toISOString().slice(0, 10));
   const [profileName, setProfileName] = useState('');
@@ -239,10 +175,9 @@ export default function App() {
   const [linkTask, setLinkTask] = useState<string | null>(null);
   const [entrySession, setEntrySession] = useState(0);
   const entryOrigin = useRef<Page>('console');
-  const [csvRows, setCsvRows] = useState<ImportRow[] | null>(null);
-  const [csvError, setCsvError] = useState('');
   const [search, setSearch] = useState('');
   const [librarySearch, setLibrarySearch] = useState('');
+  const [librarySection, setLibrarySection] = useState<'guides' | 'hazards' | 'systems'>('guides');
   const [recordMetric, setRecordMetric] = useState('all');
   const [recordFrom, setRecordFrom] = useState('');
   const [recordTo, setRecordTo] = useState('');
@@ -263,11 +198,9 @@ export default function App() {
   const [taskNotes, setTaskNotes] = useState<Record<string, string>>({});
   const [rescheduleValues, setRescheduleValues] = useState<Record<string, string>>({});
   const [focusTaskId, setFocusTaskId] = useState('');
-  const [resetDemoOpen, setResetDemoOpen] = useState(false);
   const [toast, setToast] = useState('');
   const toastTimer = useRef<number | undefined>(undefined);
   const reviewScrollTop = useRef(0);
-  const fileInput = useRef<HTMLInputElement>(null);
 
   const activeTimeZone = timeZone === 'UTC' ? 'UTC' : undefined;
   const selected = observations.find((item) => item.id === selectedObservation) ?? latestForMetric(observations, selectedMetric);
@@ -314,7 +247,7 @@ export default function App() {
   const selectedRecordEpisode = episodes.find((episode) => episode.id === recordEpisode);
   const selectedRecordEpisodeOriginal = selectedRecordEpisode ? observations.find((item) => item.id === selectedRecordEpisode.observationId) : undefined;
   const selectedTaskObservation = observations.find((item) => item.id === taskDraftObservation);
-  const activeHandoffEpisode = episodes.find((item) => item.id === handoffEpisode) ?? episodes[0];
+  const activeHandoffEpisode = episodes.find((item) => item.id === handoffEpisode);
   const handoffData = useMemo(() => {
     if (!activeHandoffEpisode) return null;
     const episodeObservations = observations.filter((item) => item.id === activeHandoffEpisode.observationId || activeHandoffEpisode.resultIds.includes(item.id));
@@ -522,48 +455,11 @@ export default function App() {
     setRescheduleValues((current) => ({ ...current, [task.id]: '' })); notify('Task schedule updated.');
   };
 
-  const onCsvFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if (!file) return;
-    setCsvError('');
-    try { setCsvRows(parseCsv(await file.text(), observations)); }
-    catch (error) { setCsvRows(null); setCsvError(error instanceof Error ? error.message : 'The selected file could not be read.'); }
-  };
-  const updateCsvRow = (id: string, field: 'rawMetric' | 'value' | 'unit' | 'at' | 'context' | 'method', value: string) => {
-    setCsvRows((rows) => rows ? validateImportRows(rows.map((row) => row.id === id
-      ? { ...row, [field]: value, metric: field === 'rawMetric' ? normalizeMetric(value) : row.metric, error: row.error?.startsWith('Row has') ? row.error : '' }
-      : row), observations) : rows);
-  };
   const downloadBlob = (content: BlobPart, mime: string, filename: string) => {
     const url = URL.createObjectURL(new Blob([content], { type: mime }));
     const anchor = document.createElement('a'); anchor.href = url; anchor.download = filename; anchor.click();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
-  const downloadTemplate = () => {
-    downloadBlob('metric,value,unit,timestamp,context,method\n', 'text/csv', 'tether-measurements-template.csv');
-  };
-  const commitCsv = () => {
-    if (!csvRows) return;
-    const good = csvRows.filter((row) => !row.error && !row.duplicate && row.metric);
-    if (!good.length) { setCsvError('No valid rows to import. Fix a row or remove it.'); return; }
-    const added: Observation[] = good.map((row) => {
-      const metric = row.metric!;
-      const date = new Date(row.at);
-      const pair = metric === 'bp' ? row.value.split('/').map(Number) : undefined;
-      const value = metric === 'bp' ? pair![0] : metric === 'mood' ? row.value.trim() : Number(row.value);
-      const context = row.context.trim() || 'Not recorded';
-      const method = row.method.trim() || 'Not recorded';
-      return { id: makeId('CSV'), metric, value, secondary: pair?.[1], unit: METRICS[metric].unit, at: date.toISOString(), context, method,
-        note: '', source: 'CSV import', synthetic: dataset === 'demo', dataset, quality: context !== 'Not recorded' && method !== 'Not recorded' ? 'usable' : 'verify', guidanceVersion: GUIDANCE_VERSION };
-    });
-    mutate((current) => ({ ...current, observations: [...added, ...current.observations], episodes: [...added.map((item) => ({ id: makeId('EPISODE'), observationId: item.id, resultIds: [], openedAt: item.at, status: 'open' as const, dataset, synthetic: dataset === 'demo' })), ...current.episodes] }));
-    const skipped = csvRows.length - good.length;
-    setCsvRows(null); setCsvError(''); setSelectedMetric(added[0].metric); setSelectedObservation(added[0].id);
-    openReview(added[0], 'measurements');
-    notify(`${added.length} reading${added.length === 1 ? '' : 's'} imported${skipped ? `; ${skipped} row${skipped === 1 ? '' : 's'} skipped` : ''}.`);
-  };
-
   function startTaskFromToday(task: Followup) {
     if (task.kind === 'measurement' && task.resultId) { const result = observations.find((item) => item.id === task.resultId); if (result) openReview(result); return; }
     openTask(task);
@@ -574,7 +470,7 @@ export default function App() {
     notify('Reading review saved.');
   };
 
-  const selectedEventKeys = exportSelection ?? visibleEvents.map((event) => event.key);
+  const selectedEventKeys = exportSelection ?? [];
   const selectedEvents = visibleEvents.filter((event) => selectedEventKeys.includes(event.key));
   const buildExportPayload = (selectedItems: RecordEvent[], withNotes: boolean): ExportPayload => {
     const chosenObs = selectedItems.filter((event) => event.kind === 'observation').map((event) => event.item as Observation);
@@ -641,30 +537,27 @@ export default function App() {
     setHandoffPreviewOpen(false); notify('Handoff report ready. Nothing was sent.');
   };
 
-  const resetDemo = () => { setWorkspaces((current) => ({ ...current, demo: makeDemoData() })); setResetDemoOpen(false); setDataset('demo'); setSelectedObservation('DEMO-heart-7'); notify('Starting readings restored. Your readings were not changed.'); };
-  const setRecordFilter = (setter: (value: string) => void, value: string) => { setter(value); setExportSelection(null); };
-
-  const navLabel = page === 'console' ? 'TODAY' : page === 'history' ? 'HISTORY' : page === 'review' ? 'READING REVIEW' : page === 'medical' ? 'MEDICAL SUPPORT' : page.toUpperCase();
+  const setRecordFilter = (setter: (value: string) => void, value: string) => { setter(value); setExportSelection([]); };
 
   return <div className={`app-shell tether-shell dark ${compactMotion || systemReducedMotion ? 'reduce-motion' : ''}`} data-page={page}>
     <aside className="sidebar">
       <a className="brand" href="#today" aria-label="Tether Crew Health home" onClick={(event) => { event.preventDefault(); navigate('console'); }}>
-        <picture className="brand-logo"><source media="(max-width: 860px)" srcSet="/assets/brand/tether-mark.svg" /><img src="/assets/brand/tether-horizontal.svg" alt="" /></picture>
+        <span className="brand-logo" aria-hidden="true"><span className="brand-wordmark">TETHER</span><span className="brand-tetherline"><span>CREW HEALTH</span><i /></span></span><img className="brand-compact-mark" src="/assets/brand/tether-mark.svg" alt="" />
       </a>
       <div className="side-caption">MISSION WORKSPACE</div>
       <nav className="primary-nav" aria-label="Primary navigation">{NAV.map(([id, label]) => <Button key={id} type="button" variant={page === id ? 'secondary' : 'ghost'} className={`nav-item ${page === id ? 'active' : ''}`} title={label} aria-current={page === id ? 'page' : undefined} onClick={() => navigate(id)}><span className="nav-icon"><Icon name={id} /></span><span>{label}</span></Button>)}</nav>
       <div className="utility-links"><div className="side-caption">REFERENCE & CONTROL</div>{(['library', 'settings'] as Page[]).map((id) => { const label = id === 'library' ? 'Reference library' : 'Settings'; return <Button key={id} type="button" variant={page === id ? 'secondary' : 'ghost'} className={`nav-item ${page === id ? 'active' : ''}`} title={label} aria-current={page === id ? 'page' : undefined} onClick={() => navigate(id)}><span className="nav-icon"><Icon name={id} /></span><span>{label}</span></Button>; })}</div>
-      {showMilo && <button type="button" className="sidebar-milo" onClick={() => navigate('library')} aria-label="Milo measurement help. Open the reference library."><img src="/assets/milo-astronaut-dog.png" alt="" /><span><b>Milo</b><small>Measurement help</small></span><ArrowRight aria-hidden="true" /></button>}
     </aside>
 
     <div className="main-area">
-      <header className="topbar"><div className="breadcrumbs"><span>CREW HEALTH</span><span className="crumb-sep">/</span><b>{navLabel}</b></div><div className="top-actions">
-        <MissionClock missionDay={missionDay} timeZone={activeTimeZone} />
-        <Button type="button" variant="outline" className="support-button" onClick={() => navigate('medical')}><Icon name="medical" /> Medical support</Button>
+      <header className="topbar"><MissionClock missionDay={missionDay} timeZone={activeTimeZone} /><div className="top-actions">
+        <WearableStatus monitor={heartRateMonitor} />
+        <Button type="button" variant="outline" className="support-button" aria-label="Medical support" onClick={() => navigate('medical')}><Icon name="medical" /> Medical support</Button>
       </div></header>
 
       <main className="content-wrap">
         {page === 'console' && <TodayView metrics={METRICS} metricOrder={METRIC_ORDER} observations={observations} contexts={contexts} tasks={tasks} assessments={assessments}
+          liveHeartRate={heartRateMonitor}
           selectedMetric={selectedMetric} selectedStructure={selectedStructure}
           environment={environment} missionDay={missionDay} timeZone={activeTimeZone ?? ''} reducedMotion={compactMotion || systemReducedMotion}
           rangeDays={consoleRange} onRangeChange={setConsoleRange}
@@ -673,14 +566,22 @@ export default function App() {
           onTask={startTaskFromToday} onCare={() => navigate('care')} />}
 
         {page === 'measurements' && <section className="page-view measurements-page">
-          <PageHeading title="Measurements" description="See what a reading means, then record it."
-            actions={<Button onClick={() => startMeasurement()}><Plus data-icon="inline-start" /> Add measurement</Button>} />
+          <PageHeading title="Measurements" description="Record a health reading or check-in." />
           <div className="measurement-grid">{METRIC_ORDER.map((metric) => {
             const item = latestForMetric(observations, metric);
+            const assessment = assessments[metric];
+            const statusLabel = assessment.state === 'attention' || assessment.state === 'urgent' ? 'Review'
+              : assessment.state === 'verify' ? 'Check conditions'
+              : assessment.state === 'stale' ? 'Out of date'
+              : assessment.state === 'missing' ? 'No measurement'
+              : assessment.state === 'within' ? 'Within check'
+              : 'Recorded';
+            const statusVariant = ['attention', 'urgent', 'verify', 'stale'].includes(assessment.state) ? 'attention'
+              : assessment.state === 'within' ? 'secondary' : 'outline';
             return <Card className="measurement-option" key={metric}>
-              <CardHeader><div className="measurement-card-title"><MetricGlyph name={metric} /><div><CardDescription>{METRICS[metric].unit || 'Self report'}</CardDescription><CardTitle>{METRICS[metric].label}</CardTitle></div></div></CardHeader>
-              <CardContent><p>{METRICS[metric].meaning}</p><div className="measurement-latest"><span>Last reading</span><strong>{item ? formatValue(item) : 'No reading yet'}</strong><small>{item ? `${fullDate(item.at, activeTimeZone)} · ${item.method}` : 'Add the first reading.'}</small></div>
-                <Button onClick={() => startMeasurement(metric)}>{item ? 'Record another' : 'Record measurement'}<ArrowRight data-icon="inline-end" /></Button>
+              <CardHeader className="measurement-option-header"><div className="measurement-card-title"><MetricGlyph name={metric} /><div><CardDescription>{METRICS[metric].unit || 'Self report'}</CardDescription><CardTitle>{METRICS[metric].label}</CardTitle></div></div><Badge variant={statusVariant}>{statusLabel}</Badge></CardHeader>
+              <CardContent className="measurement-option-content"><div className="measurement-latest"><span>Latest reading</span><strong>{item ? formatValue(item) : 'No measurement'}</strong><small>{item ? `${fullDate(item.at, activeTimeZone)} · ${item.method}` : 'Record your first reading.'}</small></div>
+                <Button size="sm" aria-label={`Record ${METRICS[metric].label.toLocaleLowerCase()}`} onClick={() => startMeasurement(metric)}><Plus data-icon="inline-start" /> Record</Button>
               </CardContent>
             </Card>;
           })}</div>
@@ -688,31 +589,10 @@ export default function App() {
             <div className="section-heading"><div><h2>Optional check-ins</h2></div></div>
             <div className="context-action-row">{CONTEXT_KINDS.map((kind) => <Button key={kind} variant="outline" onClick={() => startContext(kind)}>{kind === 'sleep quality' ? <SunMedium data-icon="inline-start" /> : <Plus data-icon="inline-start" />}{kind[0].toUpperCase() + kind.slice(1)}</Button>)}</div>
           </div>
-          <Card className="csv-import-card"><CardHeader><div><CardDescription>OPTIONAL BULK ENTRY</CardDescription><CardTitle>Import a CSV</CardTitle></div></CardHeader><CardContent>
-            <p>Check each row before saving. Different-time readings are kept.</p>
-            <div className="csv-actions"><Button variant="outline" onClick={downloadTemplate}><ArrowDownToLine data-icon="inline-start" /> Download template</Button><Button variant="outline" onClick={() => fileInput.current?.click()}><Upload data-icon="inline-start" /> Choose CSV file</Button>
-              <input ref={fileInput} type="file" accept=".csv,text/csv" onChange={onCsvFile} hidden aria-label="Choose a CSV file" /></div>
-            {csvError && <Alert variant="destructive" role="alert"><Info aria-hidden="true" /><AlertTitle>Import needs attention</AlertTitle><AlertDescription>{csvError}</AlertDescription></Alert>}
-            {csvRows && <div className="csv-preview"><div className="csv-preview-head"><div><h3>Review import rows</h3><p>{csvRows.filter((row) => !row.error && !row.duplicate).length} ready · {csvRows.filter((row) => row.error).length} need edits · {csvRows.filter((row) => row.duplicate).length} duplicates</p></div><Button variant="ghost" size="icon-sm" aria-label="Close CSV preview" onClick={() => setCsvRows(null)}><X /></Button></div>
-              <div className="csv-preview-table-wrap"><Table><TableHeader><TableRow><TableHead>Indicator</TableHead><TableHead>Value</TableHead><TableHead>Unit</TableHead><TableHead>Timestamp</TableHead><TableHead>Context</TableHead><TableHead>Method</TableHead><TableHead>Row status</TableHead><TableHead>Remove</TableHead></TableRow></TableHeader>
-      <TableBody>{csvRows.map((row) => <TableRow key={row.id} data-invalid={row.error || row.duplicate || undefined}>
-                  <TableCell><Input aria-label="Indicator" value={row.rawMetric} onChange={(event) => updateCsvRow(row.id, 'rawMetric', event.target.value)} placeholder="heart rate" /></TableCell>
-                  <TableCell><Input aria-label="Value" value={row.value} onChange={(event) => updateCsvRow(row.id, 'value', event.target.value)} /></TableCell>
-                  <TableCell><Input aria-label="Unit" value={row.unit} onChange={(event) => updateCsvRow(row.id, 'unit', event.target.value)} /></TableCell>
-                  <TableCell><Input aria-label="Timestamp" value={row.at} onChange={(event) => updateCsvRow(row.id, 'at', event.target.value)} /></TableCell>
-                  <TableCell><Input aria-label="Context" value={row.context} onChange={(event) => updateCsvRow(row.id, 'context', event.target.value)} /></TableCell>
-                  <TableCell><Input aria-label="Method" value={row.method} onChange={(event) => updateCsvRow(row.id, 'method', event.target.value)} /></TableCell>
-                  <TableCell>{row.error ? <Badge variant="attention">{row.error}</Badge> : row.duplicate ? <Badge variant="outline">Duplicate · skipped</Badge> : <Badge variant="secondary">Ready</Badge>}</TableCell>
-                  <TableCell><Button type="button" variant="ghost" size="icon-sm" aria-label="Remove row from this import" onClick={() => setCsvRows((rows) => rows ? validateImportRows(rows.filter((item) => item.id !== row.id), observations) : rows)}><X aria-hidden="true" /></Button></TableCell>
-                </TableRow>)}</TableBody>
-              </Table></div>
-              <div className="csv-confirm-row"><small>Invalid rows and duplicates are skipped; valid rows can still be imported.</small><Button onClick={commitCsv} disabled={!csvRows.some((row) => !row.error && !row.duplicate && row.metric)}><Check data-icon="inline-start" /> Import valid rows</Button></div>
-            </div>}
-          </CardContent></Card>
         </section>}
 
         {page === 'history' && historyView === 'chart' && <section className="page-view trends-page history-page">
-          <PageHeading title="History" description="Review readings, patterns, and the conditions around them."
+          <PageHeading title="History" description="Readings and check-ins over time."
             actions={<div className="trend-filters">
               <Select value={selectedMetric} onValueChange={(value) => value && setSelectedMetric(value as Metric)}>
                 <SelectTrigger aria-label="Select indicator"><SelectValue>{METRICS[selectedMetric].label}</SelectValue></SelectTrigger><SelectContent><SelectGroup>{METRIC_ORDER.map((metric) => <SelectItem key={metric} value={metric}>{METRICS[metric].label}</SelectItem>)}</SelectGroup></SelectContent>
@@ -724,7 +604,7 @@ export default function App() {
             <CardContent><ObservationChart observations={trendRows} metric={selectedMetric} timeZone={activeTimeZone} onSelect={(item) => openReview(item, 'history')} />
               <div className="trend-legend-note">Each point is one reading. Gaps show days without readings.</div>
             </CardContent></Card>
-          <div className="section-heading"><div><h2>Readings</h2><p>Each value keeps its method and conditions.</p></div><Badge variant="secondary">{trendRows.length}</Badge></div>
+          <div className="section-heading"><div><h2>Readings</h2><p>Method and conditions stay with every reading.</p></div><Badge variant="secondary">{trendRows.length}</Badge></div>
           <div className="trend-observation-table"><Table><TableHeader><TableRow><TableHead>Date and time</TableHead><TableHead>Reading</TableHead><TableHead>Method and conditions</TableHead><TableHead>Check</TableHead><TableHead /></TableRow></TableHeader><TableBody>
             {[...trendRows].reverse().map((item) => { const result = assessObservation(item, dataset, now); return <TableRow key={item.id}><TableCell>{fullDate(item.at, activeTimeZone)} · {new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', timeZone: activeTimeZone }).format(new Date(item.at))}</TableCell><TableCell><div className="table-reading"><MetricGlyph name={item.metric} /><strong>{formatValue(item)}</strong></div></TableCell><TableCell>{item.method} · {item.context}</TableCell><TableCell><Badge variant={result.state === 'within' ? 'secondary' : result.state === 'urgent' || result.state === 'attention' || result.state === 'verify' ? 'attention' : 'outline'}>{result.label}</Badge></TableCell><TableCell><Button size="sm" variant="ghost" onClick={() => openReview(item, 'history')}>Open<ArrowRight data-icon="inline-end" /></Button></TableCell></TableRow>; })}
             {!trendRows.length && <TableRow><TableCell colSpan={5}>No readings in this period.</TableCell></TableRow>}
@@ -779,7 +659,7 @@ export default function App() {
         {page === 'care' && <section className="page-view care-page">
           <PageHeading title="Care Plan" description="Review tasks and record what happened."
             actions={<Button onClick={() => { setTaskDraftKind('routine'); setTaskDraftObservation(''); setTaskDraftTitle(''); setTaskDraftDue(''); setTaskError(''); setTaskFormOpen(true); }}><Plus data-icon="inline-start" /> Add task</Button>} />
-          <Alert className="care-guidance-boundary"><Info aria-hidden="true" /><AlertTitle>Completing a task doesn’t clear a health concern</AlertTitle><AlertDescription>Follow your mission’s medical instructions for health decisions.</AlertDescription></Alert>
+          <Alert className="care-guidance-boundary"><Info aria-hidden="true" /><AlertTitle>A completed task records a review</AlertTitle><AlertDescription>It does not confirm that a health concern has resolved.</AlertDescription></Alert>
           {taskFormOpen && <Card className="task-create-card"><CardHeader><CardTitle>Schedule an action</CardTitle><CardDescription>Choose the task and its time.</CardDescription></CardHeader><CardContent>
             <form className="task-create-form" onSubmit={createTask}><FieldGroup>
               <Field><FieldLabel htmlFor="task-kind">Task type</FieldLabel><Select value={taskDraftKind} onValueChange={(value) => { if (value) { setTaskDraftKind(value as TaskKind); if (value === 'routine') setTaskDraftObservation(''); } }}><SelectTrigger id="task-kind"><SelectValue>{taskDraftKind === 'measurement' ? 'Measurement follow-up' : 'Routine action'}</SelectValue></SelectTrigger><SelectContent><SelectGroup><SelectItem value="measurement">Measurement follow-up</SelectItem><SelectItem value="routine">Routine action</SelectItem></SelectGroup></SelectContent></Select></Field>
@@ -808,8 +688,10 @@ export default function App() {
                 {task.kind === 'measurement' && <Button onClick={() => result ? openReview(result, 'care') : startMeasurement(original?.metric ?? selectedMetric, task.id)}>{result ? 'Review repeat' : 'Record follow-up'}<ArrowRight data-icon="inline-end" /></Button>}
                 <Field><FieldLabel htmlFor={`task-note-${task.id}`}>{task.kind === 'routine' || (result && !comparable) ? 'Review note (required)' : 'Note (optional)'}</FieldLabel><textarea id={`task-note-${task.id}`} value={taskNotes[task.id] ?? ''} onChange={(event) => setTaskNotes((current) => ({ ...current, [task.id]: event.target.value }))} rows={2} placeholder="What did you review or do?" /></Field>
                 <Button variant="outline" disabled={(task.kind === 'measurement' && !result) || ((!comparable || task.kind === 'routine') && !(taskNotes[task.id] ?? '').trim())} onClick={() => completeTask(task)}><Check data-icon="inline-start" /> Mark action complete</Button>
-                <details className="task-reschedule"><summary>Change schedule</summary><div><Input aria-label={`New schedule for ${task.title}`} type="datetime-local" value={rescheduleValues[task.id] || toDateTimeInput(task.due, timeZone)} onChange={(event) => setRescheduleValues((current) => ({ ...current, [task.id]: event.target.value }))} /><Button size="sm" variant="outline" onClick={() => rescheduleTask(task)}>Save time</Button></div></details>
-                <Button variant="ghost" size="sm" onClick={() => cancelTask(task)}>Cancel task</Button>
+                <details className="task-more-actions"><summary>More options</summary><div>
+                  <details className="task-reschedule"><summary>Change schedule</summary><div><Input aria-label={`New schedule for ${task.title}`} type="datetime-local" value={rescheduleValues[task.id] || toDateTimeInput(task.due, timeZone)} onChange={(event) => setRescheduleValues((current) => ({ ...current, [task.id]: event.target.value }))} /><Button size="sm" variant="outline" onClick={() => rescheduleTask(task)}>Save time</Button></div></details>
+                  <Button variant="ghost" size="sm" onClick={() => cancelTask(task)}>Cancel task</Button>
+                </div></details>
               </div>
             </article>;
           })}</div> : <Empty className="task-empty"><EmptyHeader><EmptyTitle>Nothing to do</EmptyTitle><EmptyDescription>Add a reminder when it’s useful.</EmptyDescription></EmptyHeader><Button onClick={() => { setTaskDraftKind('routine'); setTaskDraftTitle(''); setTaskDraftDue(''); setTaskFormOpen(true); }}>Add a task<Plus data-icon="inline-start" /></Button></Empty>}
@@ -819,16 +701,16 @@ export default function App() {
         </section>}
 
         {page === 'history' && historyView === 'timeline' && <section className="page-view records-page history-page">
-          <PageHeading title="History" description="Find readings and actions, then choose what to share." actions={<div className="history-heading-actions"><div className="history-view-toggle" role="group" aria-label="History view"><Button variant="ghost" aria-pressed="false" onClick={() => setHistoryView('chart')}>Chart</Button><Button variant="secondary" aria-pressed="true">Timeline</Button></div><Button onClick={() => { setIncludeNotes(false); setExportPreviewOpen(true); }}><FileText data-icon="inline-start" /> Prepare export</Button></div>} />
+          <PageHeading title="History" description="Find readings and actions, then choose what to share." actions={<div className="history-heading-actions"><div className="history-view-toggle" role="group" aria-label="History view"><Button variant="ghost" aria-pressed="false" onClick={() => setHistoryView('chart')}>Chart</Button><Button variant="secondary" aria-pressed="true">Timeline</Button></div><Button disabled={!selectedEvents.length} onClick={() => { setIncludeNotes(false); setExportPreviewOpen(true); }}><FileText data-icon="inline-start" /> Prepare export</Button></div>} />
           <div className="records-filter-bar">
             <div className="record-search-wrap"><Search aria-hidden="true" /><Input aria-label="Search records" value={search} onChange={(event) => setRecordFilter(setSearch, event.target.value)} placeholder="Search values, conditions, methods…" /></div>
             <Select value={recordMetric} onValueChange={(value) => setRecordFilter(setRecordMetric, value ?? 'all')}><SelectTrigger aria-label="Filter by indicator"><SelectValue>{recordMetric === 'all' ? 'All indicators' : METRICS[recordMetric as Metric].label}</SelectValue></SelectTrigger><SelectContent><SelectGroup><SelectItem value="all">All indicators</SelectItem>{METRIC_ORDER.map((metric) => <SelectItem key={metric} value={metric}>{METRICS[metric].label}</SelectItem>)}</SelectGroup></SelectContent></Select>
             <Input aria-label="From date" type="date" value={recordFrom} onChange={(event) => setRecordFilter(setRecordFrom, event.target.value)} /><Input aria-label="To date" type="date" value={recordTo} onChange={(event) => setRecordFilter(setRecordTo, event.target.value)} />
             <Select value={recordEpisode} onValueChange={(value) => setRecordFilter(setRecordEpisode, value ?? 'all')}><SelectTrigger aria-label="Filter by follow-up"><SelectValue>{selectedRecordEpisode ? `${METRICS[selectedRecordEpisodeOriginal?.metric ?? 'heart'].short} · ${fullDate(selectedRecordEpisode.openedAt, activeTimeZone)}` : 'All follow-ups'}</SelectValue></SelectTrigger><SelectContent><SelectGroup><SelectItem value="all">All follow-ups</SelectItem>{episodes.map((episode) => <SelectItem key={episode.id} value={episode.id}>{METRICS[observations.find((item) => item.id === episode.observationId)?.metric ?? 'heart'].short} · {fullDate(episode.openedAt, activeTimeZone)}</SelectItem>)}</SelectGroup></SelectContent></Select>
           </div>
-          <div className="record-selection-summary"><span>{visibleEvents.length} records</span><span>{selectedEventKeys.filter((key) => visibleEvents.some((event) => event.key === key)).length} selected</span><Button variant="ghost" size="sm" onClick={() => setExportSelection(visibleEvents.map((event) => event.key))}>Select all shown</Button><Button variant="ghost" size="sm" onClick={() => setExportSelection([])}>Clear</Button></div>
+          <div className="record-selection-summary"><span>{visibleEvents.length} shown</span><span>{selectedEvents.length} selected for export</span>{!selectedEvents.length && <small>Select the records you want to share.</small>}<Button variant="ghost" size="sm" disabled={!visibleEvents.length} onClick={() => setExportSelection(visibleEvents.map((event) => event.key))}>Select all shown</Button><Button variant="ghost" size="sm" disabled={!selectedEvents.length} onClick={() => setExportSelection([])}>Clear</Button></div>
           {visibleEvents.length ? <div className="record-timeline">{visibleEvents.map((event) => { const readingAssessment = event.kind === 'observation' ? assessObservation(event.item as Observation, dataset, now) : undefined; return <article className="record-event" key={event.key}>
-            <input aria-label={`Include ${event.title} in export`} type="checkbox" checked={selectedEventKeys.includes(event.key)} onChange={(change) => setExportSelection((current) => { const selectedKeys = new Set(current ?? visibleEvents.map((item) => item.key)); if (change.target.checked) selectedKeys.add(event.key); else selectedKeys.delete(event.key); return [...selectedKeys]; })} />
+            <input aria-label={`Include ${event.title} in export`} type="checkbox" checked={selectedEventKeys.includes(event.key)} onChange={(change) => setExportSelection((current) => { const selectedKeys = new Set(current ?? []); if (change.target.checked) selectedKeys.add(event.key); else selectedKeys.delete(event.key); return [...selectedKeys]; })} />
             <span className="record-event-marker" aria-hidden="true">{event.kind === 'observation' ? <MetricGlyph name={(event.item as Observation).metric} /> : event.kind === 'context' ? <SunMedium /> : <CalendarClock />}</span>
             <div><h2>{event.title}</h2><p>{event.detail}</p>{readingAssessment && ['urgent', 'attention', 'verify', 'stale'].includes(readingAssessment.state) && <Badge variant={readingAssessment.state === 'urgent' ? 'destructive' : 'attention'}>{readingAssessment.label}</Badge>}</div>
             <time>{fullDate(event.at, activeTimeZone)} · {new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', timeZone: activeTimeZone }).format(new Date(event.at))}</time>
@@ -838,24 +720,29 @@ export default function App() {
         </section>}
 
         {page === 'library' && <section className="page-view library-page">
-          <PageHeading title="Reference Library" description="Guides, spaceflight hazards, limits, and sources." />
-          <div className="library-search-wrap"><Search aria-hidden="true" /><Input aria-label="Search reference library" value={librarySearch} onChange={(event) => setLibrarySearch(event.target.value)} placeholder="Search indicators and spaceflight hazards…" /></div>
-          <section className="library-section"><h2>Five hazards of human spaceflight</h2><p className="library-section-intro">NASA’s hazards, with Tether’s available readings and limits.</p>
-            <div className="hazard-list">{libraryHazards.map((hazard) => <article className="hazard-entry" key={hazard.key}><span className="hazard-entry-icon"><HazardGlyph name={hazard.key} /></span><div><h3>{hazard.name}</h3><p>{hazard.text}</p><small>{hazard.limit}</small></div></article>)}</div>
-            {!libraryHazards.length && <p className="library-empty">No hazards match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}
-            <a className="library-source-link" href="https://www.nasa.gov/hrp/hazards/" target="_blank" rel="noreferrer">NASA Human Research Program · Five hazards <ArrowRight aria-hidden="true" /></a>
-          </section>
-          <section className="library-section"><h2>Measurement guides</h2><p className="library-section-intro">Why to measure, how to record, and what it cannot show.</p>
-            <div className="guide-list">{libraryGuides.map((metric) => <details className="guide-entry" key={metric}><summary><MetricGlyph name={metric} /><span>{METRICS[metric].label}</span><Badge variant="outline">{METRICS[metric].unit || 'Self report'}</Badge></summary><div className="guide-entry-content"><p><b>Why measure:</b> {METRICS[metric].why}</p><p><b>How to record:</b> {METRICS[metric].how}</p><p><b>Limits:</b> {METRICS[metric].cannot}</p><p><b>Mission procedure:</b> Not reviewed.</p><a href={METRICS[metric].sourceUrl} target="_blank" rel="noreferrer">{METRICS[metric].source} <ArrowRight aria-hidden="true" /></a><small>{GUIDANCE_VERSION} · {GUIDANCE_REVIEW_STATUS}</small></div></details>)}</div>
-            {!libraryGuides.length && <p className="library-empty">No measurement guides match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}
-            <a className="library-source-link" href="https://www.nasa.gov/hhp/human-system-risks/" target="_blank" rel="noreferrer">NASA Human System Risks · background only (not a measurement procedure) <ArrowRight aria-hidden="true" /></a>
-          </section>
-          <section className="library-section"><h2>Body systems</h2><p className="library-section-intro">The body model shows location, not health.</p><div className="body-system-list">{libraryBodySystems.map((item) => <article key={item.name}><strong>{item.name}</strong><span>{item.text}</span><small>Related readings: {item.metrics.length ? item.metrics.map((metric) => METRICS[metric].short).join(' · ') : 'Not assessed'}</small><div><a href={item.url} target="_blank" rel="noreferrer">{item.source} <ArrowRight aria-hidden="true" /></a><small>{GUIDANCE_VERSION} · {GUIDANCE_REVIEW_STATUS}</small></div></article>)}</div>{!libraryBodySystems.length && <p className="library-empty">No body systems match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}</section>
-          <p className="session-note">Educational background only. No reviewed mission procedures are available.</p>
+          <PageHeading title="Reference Library" description="Quick guides for readings, mission hazards, and body systems." />
+          <div className="library-search-wrap"><Search aria-hidden="true" /><Input aria-label={`Search ${librarySection === 'guides' ? 'measurement guides' : librarySection === 'hazards' ? 'spaceflight hazards' : 'body systems'}`} value={librarySearch} onChange={(event) => setLibrarySearch(event.target.value)} placeholder={`Search ${librarySection === 'guides' ? 'measurement guides' : librarySection === 'hazards' ? 'spaceflight hazards' : 'body systems'}…`} /></div>
+          <Tabs className="library-tabs" value={librarySection} onValueChange={(value) => { if (value) { setLibrarySection(value as typeof librarySection); setLibrarySearch(''); } }}>
+            <TabsList aria-label="Reference topics"><TabsTrigger value="guides">Measurement guides</TabsTrigger><TabsTrigger value="hazards">Spaceflight hazards</TabsTrigger><TabsTrigger value="systems">Body systems</TabsTrigger></TabsList>
+            <TabsContent value="guides"><section className="library-section"><div className="library-section-heading"><div><h2>Measurement guides</h2><p>Why to measure, how to record, and what a reading cannot show. Procedures have not been reviewed.</p></div><Badge variant="outline">{libraryGuides.length}</Badge></div>
+              <div className="guide-list">{libraryGuides.map((metric) => <details className="guide-entry" key={metric}><summary><MetricGlyph name={metric} /><span>{METRICS[metric].label}</span><Badge variant="outline">{METRICS[metric].unit || 'Self report'}</Badge></summary><div className="guide-entry-content"><p><b>Why:</b> {METRICS[metric].why}</p><p><b>How:</b> {METRICS[metric].how}</p><p><b>Limits:</b> {METRICS[metric].cannot}</p><a href={METRICS[metric].sourceUrl} target="_blank" rel="noreferrer">{METRICS[metric].source} <ArrowRight aria-hidden="true" /></a><small>{GUIDANCE_VERSION} · {GUIDANCE_REVIEW_STATUS}</small></div></details>)}</div>
+              {!libraryGuides.length && <p className="library-empty">No guides match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}
+            </section></TabsContent>
+            <TabsContent value="hazards"><section className="library-section"><div className="library-section-heading"><div><h2>Five hazards of human spaceflight</h2><p>NASA’s hazards, with the information Tether can record today.</p></div><Badge variant="outline">{libraryHazards.length}</Badge></div>
+              <div className="hazard-list">{libraryHazards.map((hazard) => <article className="hazard-entry" key={hazard.key}><span className="hazard-entry-icon"><HazardGlyph name={hazard.key} /></span><div><h3>{hazard.name}</h3><p>{hazard.text}</p><small>{hazard.limit}</small></div></article>)}</div>
+              {!libraryHazards.length && <p className="library-empty">No hazards match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}
+              <a className="library-source-link" href="https://www.nasa.gov/hrp/hazards/" target="_blank" rel="noreferrer">NASA Human Research Program · Five hazards <ArrowRight aria-hidden="true" /></a>
+            </section></TabsContent>
+            <TabsContent value="systems"><section className="library-section"><div className="library-section-heading"><div><h2>Body systems</h2><p>Reference anatomy shows location, not health.</p></div><Badge variant="outline">{libraryBodySystems.length}</Badge></div>
+              <div className="body-system-list">{libraryBodySystems.map((item) => <article key={item.name}><strong>{item.name}</strong><span>{item.text}</span><small>Related readings: {item.metrics.length ? item.metrics.map((metric) => METRICS[metric].short).join(' · ') : 'Not assessed'}</small></article>)}</div>
+              {!libraryBodySystems.length && <p className="library-empty">No body systems match “{librarySearch}”. <Button variant="ghost" size="sm" onClick={() => setLibrarySearch('')}>Clear search</Button></p>}
+              <a className="library-source-link" href="https://www.nasa.gov/hhp/human-system-risks/" target="_blank" rel="noreferrer">NASA Human System Risks · background only <ArrowRight aria-hidden="true" /></a><small className="library-review-note">{GUIDANCE_VERSION} · {GUIDANCE_REVIEW_STATUS}</small>
+            </section></TabsContent>
+          </Tabs>
         </section>}
 
         {page === 'settings' && <section className="page-view settings-page">
-          <PageHeading title="Settings" description="Mission setup and display." />
+          <PageHeading title="Settings" description="Mission context, reminders, and display preferences." />
           <div className="settings-list">
             <section className="settings-group"><h2>Mission context</h2>
               <FieldGroup>
@@ -868,25 +755,23 @@ export default function App() {
             <section className="settings-group"><h2>Interface</h2>
               <label className="settings-toggle-row" htmlFor="reminder-prompts"><span><b>Reminders on Today</b><small>Show an in-app reminder when a follow-up is due. Tether must be open.</small></span><Switch id="reminder-prompts" checked={reminders} onCheckedChange={setReminders} aria-label="Reminder prompts on Today" /></label>
               <label className="settings-toggle-row" htmlFor="reduce-motion"><span><b>Reduce motion</b><small>Limit page and camera transitions.</small></span><Switch id="reduce-motion" checked={compactMotion} onCheckedChange={setCompactMotion} aria-label="Reduce motion" /></label>
-              <label className="settings-toggle-row" htmlFor="show-milo"><span><b>Milo helper</b><small>Show Milo in the navigation rail.</small></span><Switch id="show-milo" checked={showMilo} onCheckedChange={setShowMilo} aria-label="Show Milo helper" /></label>
               <div className="settings-readonly"><b>Units</b><span>bpm · mmHg · mg/dL · °C · hours. Unit conversion is unavailable.</span></div>
             </section>
             <section className="settings-group"><h2>Data mode</h2>
-              <Field><FieldLabel htmlFor="active-dataset">Readings</FieldLabel><Select value={dataset} onValueChange={(value) => { if (value) { setDataset(value as Dataset); setSelectedObservation(''); } }}><SelectTrigger id="active-dataset"><SelectValue>{dataset === 'demo' ? 'Current mission' : 'My readings'}</SelectValue></SelectTrigger><SelectContent><SelectGroup><SelectItem value="demo">Current mission</SelectItem><SelectItem value="personal">My readings</SelectItem></SelectGroup></SelectContent></Select><small>Readings reset when you close the app.</small></Field>
-              <Button variant="outline" onClick={() => setResetDemoOpen(true)}><RotateCcw data-icon="inline-start" /> Restore starting readings</Button>
+              <Field><FieldLabel htmlFor="active-dataset">Readings</FieldLabel><Select value={dataset} onValueChange={(value) => { if (value) { setDataset(value as Dataset); setSelectedObservation(''); } }}><SelectTrigger id="active-dataset"><SelectValue>{dataset === 'demo' ? 'Current mission' : 'My readings'}</SelectValue></SelectTrigger><SelectContent><SelectGroup><SelectItem value="demo">Current mission</SelectItem><SelectItem value="personal">My readings</SelectItem></SelectGroup></SelectContent></Select><small>Entries are kept until Tether closes.</small>{dataset === 'demo' && <small>Simulation profile: fit 40-year-old male. Targets are illustrative.</small>}</Field>
             </section>
           </div>
         </section>}
 
         {page === 'medical' && <section className="page-view medical-support-page">
-          <PageHeading title="Medical support" description="Review mission guidance or prepare a report to share." />
-          <Card className="medical-support-card"><CardHeader><span className="medical-support-icon"><LifeBuoy aria-hidden="true" /></span><CardTitle>Mission instructions unavailable</CardTitle><CardDescription>Tether cannot contact your medical team.</CardDescription></CardHeader>
+          <PageHeading title="Medical support" description="Check available instructions and prepare a handoff." />
+          <Card className="medical-support-card"><CardHeader><span className="medical-support-icon"><LifeBuoy aria-hidden="true" /></span><div><CardTitle>Mission instructions unavailable</CardTitle><CardDescription>Tether cannot contact your medical team.</CardDescription></div></CardHeader>
             <CardContent>
               <p>For health concerns, follow your mission’s approved medical plan.</p>
-              <Field><FieldLabel htmlFor="handoff-episode">Reading review to include</FieldLabel><Select value={activeHandoffEpisode?.id ?? 'none'} onValueChange={(value) => { setHandoffEpisode(value === 'none' ? '' : value ?? ''); setHandoffError(''); }}><SelectTrigger id="handoff-episode"><SelectValue placeholder="Choose a review">{activeHandoffEpisode ? `${METRICS[observations.find((item) => item.id === activeHandoffEpisode.observationId)?.metric ?? 'heart'].short} · ${fullDate(activeHandoffEpisode.openedAt, activeTimeZone)}` : episodes.length ? 'Choose a review' : 'No reading reviews yet'}</SelectValue></SelectTrigger><SelectContent><SelectGroup>{episodes.length ? episodes.map((episode) => { const original = observations.find((item) => item.id === episode.observationId); return <SelectItem key={episode.id} value={episode.id}>{original ? METRICS[original.metric].short : 'Reading'} · {fullDate(episode.openedAt, activeTimeZone)}</SelectItem>; }) : <SelectItem value="none">No reading reviews yet</SelectItem>}</SelectGroup></SelectContent></Select><small>Only this review and its linked readings are included.</small></Field>
+              <Field><FieldLabel htmlFor="handoff-episode">Reading review to include</FieldLabel><Select value={activeHandoffEpisode?.id ?? null} onValueChange={(value) => { setHandoffEpisode(value ?? ''); setHandoffError(''); }}><SelectTrigger id="handoff-episode"><SelectValue placeholder={episodes.length ? 'Choose a review' : 'No reading reviews yet'}>{activeHandoffEpisode ? `${METRICS[observations.find((item) => item.id === activeHandoffEpisode.observationId)?.metric ?? 'heart'].short} · ${fullDate(activeHandoffEpisode.openedAt, activeTimeZone)}` : undefined}</SelectValue></SelectTrigger><SelectContent><SelectGroup>{episodes.length ? episodes.map((episode) => { const original = observations.find((item) => item.id === episode.observationId); return <SelectItem key={episode.id} value={episode.id}>{original ? METRICS[original.metric].short : 'Reading'} · {fullDate(episode.openedAt, activeTimeZone)}</SelectItem>; }) : <SelectItem value="none" disabled>No reading reviews yet</SelectItem>}</SelectGroup></SelectContent></Select><small>Choose the reading and its linked follow-up.</small></Field>
               {activeHandoffEpisode && handoffData && <div className="handoff-contents"><strong>Included in this episode</strong>{handoffData.observations.map((item) => <span key={item.id}><MetricGlyph name={item.metric} /> {METRICS[item.metric].short} · {formatValue(item)} · {fullDate(item.at, activeTimeZone)}</span>)}{handoffData.tasks.map((item) => <span key={item.id}><CalendarClock aria-hidden="true" /> {item.title} · {item.status}</span>)}{handoffData.contexts.map((item) => <span key={item.id}><SunMedium aria-hidden="true" /> {item.kind} · {item.value}</span>)}</div>}
               {handoffError && <Alert variant="destructive" role="alert"><Info aria-hidden="true" /><AlertDescription>{handoffError}</AlertDescription></Alert>}
-              <div className="medical-actions"><Button onClick={prepareHandoff}><FileHeart data-icon="inline-start" /> Preview report</Button><Button variant="outline" onClick={() => navigate('library')}>Open references<ArrowRight data-icon="inline-end" /></Button></div>
+              <div className="medical-actions"><Button disabled={!activeHandoffEpisode || !handoffData} onClick={prepareHandoff}><FileHeart data-icon="inline-start" /> Preview report</Button><Button variant="outline" onClick={() => navigate('library')}>Open references<ArrowRight data-icon="inline-end" /></Button></div>
             </CardContent><CardFooter><small>The report isn’t sent. Share it through your mission process.</small></CardFooter>
           </Card>
         </section>}
@@ -913,7 +798,6 @@ export default function App() {
         <DialogFooter><Button variant="outline" onClick={() => setHandoffPreviewOpen(false)}>Cancel</Button><Button variant="secondary" onClick={() => exportHandoff('json')}>Export JSON</Button><Button onClick={() => exportHandoff('html')}>Export HTML</Button></DialogFooter></>}
     </DialogContent></Dialog>
 
-    <Dialog open={resetDemoOpen} onOpenChange={setResetDemoOpen}><DialogContent><DialogHeader><DialogTitle>Restore starting readings?</DialogTitle><DialogDescription>This restores the initial mission readings and follow-up. My readings stay separate.</DialogDescription></DialogHeader><DialogFooter><Button variant="outline" onClick={() => setResetDemoOpen(false)}>Cancel</Button><Button variant="destructive" onClick={resetDemo}><RotateCcw data-icon="inline-start" /> Restore readings</Button></DialogFooter></DialogContent></Dialog>
 
     <div className="toast-region" aria-live="polite" aria-atomic="true">{toast && <div className="toast-message"><Check aria-hidden="true" />{toast}</div>}</div>
   </div>;

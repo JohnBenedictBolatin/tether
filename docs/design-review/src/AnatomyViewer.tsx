@@ -5,8 +5,9 @@ import { OrbitControls as OrbitControlsImpl } from 'three/addons/controls/OrbitC
 import * as THREE from 'three';
 import { Minus, Plus } from 'lucide-react';
 import { Button } from './components/ui/button';
+import { MetricGlyph } from './TetherIcons';
 import { anatomyManifest, metricNames, structureForNode } from './anatomyManifest';
-import type { AssessmentState } from './assessment';
+import { bodyTargetForMetric, type AssessmentState } from './assessment';
 import './anatomy.css';
 
 type MetricKey = 'heart' | 'bp' | 'glucose' | 'temperature' | 'sleep' | 'mood';
@@ -17,18 +18,45 @@ const layers = [
   { id: 'muscular', label: 'Muscles' }, { id: 'cardiovascular', label: 'Cardiovascular' },
   { id: 'respiratory', label: 'Respiratory' }, { id: 'digestive', label: 'Digestive' },
 ] as const;
+const ANATOMY_ASSET_REVISION = '20261031a';
 
 type ZoomRequest = { sequence: number; direction: 'in' | 'out' };
 type FrameTarget = { center: THREE.Vector3; size: THREE.Vector3 } | null;
+type TurnRef = { current: THREE.Group | null };
 
-function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoomRequest, compact }: { resetKey: number; face: 'front' | 'back'; focus: FrameTarget; frameTarget: FrameTarget; reducedMotion: boolean; zoomRequest: ZoomRequest; compact: boolean }) {
+function installBodyContour(material: THREE.MeshStandardMaterial) {
+  if (material.userData.tetherBodyContour) return;
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.tetherContourColor = { value: new THREE.Color('#9adab8') };
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vTetherViewNormal;')
+      .replace('#include <beginnormal_vertex>', '#include <beginnormal_vertex>\nvTetherViewNormal = normalize(normalMatrix * objectNormal);');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', '#include <common>\nuniform vec3 tetherContourColor;\nvarying vec3 vTetherViewNormal;')
+      .replace('#include <color_fragment>', `#include <color_fragment>
+        float tetherRim = 1.0 - abs(normalize(vTetherViewNormal).z);
+        float tetherContour = smoothstep(0.94, 0.985, tetherRim);
+        diffuseColor.rgb = mix(diffuseColor.rgb, tetherContourColor, tetherContour);
+        diffuseColor.a = mix(diffuseColor.a, 0.9, tetherContour);`);
+  };
+  material.customProgramCacheKey = () => 'tether-body-contour-v1';
+  material.userData.tetherBodyContour = true;
+  material.needsUpdate = true;
+}
+
+function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoomRequest, compact, autoTurn }: { resetKey: number; face: 'front' | 'back'; focus: FrameTarget; frameTarget: FrameTarget; reducedMotion: boolean; zoomRequest: ZoomRequest; compact: boolean; autoTurn: TurnRef }) {
   const { camera, gl, invalidate } = useThree();
   const controls = useRef<OrbitControlsImpl | null>(null);
+  const trackedPoint = useRef<{ local: THREE.Vector3; previousWorld: THREE.Vector3 } | null>(null);
   useEffect(() => {
     const orbit = new OrbitControlsImpl(camera, gl.domElement);
-    orbit.enableDamping = !reducedMotion;
+    orbit.enabled = !compact;
+    orbit.enableRotate = !compact;
+    orbit.enablePan = !compact;
+    orbit.enableZoom = !compact;
+    orbit.enableDamping = !compact && !reducedMotion;
     orbit.dampingFactor = 0.075;
-    orbit.minDistance = 1.4;
+    orbit.minDistance = compact ? 0.65 : 1.4;
     orbit.maxDistance = 8.5;
     orbit.minPolarAngle = 0.22;
     orbit.maxPolarAngle = Math.PI - 0.22;
@@ -37,7 +65,7 @@ function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoo
     orbit.addEventListener('change', () => invalidate());
     orbit.update();
     return () => { orbit.dispose(); controls.current = null; };
-  }, [camera, gl, invalidate, reducedMotion]);
+  }, [camera, gl, invalidate, reducedMotion, compact]);
   useEffect(() => {
     if (!controls.current) return;
     const center = frameTarget?.center ?? new THREE.Vector3(0, 0.95, 0);
@@ -45,7 +73,7 @@ function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoo
     const fov = THREE.MathUtils.degToRad((camera as THREE.PerspectiveCamera).fov ?? 31);
     const aspect = gl.domElement.clientWidth / Math.max(gl.domElement.clientHeight, 1);
     const size = frameTarget?.size ?? new THREE.Vector3(1.4, 3.25, 0.7);
-    const fit = compact && gl.domElement.clientHeight < 160 ? 0.9 : 1.2;
+    const fit = compact ? gl.domElement.clientHeight < 160 ? 0.9 : 1.02 : 1.2;
     const distance = Math.max(size.y / (2 * Math.tan(fov / 2)), size.x / (2 * Math.tan(fov / 2) * aspect), size.z) * fit;
     controls.current.target.copy(center);
     camera.position.copy(center).addScaledVector(direction, distance);
@@ -61,13 +89,23 @@ function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoo
       focus.size.y / (2 * Math.tan(fov / 2)),
       focus.size.x / (2 * Math.tan(fov / 2) * aspect),
       focus.size.z,
-      1.4,
-    ) * 1.08;
+      compact ? 1.05 : 1.4,
+    ) * (compact ? 0.94 : 1.08);
     const destination = focus.center.clone().add(direction.multiplyScalar(distance));
-    if (reducedMotion) camera.position.copy(destination);
+    // The Today panel is a fixed instrument view: frame the selected area
+    // exactly so the anatomy never lands halfway between body and organ views.
+    if (compact || reducedMotion) camera.position.copy(destination);
     else camera.position.lerp(destination, 0.82);
     controls.current.update();
-  }, [focus, camera, gl, reducedMotion]);
+    if (compact && autoTurn.current) {
+      autoTurn.current.updateWorldMatrix(true, false);
+      const inverse = autoTurn.current.matrixWorld.clone().invert();
+      trackedPoint.current = { local: focus.center.clone().applyMatrix4(inverse), previousWorld: focus.center.clone() };
+    } else {
+      trackedPoint.current = null;
+    }
+    invalidate();
+  }, [focus, camera, gl, reducedMotion, compact, invalidate, autoTurn]);
   useEffect(() => {
     if (!zoomRequest.sequence || !controls.current) return;
     if (zoomRequest.direction === 'in') controls.current.dollyIn(1.15);
@@ -76,6 +114,7 @@ function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoo
     invalidate();
   }, [zoomRequest, invalidate]);
   useEffect(() => {
+    if (compact) return;
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement;
       if (target.matches('button,input,select,textarea,[contenteditable="true"]')) return;
@@ -88,21 +127,43 @@ function CameraControls({ resetKey, face, focus, frameTarget, reducedMotion, zoo
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [invalidate]);
-  useFrame(() => { if (controls.current?.update()) invalidate(); });
+  }, [invalidate, compact]);
+  useFrame(() => {
+    const point = trackedPoint.current;
+    const turn = autoTurn.current;
+    if (compact && !reducedMotion && point && turn && controls.current) {
+      turn.updateWorldMatrix(true, false);
+      const nextWorld = point.local.clone().applyMatrix4(turn.matrixWorld);
+      const delta = nextWorld.sub(point.previousWorld);
+      if (delta.lengthSq() > 1e-12) {
+        controls.current.target.add(delta);
+        camera.position.add(delta);
+        point.previousWorld.copy(point.local.clone().applyMatrix4(turn.matrixWorld));
+        controls.current.update();
+      }
+      invalidate();
+      return;
+    }
+    if (controls.current?.update()) invalidate();
+  });
   return null;
 }
-function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTarget, surfaceAlpha, isolated, focusKey, highlightState, priorityStructure, priorityState, assetAttempt }: {
+function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTarget, surfaceAlpha, isolated, focusKey, highlightState, priorityStructure, priorityState, assetAttempt, compact, reducedMotion, autoTurn }: {
   visibleLayers: Set<string>; selected: string; onSelect: (id: string, metricKeys: string[]) => void;
-  onFocus: (frame: FrameTarget) => void; onFrame: (center: THREE.Vector3, size: THREE.Vector3) => void; frameTarget: FrameTarget; surfaceAlpha: number; isolated: boolean; focusKey: number; highlightState?: AssessmentState; priorityStructure?: string; priorityState?: AssessmentState; assetAttempt: number;
+  onFocus: (frame: FrameTarget) => void; onFrame: (center: THREE.Vector3, size: THREE.Vector3) => void; frameTarget: FrameTarget; surfaceAlpha: number; isolated: boolean; focusKey: number; highlightState?: AssessmentState; priorityStructure?: string; priorityState?: AssessmentState; assetAttempt: number; compact: boolean; reducedMotion: boolean; autoTurn: TurnRef;
 }) {
-  const assetUrl = (path: string) => `${path}?attempt=${assetAttempt}`;
-  const [bodyAsset, heartAsset, lungsAsset] = useLoader(GLTFLoader, [assetUrl('/assets/anatomy/reference-body.glb'), assetUrl('/assets/anatomy/heart.glb'), assetUrl('/assets/anatomy/lungs.glb')]);
+  const assetUrl = (path: string) => `${path}?rev=${ANATOMY_ASSET_REVISION}&attempt=${assetAttempt}`;
+  const [bodyAsset] = useLoader(GLTFLoader, [assetUrl('/assets/anatomy/reference-body.glb')]);
   const invalidate = useThree((state) => state.invalidate);
   const body = useMemo(() => bodyAsset.scene.clone(true), [bodyAsset]);
-  const heart = useMemo(() => heartAsset.scene.clone(true), [heartAsset]);
-  const lungs = useMemo(() => lungsAsset.scene.clone(true), [lungsAsset]);
   const model = useRef<THREE.Group>(null);
+  useFrame(({ clock }) => {
+    if (!compact || reducedMotion || !autoTurn.current) return;
+    // Rotate around the converted anatomical vertical axis; the camera tracks
+    // the focused point so this motion does not pull it off-center.
+    autoTurn.current.rotation.z = Math.sin(clock.elapsedTime * 0.11) * 0.22;
+    invalidate();
+  });
   useLayoutEffect(() => {
     const rawBounds = new THREE.Box3();
     body.traverse((node) => {
@@ -120,21 +181,11 @@ function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTar
       model.current.position.set(-rotatedCenter.x, 0.95 - rotatedCenter.y, -rotatedCenter.z);
       model.current.updateMatrixWorld(true);
     }
-    lungs.traverse((node) => { if (node instanceof THREE.Mesh) node.name = `lungs|${node.name}`; });
     body.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
       const structure = structureForNode(node.name);
       node.userData.tetherStructure = structure?.id ?? 'other';
       node.userData.tetherLayer = structure?.system ?? 'other';
-      node.geometry.computeVertexNormals();
-      const source = Array.isArray(node.material) ? node.material : [node.material];
-      node.userData.tetherMaterials = source.map((material) => material.clone());
-      node.material = node.userData.tetherMaterials.length === 1 ? node.userData.tetherMaterials[0] : node.userData.tetherMaterials;
-    });
-    for (const organ of [heart, lungs]) organ.traverse((node) => {
-      if (!(node instanceof THREE.Mesh)) return;
-      node.userData.tetherStructure = structureForNode(node.name)?.id ?? (node.name.startsWith('lungs|') ? 'lungs' : 'heart');
-      node.userData.tetherLayer = node.userData.tetherStructure === 'lungs' ? 'respiratory' : 'cardiovascular';
       node.geometry.computeVertexNormals();
       const source = Array.isArray(node.material) ? node.material : [node.material];
       node.userData.tetherMaterials = source.map((material) => material.clone());
@@ -146,25 +197,31 @@ function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTar
       if (!bounds.isEmpty()) onFrame(bounds.getCenter(new THREE.Vector3()), bounds.getSize(new THREE.Vector3()));
     }
     invalidate();
-  }, [body, heart, lungs, invalidate, onFrame]);
+  }, [body, invalidate, onFrame]);
   useEffect(() => {
-    for (const scene of [body, heart, lungs]) scene.traverse((node) => {
+    body.traverse((node) => {
       if (!(node instanceof THREE.Mesh) || node.userData.tetherOutline) return;
       const structure = structureForNode(node.name);
       const layer = structure?.system ?? 'other';
       const isSelected = !!selected && node.userData.tetherStructure === selected;
       const isPriorityTarget = !!priorityStructure && node.userData.tetherStructure === priorityStructure;
-      node.visible = (visibleLayers.has(layer) || layer === 'other') && (!isolated || isSelected || isPriorityTarget);
+      // The compact Today view is a focused reading view: retain the faint
+      // body surface for orientation, but render only the selected structure.
+      // Full layer browsing remains available in the dedicated Body view.
+      node.visible = compact
+        ? layer === 'surface' || isSelected
+        : (visibleLayers.has(layer) || layer === 'other') && (!isolated || isSelected || isPriorityTarget);
       const skin = layer === 'surface';
       const materials = node.userData.tetherMaterials as THREE.Material[] | undefined;
       materials?.forEach((material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
-          const baseColor = skin ? '#9fb2c0' : layer === 'skeleton' ? '#d3c5b2' : layer === 'muscular' ? '#a97882' : layer === 'cardiovascular' ? '#c46f82' : layer === 'respiratory' ? '#72a6b4' : '#b79c7c';
-          const selectedColor = highlightState === 'urgent' ? '#e85e67' : highlightState === 'attention' ? '#f0ad39' : '#3988c4';
-          const priorityColor = priorityState === 'urgent' ? '#e85e67' : '#f0ad39';
+          const baseColor = skin ? '#a7b5aa' : layer === 'skeleton' ? '#aaa79b' : layer === 'muscular' ? '#987a76' : layer === 'cardiovascular' ? '#ad7771' : layer === 'respiratory' ? '#78947f' : '#9b907c';
+          const selectedColor = highlightState === 'urgent' ? '#d97772' : ['attention', 'verify', 'stale'].includes(highlightState ?? '') ? '#e0a452' : '#78c6a4';
+          const priorityColor = priorityState === 'urgent' ? '#d97772' : '#e0a452';
           const numericPriority = isPriorityTarget && (priorityState === 'urgent' || priorityState === 'attention');
           const fillHighlight = node.userData.tetherStructure !== 'skin' && (numericPriority || isSelected);
           const fillColor = numericPriority ? priorityColor : selectedColor;
+          if (skin && compact) installBodyContour(material);
           material.color.set(fillHighlight ? fillColor : baseColor);
           material.emissive.set(fillHighlight ? fillColor : '#000000');
           material.emissiveIntensity = fillHighlight ? (numericPriority ? priorityState === 'urgent' ? 1.8 : 1.35 : 0.62) : 0;
@@ -178,20 +235,21 @@ function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTar
       });
     });
     invalidate();
-  }, [body, heart, lungs, visibleLayers, selected, priorityStructure, priorityState, surfaceAlpha, isolated, invalidate, highlightState]);
+  }, [body, visibleLayers, selected, priorityStructure, priorityState, surfaceAlpha, isolated, invalidate, highlightState, compact]);
   useEffect(() => {
     const outlines: Array<{ parent: THREE.Mesh; outline: THREE.Mesh }> = [];
-    for (const scene of [body, heart, lungs]) scene.traverse((node) => {
+    body.traverse((node) => {
       if (!(node instanceof THREE.Mesh) || node.userData.tetherOutline) return;
       const isSelected = !!selected && node.userData.tetherStructure === selected;
       const isPriorityTarget = !!priorityStructure && node.userData.tetherStructure === priorityStructure;
+      const skinTarget = node.userData.tetherStructure === 'skin';
+      if (compact && skinTarget) return;
       if (!isSelected && !isPriorityTarget) return;
       const priorityHasCue = isPriorityTarget && ['urgent', 'attention', 'verify'].includes(priorityState ?? '');
       const color = priorityHasCue
-        ? priorityState === 'urgent' ? '#e85e67' : '#f0ad39'
-        : highlightState === 'urgent' ? '#e85e67' : highlightState === 'attention' ? '#f0ad39' : '#3988c4';
-      const skinTarget = node.userData.tetherStructure === 'skin';
-      const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, transparent: true, opacity: skinTarget ? priorityHasCue ? 0.34 : 0.2 : priorityState === 'verify' && isPriorityTarget ? 0.88 : 0.82, depthWrite: false });
+        ? priorityState === 'urgent' ? '#d97772' : '#e0a452'
+        : isSelected ? highlightState === 'urgent' ? '#d97772' : ['attention', 'verify', 'stale'].includes(highlightState ?? '') ? '#e0a452' : '#78c6a4' : '#9adab8';
+      const material = new THREE.MeshBasicMaterial({ color, side: THREE.BackSide, transparent: true, opacity: skinTarget ? priorityHasCue ? 0.4 : 0.3 : priorityState === 'verify' && isPriorityTarget ? 0.88 : 0.82, depthWrite: false });
       const outline = new THREE.Mesh(node.geometry, material);
       outline.name = `${node.name}-tether-highlight`;
       outline.scale.setScalar(skinTarget ? 1.012 : priorityHasCue ? 1.16 : 1.055);
@@ -208,21 +266,35 @@ function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTar
       outlines.forEach(({ parent, outline }) => { parent.remove(outline); (outline.material as THREE.Material).dispose(); });
       invalidate();
     };
-  }, [body, heart, lungs, selected, highlightState, priorityStructure, priorityState, invalidate]);
+  }, [body, selected, highlightState, priorityStructure, priorityState, compact, invalidate]);
   useEffect(() => {
     if (!focusKey) return;
+    if (compact && selected === 'vessels' && frameTarget) {
+      const center = frameTarget.center.clone();
+      const size = frameTarget.size.clone();
+      center.y += size.y * 0.18;
+      onFocus({ center, size: new THREE.Vector3(size.x * 0.52, size.y * 0.32, size.z * 0.72) });
+      return;
+    }
     if (selected === 'skin' && frameTarget) {
       onFocus(frameTarget);
       return;
     }
+    if (!selected && compact && frameTarget) {
+      const size = frameTarget.size.clone();
+      const center = frameTarget.center.clone();
+      center.y += size.y * 0.39;
+      onFocus({ center, size: new THREE.Vector3(size.x * 0.3, size.y * 0.22, size.z * 0.48) });
+      return;
+    }
     const bounds = new THREE.Box3();
-    for (const scene of [body, heart, lungs]) scene.traverse((node) => {
+    body.traverse((node) => {
       if (!(node instanceof THREE.Mesh) || !node.visible || node.userData.tetherStructure !== selected) return;
       node.updateWorldMatrix(true, false);
       bounds.expandByObject(node);
     });
     if (!bounds.isEmpty()) onFocus({ center: bounds.getCenter(new THREE.Vector3()), size: bounds.getSize(new THREE.Vector3()) });
-  }, [body, heart, lungs, selected, focusKey, onFocus, frameTarget]);
+  }, [body, selected, focusKey, onFocus, frameTarget, compact]);
   const handleClick = useCallback((event: ThreeEvent<MouseEvent>) => {
     if (event.delta > 4) return;
     event.stopPropagation();
@@ -237,10 +309,10 @@ function Anatomy({ visibleLayers, selected, onSelect, onFocus, onFrame, frameTar
     if (!structure) return;
     onSelect(structure.id, structure.metricKeys);
   }, [onSelect]);
-  return <group ref={model} onClick={handleClick}>
-    <primitive object={body} dispose={null} />
-    <group position={[30, -170, 1205]} rotation={[Math.PI / 2, 0, 0]} scale={39}><primitive object={heart} dispose={null} /></group>
-    <group position={[0, -132, 1260]} rotation={[Math.PI / 2, 0, 0]} scale={64}><primitive object={lungs} dispose={null} /></group>
+  return <group ref={model} onClick={compact ? undefined : handleClick}>
+    <group ref={autoTurn} position={[0, 0.95, 0]}>
+      <group position={[0, -0.95, 0]}><primitive object={body} dispose={null} /></group>
+    </group>
   </group>;
 }
 
@@ -272,26 +344,32 @@ function ModelReady({ onLoaded }: { onLoaded: () => void }) {
 function ModelScene({ selected, visibleLayers, onSelect, onFocus, surfaceAlpha, face, resetKey, focusKey, zoomRequest, onLoaded, isolated, reducedMotion, highlightState, priorityStructure, priorityState, assetAttempt, compact }: any) {
   const [focus, setFocus] = useState<FrameTarget>(null);
   const [frameTarget, setFrameTarget] = useState<FrameTarget>(null);
+  const autoTurn = useRef<THREE.Group>(null);
   const reportFrame = useCallback((center: THREE.Vector3, size: THREE.Vector3) => {
     setFrameTarget((current) => current && current.center.distanceToSquared(center) < 1e-8 && current.size.distanceToSquared(size) < 1e-8 ? current : { center: center.clone(), size: size.clone() });
   }, []);
   useEffect(() => { if (focus) onFocus(focus); }, [focus, onFocus]);
   return <>
     <ModelReady onLoaded={onLoaded} />
-    <ambientLight intensity={1.25} />
-    <directionalLight position={[4, 6, 4]} intensity={2.15} color="#d7f2f5" />
-    <directionalLight position={[-4, 2, -3]} intensity={1.15} color="#4bbac8" />
-    <directionalLight position={[0, 4, 5]} intensity={0.45} color="#fff1e6" />
-    <Anatomy visibleLayers={visibleLayers} selected={selected} onSelect={onSelect} onFocus={setFocus} onFrame={reportFrame} frameTarget={frameTarget} surfaceAlpha={surfaceAlpha} isolated={isolated} focusKey={focusKey} highlightState={highlightState} priorityStructure={priorityStructure} priorityState={priorityState} assetAttempt={assetAttempt} />
-    <CameraControls resetKey={resetKey} face={face} focus={focus} frameTarget={frameTarget} reducedMotion={reducedMotion} zoomRequest={zoomRequest} compact={compact} />
+    <ambientLight intensity={1.2} />
+    <directionalLight position={[4, 6, 4]} intensity={1.9} color="#e5e9dd" />
+    <directionalLight position={[-4, 2, -3]} intensity={0.85} color="#91b99d" />
+    <directionalLight position={[0, 4, 5]} intensity={0.38} color="#d8be8f" />
+    <Anatomy visibleLayers={visibleLayers} selected={selected} onSelect={onSelect} onFocus={setFocus} onFrame={reportFrame} frameTarget={frameTarget} surfaceAlpha={surfaceAlpha} isolated={isolated} focusKey={focusKey} highlightState={highlightState} priorityStructure={priorityStructure} priorityState={priorityState} assetAttempt={assetAttempt} compact={compact} reducedMotion={reducedMotion} autoTurn={autoTurn} />
+    <CameraControls resetKey={resetKey} face={face} focus={focus} frameTarget={frameTarget} reducedMotion={reducedMotion} zoomRequest={zoomRequest} compact={compact} autoTurn={autoTurn} />
   </>;
 }
 
 export function AnatomyViewer({ selectedMetric, selectedStructure, focusRequestKey, reducedMotion, onMetric, onStructure, highlightState, priorityStructure, priorityState, compact = false }: ViewerProps) {
-  const selected = selectedStructure;
+  // Today follows its selected reading, never a stale anatomy selection from
+  // the separate Body view. This prevents an old skeleton selection from
+  // tinting the skull amber when the current reading concerns another system.
+  const selected = compact
+    ? selectedMetric ? bodyTargetForMetric(selectedMetric) ?? '' : ''
+    : selectedStructure;
   const [visibleLayers, setVisibleLayers] = useState<Set<string>>(new Set(['surface', 'cardiovascular', 'respiratory', 'digestive']));
   const [isolated, setIsolated] = useState(false);
-  const [surfaceAlpha, setSurfaceAlpha] = useState(compact ? 0.3 : 0.5);
+  const [surfaceAlpha, setSurfaceAlpha] = useState(compact ? 0.16 : 0.5);
   const [resetKey, setResetKey] = useState(0);
   const [focusKey, setFocusKey] = useState(0);
   const [zoomRequest, setZoomRequest] = useState<ZoomRequest>({ sequence: 0, direction: 'in' });
@@ -300,6 +378,10 @@ export function AnatomyViewer({ selectedMetric, selectedStructure, focusRequestK
   const [modelLoaded, setModelLoaded] = useState(false);
   const [modelError, setModelError] = useState(false);
   const info = anatomyManifest.find((item) => item.id === selected);
+  const focusTitle = selected === 'skin' ? 'Body surface' : info?.label ?? (selectedMetric === 'sleep' ? 'Sleep check-in' : selectedMetric === 'mood' ? 'Mood check-in' : selectedMetric === 'bp' ? 'Blood vessels' : selectedMetric === 'heart' ? 'Heart' : 'Whole body');
+  const focusDetail = selectedMetric ? metricNames[selectedMetric] : 'Reference anatomy';
+  const focusState = priorityStructure === selected ? priorityState : highlightState;
+  const focusStatus = focusState ? ({ urgent: 'Urgent', attention: 'Review', verify: 'Check conditions', within: 'Within limits', unconfigured: 'Limits not set', missing: 'No reading', stale: 'Out of date' } as const)[focusState] : '';
   const selectedSystem = info?.system;
   const markModelLoaded = useCallback(() => setModelLoaded(true), []);
   const retryModel = useCallback(() => {
@@ -317,16 +399,19 @@ export function AnatomyViewer({ selectedMetric, selectedStructure, focusRequestK
     if (!metricKeys.length || focusRequestKey === undefined) setFocusKey((x) => x + 1);
   };
   useEffect(() => {
-    if (!focusRequestKey) return;
+    if (!focusRequestKey && !compact) return;
     if (selected && selectedSystem) {
       setVisibleLayers((current) => current.has(selectedSystem) ? current : new Set(current).add(selectedSystem));
+      setFocusKey((x) => x + 1);
+    } else if (compact) {
       setFocusKey((x) => x + 1);
     } else {
       setIsolated(false);
       setResetKey((x) => x + 1);
     }
-  }, [focusRequestKey, selected, selectedSystem]);
+  }, [focusRequestKey, selected, selectedSystem, compact]);
   useEffect(() => {
+    if (compact) return;
     const keydown = (event: KeyboardEvent) => {
       const node = event.target as HTMLElement;
       if (node.matches('button,input,select,textarea')) return;
@@ -336,16 +421,20 @@ export function AnatomyViewer({ selectedMetric, selectedStructure, focusRequestK
     };
     window.addEventListener('keydown', keydown);
     return () => window.removeEventListener('keydown', keydown);
-  }, []);
+  }, [compact]);
   return <div className={`anatomy-shell ${compact ? 'compact-anatomy' : ''}`}>
     {!compact && <div className="anatomy-header"><div><span className="anatomy-title">Reference anatomy</span><span className="anatomy-tag"><i /> 3D MODEL</span></div><span className="anatomy-hint">Drag to rotate <b>·</b> Scroll or use zoom buttons</span></div>}
     <div className="anatomy-stage">
-      <ModelBoundary key={assetAttempt} onRetry={retryModel}><Canvas frameloop="demand" camera={{ position: [3.7, 1.35, 5.9], fov: 31 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
-        <color attach="background" args={['#171d23']} />
+      <ModelBoundary key={assetAttempt} onRetry={retryModel}><Canvas aria-hidden={compact} frameloop="demand" camera={{ position: [3.7, 1.35, 5.9], fov: 31 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
         <CanvasModelBoundary onError={(error) => { console.error('Unable to load the offline anatomy assets', error); setModelError(true); }}>
         <Suspense fallback={null}><ModelScene selected={selected} visibleLayers={visibleLayers} onSelect={selectStructure} onFocus={() => {}} surfaceAlpha={surfaceAlpha} face={face} resetKey={resetKey} focusKey={focusKey} zoomRequest={zoomRequest} onLoaded={markModelLoaded} isolated={isolated} reducedMotion={reducedMotion} highlightState={highlightState} priorityStructure={priorityStructure} priorityState={priorityState} assetAttempt={assetAttempt} compact={compact} /></Suspense>
         </CanvasModelBoundary>
       </Canvas></ModelBoundary>
+      {compact && <div className="anatomy-focus-badge" data-state={focusState ?? 'unconfigured'} role="status" aria-live="polite">
+        <MetricGlyph name={selectedMetric ?? 'heart'} size={24} />
+        <span className="anatomy-focus-copy"><strong>{focusTitle}</strong><small>{focusDetail}</small></span>
+        {focusStatus && <span className="anatomy-focus-status">{focusStatus}</span>}
+      </div>}
       {modelError ? <div className="anatomy-loading anatomy-error" role="alert"><strong>3D anatomy could not load</strong><span>Your readings and actions are still available.</span><button onClick={retryModel}>Try again</button></div> : !modelLoaded && <div className="anatomy-loading" role="status">Loading anatomy meshes…</div>}
       {!compact && <div className="anatomy-watermark">BODY SYSTEMS <span>·</span> REFERENCE MODEL</div>}
       {!compact && <div className="anatomy-view-controls"><button onClick={() => setFace('front')} aria-pressed={face === 'front'}>Front</button><button onClick={() => setFace('back')} aria-pressed={face === 'back'}>Back</button><Button type="button" variant="outline" size="icon-sm" aria-label="Zoom out" title="Zoom out" onClick={() => requestZoom('out')}><Minus aria-hidden="true" /></Button><Button type="button" variant="outline" size="icon-sm" aria-label="Zoom in" title="Zoom in" onClick={() => requestZoom('in')}><Plus aria-hidden="true" /></Button><button aria-label="Focus selection" title="Focus selection" disabled={!selected} onClick={() => setFocusKey((x) => x + 1)}>Focus</button><button onClick={() => setResetKey((x) => x + 1)}>Reset</button></div>}

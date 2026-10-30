@@ -62,19 +62,6 @@ export type ReviewEpisode = {
   synthetic: boolean;
 };
 
-export type ImportRow = {
-  id: string;
-  metric: Metric | null;
-  rawMetric: string;
-  value: string;
-  unit: string;
-  at: string;
-  context: string;
-  method: string;
-  error?: string;
-  duplicate?: boolean;
-};
-
 export type MetricInfo = {
   label: string;
   short: string;
@@ -213,14 +200,16 @@ export function makeDemoData(now = new Date()) {
       observed.setHours(metric === 'heart' || metric === 'bp' ? 7 : 8, (index * 13) % 60, 0, 0);
       if (index === 6) observed.setTime(now.getTime() - 30 * 60 * 1000);
       const [value, secondary] = Array.isArray(sample) ? sample : [sample, undefined];
-      const missingConditions = metric === 'bp' && index === 6;
       readings.push({
         id: `DEMO-${metric}-${index + 1}`, metric, value, secondary, unit: METRICS[metric].unit,
-        at: observed.toISOString(), method: missingConditions ? 'Not recorded' : 'Crew self-measurement',
-        context: missingConditions ? 'Not recorded' : metric === 'glucose' ? (index === 6 ? 'After a meal' : 'Before a meal') : 'At rest · seated',
-        note: missingConditions ? 'Position and activity were not recorded; confirm these before comparing.' : '',
+        at: observed.toISOString(), method: 'Crew self-measurement',
+        context: metric === 'glucose' ? (index === 6 ? 'After a meal' : 'Fasting')
+          : metric === 'temperature' ? 'Oral'
+            : metric === 'sleep' ? 'Main sleep period'
+              : metric === 'mood' ? 'At this check-in' : metric === 'bp' ? 'Seated · at rest' : 'At rest · seated',
+        note: '',
         source: 'Practice scenario', synthetic: true, dataset: 'demo',
-        quality: missingConditions ? 'verify' : 'usable', guidanceVersion: GUIDANCE_VERSION,
+        quality: 'usable', guidanceVersion: GUIDANCE_VERSION,
       });
     });
   }

@@ -15,7 +15,9 @@ OUT = ROOT / "public" / "assets" / "anatomy"
 PATTERNS = {
     "surface": [r"^skin$"],
     "digestive": [r"stomach", r"liver", r"pancreas", r"intestin", r"gallbladder", r"esophagus", r"digestive", r"colon", r"rectum"],
-    "cardiovascular": [r"aorta", r"vena cava", r"coronary", r"pulmonary (artery|trunk)", r"common carotid", r"internal jugular", r"subclavian artery", r"renal artery", r"iliac artery", r"femoral artery", r"brachial artery", r"heart", r"atrium", r"ventricle"],
+    # Do not match the generic word "ventricle": that also labels the brain's
+    # third, fourth, and lateral ventricles. Keep only explicit heart parts.
+    "cardiovascular": [r"aorta", r"vena cava", r"coronary", r"pulmonary (artery|trunk)", r"common carotid", r"internal jugular", r"subclavian artery", r"renal artery", r"iliac artery", r"femoral artery", r"brachial artery", r"heart", r"atrium", r"cavity of (left|right) ventricle", r"wall of ventricle", r"papillary muscle of (left|right) ventricle", r"head of .*papillary muscle of left ventricle", r"vein of left ventricle"],
     "respiratory": [r"lung", r"respiratory", r"trache", r"bronch", r"larynx", r"pharynx"],
     "muscular": [r"muscle", r"muscular", r"fibularis", r"tibialis", r"extensor", r"flexor", r"levator", r"pronator", r"supinator", r"adductor", r"abductor", r"biceps", r"triceps", r"deltoid", r"gluteal", r"obturator", r"gastrocnemius", r"soleus", r"pectoral", r"sartorius", r"iliotibial", r"psoas", r"scalene", r"rhomboid", r"latissimus", r"vastus", r"gracilis", r"serratus", r"intercostal"],
     "skeleton": [r"\bbone\b", r"skeletal", r"skeleton", r"vertebr", r"\brib\b", r"\bsternum\b", r"\bskull\b", r"\bfemur\b", r"\bpatella\b", r"\btibia\b", r"\bfibula\b", r"\bclavicle\b", r"\bscapula\b", r"\bhumerus\b", r"\bulna\b", r"\bradius\b", r"\bcarpal\b", r"\bmetacarpal\b", r"\bphalange\w*\b", r"\btarsal bone\b", r"\bmetatarsal\b", r"\bsacrum\b", r"\bcoccyx\b", r"\bpelvis\b", r"\bilium\b", r"\bischium\b", r"\bpubis\b", r"\bmandible\b", r"\bmaxilla\b"],
@@ -46,7 +48,9 @@ def display_name(system: str, name: str) -> str:
     if system == "skeleton": return "skeleton|Skeleton"
     if system == "muscular": return "muscles|Muscles"
     if system == "surface": return "skin|Skin"
-    if system == "cardiovascular": return "vessels|Great vessels"
+    if system == "cardiovascular":
+        if re.search(r"heart|atrium|ventricle", name, re.IGNORECASE): return "heart|Heart"
+        return "vessels|Blood vessels"
     return f"{system}|{name}"
 
 
